@@ -1,0 +1,11 @@
+[Unit]
+Description=Chimera II Aurora Mobile graphical shell
+After=systemd-user-sessions.service
+
+[Service]
+Type=simple
+ExecStart=/usr/lib/chimera/aurora-mobile
+Restart=on-failure
+
+[Install]
+WantedBy=graphical.target
