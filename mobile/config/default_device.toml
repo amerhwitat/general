@@ -11,7 +11,20 @@ thermal_throttle_millicelsius = 85000
 [graphics]
 triple_buffer = true
 zero_copy_threshold_kb = 256
+wayland = true
+aurora_glass = true
 
 [runtime]
 foreground_launch_deadline_ms = 1000
 frame_deadline_ms = 12
+
+[execution]
+nbit_min = 64
+nbit_named_max = 16384
+wide_context = "lazy"
+architectures = ["arm64","r8192","c8192"]
+
+[userspace]
+distribution = "archlinux-arm"
+package_manager = "pacman"
+init = "systemd-compatible"
