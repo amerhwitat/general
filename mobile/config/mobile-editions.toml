@@ -1,0 +1,27 @@
+[chimera]
+name="Chimera II OS Mobile"
+base="koronos"
+
+[debian]
+userspace="debian-arm64"
+package="deb"
+manager="apt+dpkg"
+store="aurora"
+
+[android-debian]
+userspace="debian-arm64"
+android_runtime="namespace-container"
+package="apk+deb"
+manager="chimera-pkg"
+store="aurora"
+
+[ios-debian]
+userspace="debian-arm64"
+swift_runtime="swiftpm"
+package="deb+swiftpm"
+manager="chimera-pkg"
+store="aurora"
+
+[universal]
+package_managers=["pacman","apt","apt-get","dpkg","aptitude","rpm","dnf","yum","apk","nix","flatpak","snap","appimage","git","gh"]
+formats=["pkg.tar.*","deb","rpm","apk","nix","flatpak","snap","AppImage","apk-android","swiftpm","source"]
