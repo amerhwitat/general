@@ -2,7 +2,7 @@
 
 ## Scope
 
-`general` is now the isolated home for the Chimera II OS Mobile Edition. Existing Chimera repositories remain untouched by this mobile implementation.
+`general` is the isolated home for the Chimera II OS Mobile Edition. Existing Chimera repositories remain untouched by this mobile implementation.
 
 The design uses AOSP as a reference and selectively imports compatible open-source components through reproducible upstream manifests. It does not pretend that the entire Android source tree can be safely copied into a small repository.
 
@@ -25,6 +25,14 @@ The design uses AOSP as a reference and selectively imports compatible open-sour
 
 **One mobile policy plane, many execution engines.** Application importance, frame deadlines, memory pressure, thermal headroom, battery state, network state and accelerator queues become one scheduling signal. This avoids the common gap where lifecycle, scheduler, compositor and power manager each optimize locally while harming the device globally.
 
+## Performance-derived design decisions
+
+AOSP's current compatibility requirements emphasize consistent frame latency, low task-switch latency, storage I/O, per-component power accounting and sustained-performance behavior. Linux Energy Aware Scheduling provides an established heterogeneous-CPU energy model. Chimera therefore keeps power policy explicit rather than burying it in a single frequency governor. citeturn0search0turn0search3
+
+AOSP now supports 16 KiB page-size builds on ARM64, and current Android common kernels include 16 KiB GKI builds. Chimera Mobile therefore treats 16 KiB pages as the reference ARM64 configuration while keeping allocations page-size aware. citeturn1search0turn1search4
+
+Thermal management is a first-class service boundary: AOSP's current thermal architecture exposes thermal data and policy-driven throttling to the framework. Chimera's Adaptive Resource Fabric follows the same separation while keeping the policy implementation native to Chimera. citeturn1search14
+
 ## Compatibility strategy
 
 1. Preserve Android application concepts where useful.
@@ -37,10 +45,6 @@ The design uses AOSP as a reference and selectively imports compatible open-sour
 ## Security
 
 Package installation requires a signature flag in the initial API. Production implementation must add cryptographic verification, rollback protection, per-package UID/GID isolation, SELinux-equivalent policy or a Chimera capability policy, verified boot and encrypted user storage.
-
-## Performance research basis
-
-Current AOSP compatibility documentation emphasizes frame-latency consistency, task switching, storage I/O, power attribution and sustained performance. Linux Energy Aware Scheduling provides an established model for heterogeneous CPU power/performance decisions. These are adopted as engineering targets and design inputs, not as claims that the current prototype already meets them.
 
 ## Build
 
