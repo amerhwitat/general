@@ -1,0 +1,17 @@
+name: Chimera Mobile
+on:
+  push:
+    paths: ['mobile/**']
+  pull_request:
+    paths: ['mobile/**']
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure
+        run: cmake -S mobile -B build/mobile -DCMAKE_BUILD_TYPE=Release
+      - name: Build
+        run: cmake --build build/mobile --parallel
+      - name: Test
+        run: ctest --test-dir build/mobile --output-on-failure
