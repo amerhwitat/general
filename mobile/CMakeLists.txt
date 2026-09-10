@@ -2,17 +2,18 @@ cmake_minimum_required(VERSION 3.20)
 project(chimera_mobile LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-add_library(chimera_mobile STATIC
-  src/runtime.cpp
-  src/binder.cpp
-  src/power.cpp
-  src/graphics.cpp
-  src/package_manager.cpp)
+add_library(chimera_mobile STATIC src/runtime.cpp src/binder.cpp src/power.cpp src/graphics.cpp src/package_manager.cpp src/package_fabric.cpp src/package_adapters.cpp src/app_store.cpp)
 target_include_directories(chimera_mobile PUBLIC include)
 add_executable(chimera_mobile_test tests/mobile_runtime_test.cpp)
 target_link_libraries(chimera_mobile_test PRIVATE chimera_mobile)
 add_executable(chimera_mobile_nbit_test tests/nbit_runtime_test.cpp)
 target_link_libraries(chimera_mobile_nbit_test PRIVATE chimera_mobile)
+add_executable(chimera_mobile_package_test tests/package_fabric_test.cpp)
+target_link_libraries(chimera_mobile_package_test PRIVATE chimera_mobile)
+add_executable(chimera_mobile_target_test tests/mobile_targets_test.cpp)
+target_link_libraries(chimera_mobile_target_test PRIVATE chimera_mobile)
 enable_testing()
 add_test(NAME chimera_mobile COMMAND chimera_mobile_test)
 add_test(NAME chimera_mobile_nbit COMMAND chimera_mobile_nbit_test)
+add_test(NAME chimera_mobile_package COMMAND chimera_mobile_package_test)
+add_test(NAME chimera_mobile_targets COMMAND chimera_mobile_target_test)
