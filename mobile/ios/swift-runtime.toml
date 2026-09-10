@@ -1,0 +1,12 @@
+[runtime]
+language="swift"
+package_manager="swiftpm"
+foundation="swift-foundation"
+foundation_networking=true
+swift_nio=true
+
+[policy]
+proprietary_apple_frameworks=false
+sandbox=true
+network_owner="spotnik"
+graphics_owner="aurora-wayland"
