@@ -1,0 +1,17 @@
+[device]
+name = "Chimera Mobile Reference ARM64"
+arch = "arm64"
+page_size = 16384
+refresh_hz = 120
+
+[power]
+battery_saver_threshold = 10
+thermal_throttle_millicelsius = 85000
+
+[graphics]
+triple_buffer = true
+zero_copy_threshold_kb = 256
+
+[runtime]
+foreground_launch_deadline_ms = 1000
+frame_deadline_ms = 12
