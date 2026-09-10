@@ -1,0 +1,14 @@
+[runtime]
+model="linux-namespace-container"
+image="waydroid-compatible"
+namespaces=["user","pid","uts","net","mount","ipc"]
+binder_bridge=true
+
+[package]
+format="apk"
+verified=true
+sandbox=true
+
+[hardware]
+direct_access=false
+policy_owner="koronos-hal"
