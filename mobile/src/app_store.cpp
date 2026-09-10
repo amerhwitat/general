@@ -1,2 +1,3 @@
 #include "chimera/mobile/app_store.hpp"
+#include <utility>
 namespace chimera::mobile { void AppStore::publish(StoreEntry e){entries_.push_back(std::move(e));} std::vector<StoreEntry> AppStore::search(const std::string&t)const{std::vector<StoreEntry>o;for(auto&e:entries_)if(e.package.name.find(t)!=std::string::npos)o.push_back(e);return o;} const StoreEntry*AppStore::find(const std::string&n)const{for(auto&e:entries_)if(e.package.name==n)return &e;return nullptr;} }
