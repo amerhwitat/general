@@ -1,0 +1,25 @@
+[mobile]
+architecture = "aarch64"
+rootfs = "archlinux-arm"
+page_size = 16384
+init = "systemd"
+package_manager = "pacman"
+
+[aurora]
+compositor = "wayland"
+shell = "aurora-glass"
+refresh_rates = [60,90,120,144]
+triple_buffer = true
+
+[chimera]
+kernel = "koronos"
+network = "spotnik"
+services = "kore"
+execution = ["arm64","r8192","c8192","nbit"]
+lazy_wide_context = true
+
+[security]
+verified_boot = "required"
+package_signatures = "required"
+capability_sandbox = "required"
+encrypted_user_storage = "required"
