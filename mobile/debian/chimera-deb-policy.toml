@@ -1,0 +1,12 @@
+[policy]
+architecture="arm64"
+require_signature=true
+require_sha256=true
+transactional=true
+sandbox_maintainer_scripts=true
+allow_system_services=false
+allow_kernel_modules=false
+rollback_on_failure=true
+
+[compatibility]
+commands=["apt","apt-get","dpkg","aptitude"]
