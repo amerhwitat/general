@@ -1,0 +1,2 @@
+use regex::Regex; use std::collections::BTreeSet; use std::fs;
+fn main(){let a:Vec<String>=std::env::args().collect();if a.len()<2{eprintln!("usage: webcontactcrawler <html-file>");return} let s=fs::read_to_string(&a[1]).unwrap_or_default();let re=Regex::new(r"(?i)[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}").unwrap();let mut set=BTreeSet::new();for m in re.find_iter(&s){set.insert(m.as_str().to_lowercase());}println!("DONE unique_emails={}",set.len());for e in set{println!("{}",e)}}
