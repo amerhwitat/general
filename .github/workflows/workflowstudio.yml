@@ -1,0 +1,31 @@
+name: WorkflowStudio verification
+on:
+  push:
+    paths: ['WorkflowStudio/**']
+  pull_request:
+    paths: ['WorkflowStudio/**']
+jobs:
+  python-node-cpp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m py_compile WorkflowStudio/services/python/main.py WorkflowStudio/ai/rnn/SequenceModel.py WorkflowStudio/ai/rnn/Inference.py WorkflowStudio/integrations/observability/TelemetryCorrelator.py WorkflowStudio/voice/python/voice_router.py
+      - run: python -m unittest discover -s WorkflowStudio/tests -p 'test_*.py'
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: node --check WorkflowStudio/services/node/server.mjs
+      - run: g++ -std=c++20 -Wall -Wextra WorkflowStudio/core/cpp/main.cpp WorkflowStudio/core/workflow/StateMachine.cpp -I WorkflowStudio/core/workflow -o /tmp/chimera-workflow
+  java-go-rust:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: {distribution: temurin, java-version: '21'}
+      - run: javac WorkflowStudio/clients/java/Main.java
+      - uses: actions/setup-go@v5
+        with: {go-version: '1.23'}
+      - run: cd WorkflowStudio/clients/go && go build main.go
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo check --manifest-path WorkflowStudio/clients/rust/Cargo.toml
