@@ -22,14 +22,26 @@ Every maintained application is cited from this README by its canonical source t
 ### Exact flagship source files
 
 - [Email Extractor Python core](email_extractor/core_py/extractor.py)
+- [Email Extractor Python SQLite/CSV storage](email_extractor/utils/storage.py)
 - [Email Extractor SQLite/CSV/JSON persistence](email_extractor/core_py/persistence.py)
+- [Email Extractor Visual Studio solution](email_extractor/EmailExtractor.sln)
 - [Email Extractor PyQt UI](email_extractor/ui_pyqt/main.py)
 - [Email Extractor C# core](email_extractor/core_csharp/Extractor.cs)
-- [Email Extractor C# UI](email_extractor/ui_csharp/MainForm.cs)
+- [Email Extractor C# storage](email_extractor/core_csharp/Storage.cs)
+- [Email Extractor C# project](email_extractor/core_csharp/EmailExtractor.CSharp.csproj)
+- [Email Extractor native C/C++/ASM CMake](email_extractor/native/CMakeLists.txt)
+- [Email Extractor Code::Blocks project](email_extractor/native/CodeBlocks.EmailExtractor.cbp)
 - [Email Extractor Node.js core](email_extractor/core_js/extractor.js)
+- [Email Extractor Node.js storage](email_extractor/core_js/storage.js)
+- [Email Extractor Electron integration](email_extractor/electron/main.js)
 - [Email Extractor Java core](email_extractor/core_java/Extractor.java)
+- [Email Extractor Java storage](email_extractor/core_java/Storage.java)
+- [Email Extractor Maven project](email_extractor/core_java/pom.xml)
 - [Email Extractor PHP core](email_extractor/core_php/extractor.php)
+- [Email Extractor PHP storage](email_extractor/core_php/storage.php)
 - [Email Extractor Rust core](email_extractor/core_rust/extractor.rs)
+- [Email Extractor Rust storage](email_extractor/core_rust/storage.rs)
+- [Email Extractor Cargo project](email_extractor/core_rust/Cargo.toml)
 - [Email Extractor Rust TUI](email_extractor/ui_rust/src/main.rs)
 - [SEO crawler](SEO-Tool/SEO_Tool/core.py)
 - [SEO CLI](SEO-Tool/SEO_Tool/cli.py)
@@ -54,7 +66,7 @@ Every maintained application is cited from this README by its canonical source t
 
 ## Email Extractor
 
-`email_extractor/` is the cross-language public/authorized-web contact discovery application. It now includes extraction, page-title/provenance handling and DNS/MX validation cores for Python, C#, Node.js, Java, PHP and Rust, plus native/UI implementations for the supported desktop/web environments. The Python reference implementation also provides SQLite persistence and CSV/JSON export. The design shares result fields and interoperability goals with `WebContactCrawler`.
+`email_extractor/` is the cross-language public/authorized-web contact discovery application. It includes extraction, title/provenance handling and DNS/MX validation cores for Python, C#, Node.js, Java, PHP and Rust, native C/C++/ASM build scaffolding, and desktop/web interfaces. SQLite persistence and CSV export are standardized across the language cores. IDE/build metadata is included for Visual Studio, Code::Blocks, CMake, PyCharm/IntelliJ, VS Code, Eclipse, Maven, Cargo, Node/Electron and PHP workflows.
 
 ## AgentResearchForge
 
