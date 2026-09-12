@@ -2,13 +2,35 @@ name: Chimera3D4D
 options:
   deploymentTarget:
     macOS: '13.0'
+    iOS: '16.0'
+    iPadOS: '16.0'
 targets:
-  Chimera3D4D:
+  Chimera3D4D-macOS:
     type: application
     platform: macOS
     sources: [objc, metal]
     settings:
-      PRODUCT_BUNDLE_IDENTIFIER: ai.chimera.3d4d
+      PRODUCT_BUNDLE_IDENTIFIER: ai.chimera.3d4d.macos
       MACOSX_DEPLOYMENT_TARGET: '13.0'
+      CLANG_ENABLE_MODULES: YES
+      OTHER_LDFLAGS: ['-framework','Metal','-framework','QuartzCore']
+  Chimera3D4D-iOS:
+    type: application
+    platform: iOS
+    sources: [ios]
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: ai.chimera.3d4d.ios
+      IPHONEOS_DEPLOYMENT_TARGET: '16.0'
+      TARGETED_DEVICE_FAMILY: '1,2'
+      CLANG_ENABLE_MODULES: YES
+      OTHER_LDFLAGS: ['-framework','Metal','-framework','QuartzCore']
+  Chimera3D4D-iPadOS:
+    type: application
+    platform: iOS
+    sources: [ios]
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: ai.chimera.3d4d.ipados
+      IPHONEOS_DEPLOYMENT_TARGET: '16.0'
+      TARGETED_DEVICE_FAMILY: '2'
       CLANG_ENABLE_MODULES: YES
       OTHER_LDFLAGS: ['-framework','Metal','-framework','QuartzCore']
