@@ -2,11 +2,19 @@
 
 ## Pipeline
 
-`keywords / URLs -> bounded search-provider discovery -> URL policy filters -> concurrent HTTP/HTTPS fetch -> email extraction -> normalization/deduplication -> optional DNS/MX validation -> SQLite session -> CSV/JSON export`
+`keywords / URLs -> bounded search-provider discovery -> URL policy filters -> concurrent HTTP/HTTPS fetch -> email extraction -> normalization/deduplication -> optional DNS/MX validation -> optional local RNN/LLM ranking -> SQLite session -> human review -> EmailListManager -> CSV/JSON export`
 
 ## Concurrency
 
 The language cores provide bounded concurrency rather than an unbounded `Promise.all`/task fan-out. The default worker count is 8 and should be configurable. Progress callbacks report completed pages and unique contacts without blocking the UI.
+
+## AI boundary
+
+The repository-wide `shared/ai` layer provides a deterministic lightweight recurrent scorer and an optional local Ollama-compatible LLM adapter. AI is disabled by default and remains advisory: it cannot override consent, suppression, robots, access-control or domain policy. Source URL/provenance stays attached to every extracted record.
+
+## Contact management
+
+`EmailListManager/` is the downstream list-management boundary for normalized contacts, list membership, tags, notes, explicit consent/status and suppression. Extraction and discovery do not imply permission to message a contact.
 
 ## Search providers
 
