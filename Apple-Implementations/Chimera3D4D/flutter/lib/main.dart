@@ -1,0 +1,4 @@
+import 'package:flutter/material.dart';
+void main()=>runApp(const ChimeraApp());
+class ChimeraApp extends StatelessWidget{const ChimeraApp({super.key});@override Widget build(BuildContext c)=>MaterialApp(debugShowCheckedModeBanner:false,title:'Chimera 3D/4D Studio',theme:ThemeData.dark(),home:const Studio());}
+class Studio extends StatelessWidget{const Studio({super.key});@override Widget build(BuildContext c)=>Scaffold(appBar:AppBar(title:const Text('Chimera 3D/4D Studio')),body:Row(children:[NavigationRail(selectedIndex:0,onDestinationSelected:(_){},destinations:const[NavigationRailDestination(icon:Icon(Icons.view_in_ar),label:Text('Model')),NavigationRailDestination(icon:Icon(Icons.brush),label:Text('Sculpt')),NavigationRailDestination(icon:Icon(Icons.animation),label:Text('Animate')),NavigationRailDestination(icon:Icon(Icons.movie),label:Text('VFX'))]),const Expanded(child:Center(child:Text('3D / 4D viewport boundary\nNative renderer integration')))]));}
