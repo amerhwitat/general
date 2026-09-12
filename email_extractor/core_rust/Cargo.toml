@@ -6,7 +6,6 @@ edition = "2021"
 [dependencies]
 regex = "1.10"
 reqwest = { version = "0.12", features = ["rustls-tls"] }
-runtime = "0.3"
 tokio = { version = "1.39", features = ["macros", "rt-multi-thread"] }
 rusqlite = { version = "0.32", features = ["bundled"] }
 trust-dns-resolver = "0.23"
