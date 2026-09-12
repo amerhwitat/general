@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "seo-tool"
+version = "0.1.0"
+description = "Local-first SEO crawler and authorized deep-web research tool"
+requires-python = ">=3.11"
+dependencies = ["requests>=2.31", "beautifulsoup4>=4.12"]
+
+[project.optional-dependencies]
+gui = ["flask>=3.0"]
+documents = ["pypdf>=5.0", "python-docx>=1.1"]
+render = ["playwright>=1.45"]
+
+audit = ["pytest>=8"]
+
+[project.scripts]
+seo-tool = "SEO_Tool.cli:main"
+seo-tool-gui = "SEO_Tool.gui:main"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
