@@ -4,11 +4,13 @@ This repository is a general integration and research workspace within the Amer 
 
 ## AgentResearchForge
 
-`AgentResearchForge/` is the portfolio's new AI research and project-generation workspace. It provides a chat-driven orchestration layer that can combine public web search, imported/local-library document retrieval, public code/API discovery, evidence synthesis and safe multi-language project generation.
+`AgentResearchForge/` is the portfolio's AI research and project-generation workspace. It provides chat-driven deep retrieval across public web sources, local libraries/documents and public code/API sources, plus bounded crawling, authorized onion retrieval, evidence synthesis, multi-language project generation, persistent artifact storage and document export.
 
 The application supports a dependency-light core plus optional SearXNG/search providers, Tor SOCKS access for explicitly authorized/public `.onion` resources, PDF/DOCX/PPTX/EPUB parsers, GitHub repository discovery, OpenAPI metadata registration, RAG/vector/LLM adapters and a language-neutral JSONL protocol. Generated code remains inert until a separately authorized build/execution workflow reviews it.
 
-The design is informed by current agentic retrieval patterns such as MCP-native web research, agentic document RAG, hybrid search and provenance-preserving retrieval. Recent open-source examples include Agent Search, web-retrieval MCP, MCP-RAG and pdf-mcp; these are architectural references rather than copied source.
+It also includes deployment metadata for public/free-tier hosts such as GitHub Pages, Cloudflare Pages, Vercel, Netlify and Render. These adapters never collect credentials or silently deploy; provider authentication and the final deployment action remain under user control.
+
+The design is informed by current agentic retrieval patterns such as MCP-native web research, agentic document RAG, hybrid search and provenance-preserving retrieval. Recent open-source examples include Agent Search, web-retrieval MCP, MCP-RAG, pdf-mcp and deep-research agent projects; these are architectural references rather than copied source.
 
 ## AI architecture layer
 
