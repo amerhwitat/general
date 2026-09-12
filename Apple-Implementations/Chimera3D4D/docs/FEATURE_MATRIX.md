@@ -18,6 +18,7 @@ This matrix separates the desired professional-DCC capability set from the curre
 | Color | Color-space metadata | OpenColorIO configuration and display/view transforms |
 | Interchange | Adapter boundary | OpenUSD/USDZ, glTF, Alembic, MaterialX production round-trip |
 | Procedural | Node graph contract | Geometry nodes, simulation nodes, shader nodes, caching |
+| AI / RNN / LLM | Local recurrent scene memory + optional GRU backend | Trainable scene-language model, authorized RAG/vector search, multimodal embeddings, evaluation and accelerated inference |
 | Collaboration | Architecture boundary | Hosted sessions, versioned assets, authenticated P2P contracts |
 | Apple | macOS/iOS/iPadOS shells | Production Metal renderer, Pencil sculpting, packaging/signing |
 | Web | PlayCanvas viewport | Shared scene editor, WebGPU compute/rendering, hosted deployment |
