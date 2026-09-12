@@ -18,7 +18,11 @@ Application code and canonical language data remain in the `nlp` repository. Thi
 
 Transliteration is kept separate from translation. Unicode/CLDR language identifiers and transformed-content metadata are used for language and script routing. See the canonical implementation's `docs/SOURCES.md` and `docs/PDF_CITATIONS.md`.
 
-Unicode CLDR provides language/locale data and BCP 47 extensions for machine-readable language identification; its transliteration guidance explicitly distinguishes transliteration from translation. citeturn0search0turn0search2
+References:
+
+- [Unicode CLDR Project](https://cldr.unicode.org/) — language and locale data.
+- [Unicode BCP 47 Extensions](https://cldr.unicode.org/index/bcp47-extension) — machine-readable language/locale extensions.
+- [Unicode Transliteration Guidelines](https://cldr.unicode.org/index/cldr-spec/transliteration-guidelines) — transliteration guidance and its distinction from translation.
 
 ## KPI scope
 
