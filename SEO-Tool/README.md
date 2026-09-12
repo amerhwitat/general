@@ -39,6 +39,26 @@ The architecture incorporates ideas observed in open-source tools such as Open S
 - Automation scripts for Linux/macOS, Windows CMD and PowerShell.
 - Starter adapters/templates for Python, JavaScript, TypeScript, C, C++, C#, Java, Kotlin, Go, Rust, Swift, Objective-C, PHP, Ruby, Dart, Julia, R, Lua, Bash, PowerShell, SQL, HTML/CSS and WebAssembly.
 
+## Source-code index
+
+All implementation files are explicitly referenced here so the README remains a navigable code citation for the project:
+
+| Area | Source |
+|---|---|
+| Core crawler/audit engine | [SEO_Tool/core.py](SEO_Tool/core.py) |
+| CLI | [SEO_Tool/cli.py](SEO_Tool/cli.py) |
+| Local GUI/API | [SEO_Tool/gui.py](SEO_Tool/gui.py) |
+| Research/deep-web expansion | [SEO_Tool/research.py](SEO_Tool/research.py) |
+| Document extraction | [SEO_Tool/documents.py](SEO_Tool/documents.py) |
+| Package metadata | [SEO_Tool/__init__.py](SEO_Tool/__init__.py), [pyproject.toml](pyproject.toml) |
+| Language matrix | [languages/manifest.json](languages/manifest.json), [languages/generate_adapters.py](languages/generate_adapters.py) |
+| Language documentation | [languages/README.md](languages/README.md) |
+| Browser UI | [web/index.html](web/index.html), [web/app.js](web/app.js), [web/style.css](web/style.css), [web/package.json](web/package.json) |
+| Automated execution | [scripts/run.sh](scripts/run.sh), [scripts/run.bat](scripts/run.bat), [scripts/run.ps1](scripts/run.ps1) |
+| Build automation | [scripts/build.sh](scripts/build.sh), [scripts/build.bat](scripts/build.bat), [scripts/build.ps1](scripts/build.ps1) |
+| Regression tests | [tests/test_core.py](tests/test_core.py) |
+| CI | [.github/workflows/ci.yml](.github/workflows/ci.yml) |
+
 ## Quick start
 
 ```bash
