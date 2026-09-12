@@ -6,19 +6,23 @@ This repository is a general integration and research workspace within the Amer 
 
 `AgentResearchForge/` is the portfolio's AI research and project-generation workspace. It provides chat-driven deep retrieval across public web sources, local libraries/documents and public code/API sources, plus bounded crawling, authorized onion retrieval, evidence synthesis, multi-language project generation, persistent artifact storage and document export.
 
-The application supports a dependency-light core plus optional SearXNG/search providers, Tor SOCKS access for explicitly authorized/public `.onion` resources, PDF/DOCX/PPTX/EPUB parsers, GitHub repository discovery, OpenAPI metadata registration, RAG/vector/LLM adapters and a language-neutral JSONL protocol. Generated code remains inert until a separately authorized build/execution workflow reviews it.
+## SEO-Tool
 
-It also includes deployment metadata for public/free-tier hosts such as GitHub Pages, Cloudflare Pages, Vercel, Netlify and Render. These adapters never collect credentials or silently deploy; provider authentication and the final deployment action remain under user control.
+`SEO-Tool/` is the dedicated technical SEO and authorized deep-web research crawler. It supports HTTP and HTTPS audit targets, bounded crawling, sitemap/link discovery, metadata and structured-data extraction, indexability and canonical analysis, duplicate/thin-content heuristics, security headers, site graphs, persistent SQLite crawl sessions, document capture/extraction and JSON/CSV/Markdown reporting. A local GUI, CLI, Linux/macOS shell, Windows CMD and PowerShell automation are included.
 
-The design is informed by current agentic retrieval patterns such as MCP-native web research, agentic document RAG, hybrid search and provenance-preserving retrieval. Recent open-source examples include Agent Search, web-retrieval MCP, MCP-RAG, pdf-mcp and deep-research agent projects; these are architectural references rather than copied source.
+SEO-Tool provides an explicitly enabled Tor SOCKS adapter for public/authorized `.onion` targets. It follows supplied seeds and discovered links rather than enumerating onion space, and never bypasses authentication, CAPTCHA, access controls or rate limits. HTTP is supported deliberately because insecure transport is itself an audit finding.
+
+The design is informed by open-source SEO projects including Open SEO Crawler, Crawlie, NovaCrawl, CrawlObserver and FreeCrawl, whose public feature sets demonstrate useful patterns such as sitemap analysis, concurrent crawling, duplicate detection, JavaScript rendering, issue scoring, export, persistence and agent/MCP interfaces. These projects are references, not copied source.
+
+SEO-Tool has a language-adapter matrix covering Python, JavaScript, TypeScript, C, C++, C#, Java, Kotlin, Go, Rust, Swift, Objective-C, PHP, Ruby, Dart, Julia, R, Lua, Bash, PowerShell, SQL, HTML/CSS and WebAssembly. The stable JSONL interface lets all language tracks share the same audited engine.
 
 ## AI architecture layer
 
-The portfolio now uses a common local-first RNN/LLM architecture pattern across applications: bounded recurrent state, explicit memory, optional trainable GRU inference, retrieval/vector-store boundaries, explainable recommendations, provenance/confidence and human/policy approval before consequential mutations.
+The portfolio uses a common local-first RNN/LLM architecture pattern: bounded recurrent state, explicit memory, optional trainable GRU inference, retrieval/vector-store boundaries, explainable recommendations, provenance/confidence and human/policy approval before consequential mutations.
 
 ## WebContactCrawler
 
-`applications/WebContactCrawler/` is the portfolio's cross-language public-web contact crawler. It provides bounded keyword-focused crawling, robots-aware scheduling, public email extraction, provenance, deduplication, detailed JSONL progress telemetry, a visual dashboard, and TXT/CSV import/export. The crawler is responsible-use oriented: public/authorized resources only; no authentication/CAPTCHA bypass, anti-bot evasion, credential collection, private-area crawling or SMTP mailbox probing.
+`applications/WebContactCrawler/` is the portfolio's cross-language public-web contact crawler with bounded keyword-focused crawling, robots-aware scheduling, public email extraction, provenance, deduplication, detailed JSONL progress telemetry, a visual dashboard, and TXT/CSV import/export.
 
 ## Chimera WorkFlow Studio
 
@@ -26,7 +30,7 @@ The portfolio now uses a common local-first RNN/LLM architecture pattern across 
 
 ## Central Apple implementations
 
-`Apple-Implementations/` is the portfolio-wide Apple source tree. Each application has its own subdirectory with Objective-C/Xcode and Flutter iOS/macOS implementations, Apple-specific documentation and build boundaries.
+`Apple-Implementations/` is the portfolio-wide Apple source tree with Objective-C/Xcode and Flutter iOS/macOS implementations and Apple-specific build boundaries.
 
 ## Chimera 3D/4D Studio
 
