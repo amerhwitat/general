@@ -1,1 +1,47 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WebContactCrawler Progress</title><style>body{font:14px system-ui;margin:24px;background:#0b1020;color:#eaf0ff}main{max-width:1100px;margin:auto}.bar{height:18px;background:#273250;border-radius:9px;overflow:hidden}.fill{height:100%;width:0;background:#58a6ff}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.card{background:#151d35;padding:14px;border-radius:10px}.metric{font-size:1.6rem;font-weight:700}button,input{padding:9px;margin:4px}pre{background:#111827;padding:12px;min-height:180px;max-height:460px;overflow:auto}@media(max-width:700px){.grid{grid-template-columns:repeat(2,1fr)}}</style></head><body><main><h1>WebContactCrawler — Live Progress</h1><p>Load the reference implementation's <code>--events events.jsonl</code> file to replay detailed crawl telemetry.</p><input id="file" type="file" accept=".jsonl,.log,.txt"><div class="bar"><div id="fill" class="fill"></div></div><div class="grid"><div class="card">Pages<div id="pages" class="metric">0</div></div><div class="card">Queued<div id="queued" class="metric">0</div></div><div class="card">Emails<div id="emails" class="metric">0</div></div><div class="card">Errors<div id="errors" class="metric">0</div></div></div><p id="status">Waiting for telemetry…</p><pre id="out"></pre><script>file.onchange=async()=>{out.textContent='';const lines=(await file.files[0].text()).split(/\r?\n/).filter(Boolean);let last=0;for(const line of lines){try{const e=JSON.parse(line);pages.textContent=e.pages??0;queued.textContent=e.queued??0;emails.textContent=e.emails??0;errors.textContent=e.errors??0;status.textContent=(e.event||'event')+(e.url?' — '+e.url:'');last=Math.max(last,Number(e.pages||0));out.textContent+=JSON.stringify(e)+'\n';out.scrollTop=out.scrollHeight}catch{}}fill.style.width=Math.min(100,last)+'%'};</script></main></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WebContactCrawler Progress</title>
+<style>
+body{font:14px system-ui;margin:24px;background:#0b1020;color:#eaf0ff}main{max-width:1100px;margin:auto}.bar{height:18px;background:#273250;border-radius:9px;overflow:hidden}.fill{height:100%;width:0;background:#58a6ff;transition:width .15s}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.card{background:#151d35;padding:14px;border-radius:10px}.metric{font-size:1.6rem;font-weight:700}button,input{padding:9px;margin:4px}pre{background:#111827;padding:12px;min-height:180px;max-height:460px;overflow:auto;white-space:pre-wrap}.muted{opacity:.75}@media(max-width:700px){.grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body><main>
+<h1>WebContactCrawler — Detailed Progress</h1>
+<p class="muted">Load JSONL emitted with <code>--events events.jsonl</code>. The dashboard replays the event stream locally in the browser.</p>
+<input id="file" type="file" accept=".jsonl,.log,.txt">
+<div class="bar"><div id="fill" class="fill"></div></div>
+<div class="grid">
+<div class="card">Pages<div id="pages" class="metric">0</div></div>
+<div class="card">Queued<div id="queued" class="metric">0</div></div>
+<div class="card">Emails<div id="emails" class="metric">0</div></div>
+<div class="card">Errors<div id="errors" class="metric">0</div></div>
+<div class="card">Skipped<div id="skipped" class="metric">0</div></div>
+<div class="card">Discovered URLs<div id="discovered" class="metric">0</div></div>
+<div class="card">Rate<div id="rate" class="metric">0</div></div>
+<div class="card">Progress<div id="percent" class="metric">0%</div></div>
+</div>
+<p id="status">Waiting for telemetry…</p><pre id="out"></pre>
+<script>
+const $=id=>document.getElementById(id);
+$('file').onchange=async()=>{
+ const input=$('file'); if(!input.files[0]) return;
+ $('out').textContent='';
+ const lines=(await input.files[0].text()).split(/\r?\n/).filter(Boolean);
+ let maxPages=0,lastPages=0;
+ for(const line of lines){
+  try{
+   const e=JSON.parse(line); maxPages=Math.max(maxPages,Number(e.max_pages||0)); lastPages=Number(e.pages||0);
+   $('pages').textContent=e.pages??0; $('queued').textContent=e.queued??0; $('emails').textContent=e.emails??0;
+   $('errors').textContent=e.errors??0; $('skipped').textContent=e.skipped??0; $('discovered').textContent=e.discovered_urls??0;
+   $('rate').textContent=e.rate?`${e.rate}/s`:'0';
+   const pct=maxPages?Math.min(100,(lastPages/maxPages)*100):((e.event==='done')?100:0);
+   $('fill').style.width=pct+'%'; $('percent').textContent=pct.toFixed(1)+'%';
+   $('status').textContent=(e.event||'event')+(e.url?' — '+e.url:'')+(e.error?' — '+e.error:'');
+   $('out').textContent+=JSON.stringify(e)+'\n'; $('out').scrollTop=$('out').scrollHeight;
+  }catch(_){ $('out').textContent+='[ignored malformed event]\n'; }
+ }
+};
+</script>
+</main></body></html>
