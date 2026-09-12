@@ -1,0 +1,14 @@
+name: Chimera3D4D
+options:
+  deploymentTarget:
+    macOS: '13.0'
+targets:
+  Chimera3D4D:
+    type: application
+    platform: macOS
+    sources: [objc, metal]
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: ai.chimera.3d4d
+      MACOSX_DEPLOYMENT_TARGET: '13.0'
+      CLANG_ENABLE_MODULES: YES
+      OTHER_LDFLAGS: ['-framework','Metal','-framework','QuartzCore']
