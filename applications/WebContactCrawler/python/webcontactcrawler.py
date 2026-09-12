@@ -174,9 +174,9 @@ def main():
     ap.add_argument("--delay", type=float, default=.5); ap.add_argument("--timeout", type=float, default=10)
     ap.add_argument("--max-bytes", type=int, default=2_000_000); ap.add_argument("--events", help="JSONL progress event file")
     a = ap.parse_args()
-    rows = Crawler(a.urls, a.keyword, a.max_pages, a.max_depth, a.delay, a.timeout, a.max_bytes, event_file=a.events).run()
+    crawler = Crawler(a.urls, a.keyword, a.max_pages, a.max_depth, a.delay, a.timeout, a.max_bytes, event_file=a.events)
+    rows = crawler.run()
     export(rows, a.output)
-    print(f"DONE pages={len(rows)} unique_emails={len(rows)} output={a.output}")
+    print(f"DONE pages={crawler.pages} unique_emails={len(rows)} output={a.output}")
 
-if __name__ == "__main__":
-    main()
+if __name__ == "__main__": main()
