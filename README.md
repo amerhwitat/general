@@ -4,27 +4,34 @@ This repository is a general integration and research workspace within the Amer 
 
 ## Central Apple implementations
 
-`Apple-Implementations/` is now the portfolio-wide Apple source tree. Each application has its own subdirectory with Objective-C/Xcode and Flutter iOS/macOS implementations, Apple-specific documentation and build boundaries. The structure preserves the owning repositories while providing a centralized Apple implementation surface.
+`Apple-Implementations/` is the portfolio-wide Apple source tree. Each application has its own subdirectory with Objective-C/Xcode and Flutter iOS/macOS implementations, Apple-specific documentation and build boundaries. The structure preserves the owning repositories while providing a centralized Apple implementation surface.
 
-Flutter officially supports Objective-C host code on iOS and macOS through platform channels, and its Apple tooling uses Xcode for device/simulator builds. citeturn0search0turn0search8 Flutter's Impeller renderer is the supported iOS renderer and is enabled by default on supported macOS releases. citeturn0search1
+## Chimera 3D/4D Studio
+
+`Apple-Implementations/Chimera3D4D/` is the new unified 3D/4D digital-content-creation application foundation. It combines a portable C++ scene/geometry core with modeling, sculpting, materials, animation, rigging, motion, rendering, VFX, procedural-node, interchange, Objective-C/Metal, Flutter and Web foundations.
+
+The design uses open standards and open-source adapter boundaries including OpenUSD/Hydra, MaterialX, OpenColorIO, OpenImageIO, OpenVDB, OpenSubdiv, CGAL, libigl and PlayCanvas. Public Blender/OpenUSD/OpenDCC/geometry documentation is recorded as training/reference material. Commercial DCC products are capability references only; proprietary source and assets are not copied.
+
+The 4D model treats time as a separate evolving state dimension for animated/deforming geometry and simulations. An optional 128-component semantic/perception state is attached as metadata without replacing ordinary 3D geometry.
 
 ## Apple applications
 
-`apple/project.yml` defines native SwiftUI iOS/iPadOS and macOS application targets generated with XcodeGen. `Apple-Implementations/` contains the Objective-C + Flutter companion implementations for BizX, BizXtreme, ChimeraIIOS, CPU4096, CPU4096Simulator, PDFreaderPY, nlp, eth-key-check, bruteforce, keygen, test, general, VanG and amerhwitat.github.io. IPA archive/export requires macOS/Xcode and operator-controlled signing.
+Existing `Apple-Implementations/` application directories contain Objective-C/Flutter companions. `Chimera3D4D/apple/project.yml` adds a native Objective-C + Metal macOS shell; the architecture is extensible to iOS/iPadOS targets. IPA archive/export requires macOS/Xcode and operator-controlled signing.
 
 ## Apple performance
 
-The Apple implementations use background queues for expensive work, explicit native/Flutter boundaries, buffer reuse, Metal/Impeller-compatible rendering, main-thread UI marshaling and permission-gated camera/microphone services. Flutter's performance model separates UI, raster, platform and I/O threads; blocking those paths is avoided. citeturn0search6
-
-XcodeGen is used where appropriate to generate Xcode projects from source-controlled YAML specifications rather than storing generated projects as the source of truth. citeturn0search5 CocoaPods remains an available Objective-C dependency manager when an upstream dependency genuinely requires it; Swift Package Manager is preferred where available. citeturn0search9
+Apple implementations use background queues for expensive work, explicit native/Flutter boundaries, buffer reuse, Metal-compatible rendering and main-thread UI marshaling. Flutter's performance model separates UI, raster, platform and I/O paths; blocking those paths is avoided.
 
 ## Build
 
+For Chimera 3D/4D:
+
 ```bash
-cd Apple-Implementations
-./scripts/bootstrap-macos.sh
-./scripts/build-all.sh
+cd Apple-Implementations/Chimera3D4D
+./scripts/build-linux.sh
 ```
+
+On macOS, use `scripts/build-macos.sh`; XcodeGen can generate the native project from `apple/project.yml`. Web and Flutter builds are available through `scripts/build-all.ps1` or their platform-specific tools.
 
 ## Chimera 128D
 
