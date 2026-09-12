@@ -15,7 +15,7 @@ from ..crawler.web import WebProvider
 from ..crawler.onion import OnionProvider
 from ..code_search.github import GitHubCodeProvider
 from ..artifacts.store import ArtifactStore
-from ..exporters.documents import export_markdown, export_html, export_text
+from ..exporters.documents import export_markdown, export_html, export_text, export_docx, export_pdf
 from ..hosting.registry import targets
 
 index = DocumentIndexer()
@@ -63,13 +63,15 @@ if FastAPI:
 
     @app.post('/export')
     def export(request: ExportRequest):
-        ext = {'md': '.md', 'markdown': '.md', 'html': '.html', 'txt': '.txt'}.get(request.format.lower())
+        fmt = request.format.lower(); ext = {'md': '.md', 'markdown': '.md', 'html': '.html', 'txt': '.txt', 'docx': '.docx', 'pdf': '.pdf'}.get(fmt)
         if not ext:
-            raise ValueError('Supported export formats: md, html, txt')
+            raise ValueError('Supported export formats: md, html, txt, docx, pdf')
         target = Path('data/exports') / f"result-{abs(hash(request.title))}{ext}"
-        if ext == '.md': path = export_markdown(str(target), request.title, request.body, request.sources)
-        elif ext == '.html': path = export_html(str(target), request.title, request.body, request.sources)
-        else: path = export_text(str(target), request.title, request.body)
+        if fmt in {'md', 'markdown'}: path = export_markdown(str(target), request.title, request.body, request.sources)
+        elif fmt == 'html': path = export_html(str(target), request.title, request.body, request.sources)
+        elif fmt == 'txt': path = export_text(str(target), request.title, request.body)
+        elif fmt == 'docx': path = export_docx(str(target), request.title, request.body, request.sources)
+        else: path = export_pdf(str(target), request.title, request.body, request.sources)
         return {'path': path}
 else:
     app = None
