@@ -1,0 +1,1 @@
+{"name":"amerhwitat/email-list-manager","description":"Local-first email contact list manager","type":"library","require":{"php":">=8.1"},"autoload":{"files":["EmailListManager.php"]}}
