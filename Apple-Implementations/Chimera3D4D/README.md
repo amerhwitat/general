@@ -24,11 +24,40 @@ It is implemented as an independent application. Commercial DCC products such as
 - local-first RNN/LLM scene intelligence in `ai/`
 - CMake, PowerShell, shell scripts and GitHub Actions CI definitions
 
+## Complete source-code citation index
+
+| Module | Source |
+|---|---|
+| Core geometry | [core/src/geometry.cpp](core/src/geometry.cpp), [geometry.hpp](core/include/chimera3d4d/geometry.hpp) |
+| Scene system | [core/src/scene.cpp](core/src/scene.cpp), [scene.hpp](core/include/chimera3d4d/scene.hpp) |
+| AI/RNN/LLM | [ai/rnn_llm_engine.py](ai/rnn_llm_engine.py), [ai/README.md](ai/README.md) |
+| Animation | [animation/src/animation.cpp](animation/src/animation.cpp), [animation/include/animation.hpp](animation/include/animation.hpp) |
+| Modeling | [modeling/src/modeling.cpp](modeling/src/modeling.cpp), [modeling/include/modeling.hpp](modeling/include/modeling.hpp) |
+| Sculpting | [sculpt/src/sculpt.cpp](sculpt/src/sculpt.cpp), [sculpt/include/sculpt.hpp](sculpt/include/sculpt.hpp) |
+| Rigging | [rigging/src/rigging.cpp](rigging/src/rigging.cpp), [rigging/include/rigging.hpp](rigging/include/rigging.hpp) |
+| Motion | [motion/src/motion.cpp](motion/src/motion.cpp), [motion/include/motion.hpp](motion/include/motion.hpp) |
+| Dynamics | [dynamics/src/dynamics.cpp](dynamics/src/dynamics.cpp), [dynamics/include/dynamics.hpp](dynamics/include/dynamics.hpp) |
+| Rendering | [rendering/src/rendering.cpp](rendering/src/rendering.cpp), [rendering/include/rendering.hpp](rendering/include/rendering.hpp) |
+| Materials | [materials/src/materials.cpp](materials/src/materials.cpp), [materials/include/materials.hpp](materials/include/materials.hpp) |
+| Color | [color/src/color.cpp](color/src/color.cpp), [color/include/color.hpp](color/include/color.hpp) |
+| VFX | [vfx/src/vfx.cpp](vfx/src/vfx.cpp), [vfx/include/vfx.hpp](vfx/include/vfx.hpp) |
+| Nodes | [nodes/src/nodes.cpp](nodes/src/nodes.cpp), [nodes/include/nodes.hpp](nodes/include/nodes.hpp) |
+| Compositor | [compositor/src/compositor.cpp](compositor/src/compositor.cpp), [compositor/include/compositor.hpp](compositor/include/compositor.hpp) |
+| USD | [usd/src/usd_adapter.cpp](usd/src/usd_adapter.cpp), [usd/include/usd_adapter.hpp](usd/include/usd_adapter.hpp) |
+| iOS shell | [apple/ios/CH3D4DiOSViewController.m](apple/ios/CH3D4DiOSViewController.m), [CH3D4DiOSViewController.h](apple/ios/CH3D4DiOSViewController.h) |
+| Metal | [apple/metal/CH3D4DRenderer.m](apple/metal/CH3D4DRenderer.m), [CH3D4DRenderer.h](apple/metal/CH3D4DRenderer.h) |
+| macOS Objective-C shell | [apple/objc/CH3D4DAppDelegate.m](apple/objc/CH3D4DAppDelegate.m), [CH3D4DViewport.m](apple/objc/CH3D4DViewport.m) |
+| Flutter | [flutter/lib/main.dart](flutter/lib/main.dart) |
+| Web TypeScript | [web/src/main.ts](web/src/main.ts), [web/src/viewport.ts](web/src/viewport.ts) |
+| Web shell | [web/index.html](web/index.html), [web/package.json](web/package.json) |
+| Build automation | [scripts/](scripts/), [CMakeLists.txt](CMakeLists.txt) |
+| Tests | [tests/core_tests.cpp](tests/core_tests.cpp) |
+| CI | [.github/workflows/chimera-3d4d.yml](.github/workflows/chimera-3d4d.yml) |
+| Architecture/docs | [ARCHITECTURE.md](ARCHITECTURE.md), [docs/](docs/) |
+
 ## RNN/LLM scene intelligence
 
 `ai/rnn_llm_engine.py` provides bounded recurrent scene memory, time-series observation, explainable recommendations and an optional PyTorch GRU next-token backend. It can consume authorized scene descriptions, animation/motion events and optional 128D semantic metadata. It does not automatically mutate production scenes.
-
-The design draws architectural ideas from LangChain, LangGraph, LlamaIndex, Chroma, Open WebUI and Mamba while preserving this project's own interfaces. citeturn0search2turn0search0turn0search1turn0search3turn0search9turn1search0
 
 ## Repository layout
 
@@ -47,8 +76,6 @@ Chimera3D4D/
 
 The architecture uses adapter boundaries around OpenUSD, MaterialX, OpenColorIO, OpenImageIO, OpenVDB, OpenSubdiv, CGAL and libigl. The core does not require these libraries to compile. See `THIRD_PARTY.md` and `LICENSES.md` before enabling optional adapters.
 
-The AI layer similarly uses optional adapters rather than vendoring external frameworks. Research references include OpenDCC and PlayCanvas for DCC/web architecture and current AI projects for stateful agents, retrieval, vector search and sequence modeling.
-
 ## 3D versus 4D
 
 The core treats spatial geometry as 3D coordinates and time as a separate dimension of state. A 4D object can therefore be represented as geometry sampled/evolving over time without treating time as an additional spatial coordinate.
@@ -60,58 +87,31 @@ Optional metadata can attach a 128-component state vector to a scene/entity for 
 ## Build
 
 ### C++
-
 ```bash
 ./scripts/build-linux.sh
 ```
 
-On Windows PowerShell:
-
-```powershell
-./scripts/build-all.ps1
-```
-
 ### Web
-
 ```bash
 ./scripts/build-web.sh
 ```
 
 ### Flutter
-
 ```bash
 ./scripts/build-flutter.sh
 ```
 
 ### Apple
-
 ```bash
 ./scripts/build-macos.sh
 ```
 
-The Apple script can generate an Xcode project when XcodeGen is installed. Actual signed iOS/iPadOS IPA and production macOS distribution still require macOS/Xcode, signing identities/profiles and the appropriate Apple SDKs.
+Actual signed Apple distribution requires macOS/Xcode and the appropriate signing configuration.
 
 ## Capability and implementation status
 
-See `docs/FEATURE_MATRIX.md` for the distinction between the implemented foundation and the remaining production DCC layers. See `ROADMAP.md` for the next engineering stages and `BUILD_STATUS.md` for verification status.
+See `docs/FEATURE_MATRIX.md`, `ROADMAP.md` and `BUILD_STATUS.md` for implementation and verification boundaries.
 
-## Hosted web and collaboration
+## License
 
-`docs/HOSTED_WEB.md` describes a deployment architecture for static web assets, authenticated scene APIs, live collaboration and future trusted Chimera P2P integration. No credentials or production endpoints are embedded.
-
-## Research and training references
-
-- Blender Manual: https://docs.blender.org/manual/en/5.2/
-- OpenUSD tutorials: https://openusd.org/dev/tut_usd_tutorials.html
-- OpenUSD developer guides: https://openusd.org/dev/api/_developer__guides.html
-- CGAL: https://www.cgal.org/
-- libigl: https://igl.ethz.ch/code/
-- OpenDCC: https://github.com/shapefx/OpenDCC
-- PlayCanvas Engine: https://github.com/playcanvas/engine
-- LangChain: https://github.com/langchain-ai/langchain citeturn0search2
-- LangGraph: https://github.com/langchain-ai/langgraph citeturn0search0
-- LlamaIndex: https://github.com/run-llama/llama_index citeturn0search1
-- Chroma: https://github.com/chroma-core/chroma citeturn0search3
-- Mamba: https://github.com/state-spaces/mamba citeturn1search0turn1search3
-
-See `TRAINING_GUIDES.md`, `THIRD_PARTY.md` and `ai/README.md` for attribution and integration notes.
+GPL-3.0-or-later for original project code. Third-party libraries and assets retain their own licenses.
