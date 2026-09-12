@@ -52,6 +52,8 @@ Cross-language, responsible public-web crawler and contact extraction applicatio
 | Open-source research | [`docs/OPEN_SOURCE_RESEARCH.md`](docs/OPEN_SOURCE_RESEARCH.md) |
 | Portfolio references | [`docs/PORTFOLIO_REFERENCES.md`](docs/PORTFOLIO_REFERENCES.md) |
 | Implementation plan | [`docs/superpowers/plans/2026-09-12-cute-web-extractor-ui.md`](docs/superpowers/plans/2026-09-12-cute-web-extractor-ui.md) |
+| Windows GUI launcher | [`scripts/run-gui.bat`](scripts/run-gui.bat) |
+| Unix GUI launcher | [`scripts/run-gui.sh`](scripts/run-gui.sh) |
 
 ## Quick start — GUI
 
@@ -61,7 +63,7 @@ From `applications/WebContactCrawler/python/`:
 python gui_server.py
 ```
 
-Open the local address printed by the server. Enter a public/authorized URL, optional keywords, crawl depth and page budget, then use **Search Now**. Progress is JSONL-backed and displayed in the statistics/progress area.
+Or use [`scripts/run-gui.bat`](scripts/run-gui.bat) on Windows or [`scripts/run-gui.sh`](scripts/run-gui.sh) on Unix-like systems. Open the local address printed by the server. Enter a public/authorized URL, optional keywords, crawl depth and page budget, then use **Search Now**. Progress is JSONL-backed and displayed in the statistics/progress area.
 
 ## Quick start — CLI
 
