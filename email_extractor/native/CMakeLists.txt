@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.20)
+project(EmailExtractorNative LANGUAGES C CXX ASM)
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_CXX_STANDARD 20)
+add_library(email_extractor_native STATIC native.cpp native.c)
+add_executable(email_extractor_native_demo main.cpp)
+target_link_libraries(email_extractor_native_demo PRIVATE email_extractor_native)
