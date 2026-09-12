@@ -1,0 +1,17 @@
+{
+  "protocol_version": 1,
+  "default_modes": ["client", "server", "host", "p2p", "hybrid"],
+  "applications": [
+    {"id":"AgentResearchForge","path":"AgentResearchForge","network":true},
+    {"id":"SEO-Tool","path":"SEO-Tool","network":true},
+    {"id":"WebContactCrawler","path":"applications/WebContactCrawler","network":true},
+    {"id":"EmailKeywordCrawler","path":"EmailKeywordCrawler","network":true},
+    {"id":"EmailListManager","path":"EmailListManager","network":true},
+    {"id":"EmailExtractor","path":"email_extractor","network":true},
+    {"id":"WorkflowStudio","path":"WorkflowStudio","network":true},
+    {"id":"Chimera3D4D","path":"Apple-Implementations/Chimera3D4D","network":true}
+  ],
+  "profile": {"nickname_max":32,"avatar_mime":["image/png","image/jpeg","image/webp"],"max_avatar_bytes":5242880},
+  "host_mode": {"local_client":true,"same_authorization_path":true},
+  "privacy": {"persist_raw_ip_in_profile":false,"share_exact_location":false}
+}
