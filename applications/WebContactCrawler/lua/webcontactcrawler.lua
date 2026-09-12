@@ -1,0 +1,1 @@
+local f=assert(io.open(arg[1],'r'));local s=f:read('*a');f:close();local seen={};for e in s:gmatch('[%w%._%%+%-]+@[%w%.%-]+%.[A-Za-z][A-Za-z]+') do seen[e:lower()]=true end;local n=0;for _ in pairs(seen) do n=n+1 end;print('DONE unique_emails='..n);for e in pairs(seen) do print(e) end
