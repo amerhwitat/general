@@ -1,6 +1,6 @@
 # Email List Manager
 
-A new local-first contact-list management tool inspired by open-source mailing-list managers such as listmonk, while keeping the implementation original and focused on **contact data management rather than unsolicited mail delivery**. listmonk demonstrates useful patterns including subscriber/list relationships, segmentation, CSV synchronization and analytics. citeturn0search4turn0search13
+A new local-first contact-list management tool inspired by open-source mailing-list managers such as [listmonk](https://listmonk.app/), while keeping the implementation original and focused on **contact data management rather than unsolicited mail delivery**. listmonk demonstrates useful patterns including subscriber/list relationships, segmentation, CSV synchronization and analytics. See the [listmonk documentation](https://listmonk.app/docs/) and [external integration/API guidance](https://listmonk.app/docs/external-integration/).
 
 ## Features
 - Contacts, lists, memberships, tags, notes and source provenance.
@@ -13,12 +13,12 @@ A new local-first contact-list management tool inspired by open-source mailing-l
 - No automatic bulk email sending, credential collection, access-control bypass or private-source harvesting.
 
 ## AI contract
-AI is disabled by default. Set `CHIMERA_AI_ENABLED=1` and configure `CHIMERA_LLM_ENDPOINT` / `CHIMERA_LLM_MODEL` to use a local Ollama-compatible service. AI output is advisory and must not modify consent or suppression state automatically.
+AI is disabled by default. Set `CHIMERA_AI_ENABLED=1` and configure `CHIMERA_LLM_ENDPOINT` / `CHIMERA_LLM_MODEL` to use a local [Ollama](https://github.com/ollama/ollama) service. Ollama exposes a local REST `/api/generate` endpoint that accepts a model, prompt and `stream:false` for a single JSON response; this repository uses that boundary without embedding a vendor SDK or model weights. AI output is advisory and must not modify consent or suppression state automatically.
 
 The recurrent scorer is intentionally small and deterministic so every implementation can operate without a model server. It is an integration primitive, not a claim of a trained production neural network.
 
 ## Open-source research
-The architecture reviewed listmonk's subscriber/list schema and API/CSV synchronization ideas, plus local RAG/Ollama patterns. No third-party source code is copied. citeturn0search4turn0search13turn0search8
+The architecture reviewed listmonk's subscriber/list schema and API/CSV synchronization ideas, plus local RAG/Ollama patterns. No third-party source code is copied. See the [Ollama API documentation](https://github.com/ollama/ollama/blob/main/docs/api.md) and [local RAG example](https://github.com/emilvrana/local-rag-stack) for the external architectural references.
 
 ## Safety and compliance
 Use only contacts you are authorized to manage. Respect consent, suppression, privacy, terms of service and applicable anti-spam/data-protection laws. This tool deliberately does not implement unsolicited bulk delivery.
