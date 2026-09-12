@@ -1,6 +1,8 @@
 #pragma once
 #include "chimera3d4d/geometry.hpp"
+#include <cstdint>
 #include <string>
+#include <utility>
 #include <vector>
 
 namespace chimera3d4d::rigging {
