@@ -31,8 +31,8 @@ struct Vertex { Vec3 position{}; Vec3 normal{}; std::array<float,2> uv{}; };
 struct Triangle { std::uint32_t a{}, b{}, c{}; };
 
 struct AABB {
-  Vec3 min{std::numeric_limits<double>::infinity()};
-  Vec3 max{-std::numeric_limits<double>::infinity()};
+  Vec3 min{std::numeric_limits<double>::infinity(), std::numeric_limits<double>::infinity(), std::numeric_limits<double>::infinity()};
+  Vec3 max{-std::numeric_limits<double>::infinity(), -std::numeric_limits<double>::infinity(), -std::numeric_limits<double>::infinity()};
   void expand(const Vec3& p) noexcept;
   bool valid() const noexcept;
 };
