@@ -7,7 +7,7 @@ It is an application integration boundary, not a claim of a pretrained foundatio
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Iterable, List, Sequence
+from typing import List, Sequence
 import math
 import re
 
@@ -40,8 +40,7 @@ class RNNLLMEngine:
 
     def step(self, text: str) -> List[float]:
         """Update recurrent state using a deterministic tanh recurrence."""
-        tokens = TOKEN_RE.findall(text.lower())
-        for token in tokens:
+        for token in TOKEN_RE.findall(text.lower()):
             seed = sum(ord(c) for c in token) % 997
             for i, value in enumerate(self.state.values):
                 drive = math.sin((seed + i * 13) * 0.017)
@@ -56,12 +55,8 @@ class RNNLLMEngine:
     def summarize_state(self) -> dict:
         values = self.state.values
         energy = sum(v * v for v in values) / max(1, len(values))
-        return {
-            "steps": self.state.step,
-            "memory_items": len(self.state.memory),
-            "hidden_size": self.hidden_size,
-            "state_energy": energy,
-        }
+        return {"steps": self.state.step, "memory_items": len(self.state.memory),
+                "hidden_size": self.hidden_size, "state_energy": energy}
 
     def suggest_workflow_action(self, events: Sequence[str]) -> dict:
         """Produce an explainable advisory from recent event text."""
@@ -86,20 +81,27 @@ class RNNLLMEngine:
 
 
 class TorchGRULanguageModel:
-    """Optional trainable GRU LM. Importing this class does not require torch."""
+    """Optional trainable GRU LM wrapped as a proper PyTorch module."""
 
     def __init__(self, vocab_size: int, embedding_size: int = 256, hidden_size: int = 512):
         import torch.nn as nn
-        self.nn = nn
-        self.model = nn.Sequential()  # populated explicitly below for stable serialization
-        self.embedding = nn.Embedding(vocab_size, embedding_size)
-        self.gru = nn.GRU(embedding_size, hidden_size, batch_first=True)
-        self.head = nn.Linear(hidden_size, vocab_size)
+
+        class _Model(nn.Module):
+            def __init__(self):
+                super().__init__()
+                self.embedding = nn.Embedding(vocab_size, embedding_size)
+                self.gru = nn.GRU(embedding_size, hidden_size, batch_first=True)
+                self.head = nn.Linear(hidden_size, vocab_size)
+
+            def forward(self, token_ids, hidden=None):
+                x = self.embedding(token_ids)
+                x, hidden = self.gru(x, hidden)
+                return self.head(x), hidden
+
+        self.model = _Model()
 
     def parameters(self):
-        return list(self.embedding.parameters()) + list(self.gru.parameters()) + list(self.head.parameters())
+        return self.model.parameters()
 
     def forward(self, token_ids, hidden=None):
-        x = self.embedding(token_ids)
-        x, hidden = self.gru(x, hidden)
-        return self.head(x), hidden
+        return self.model(token_ids, hidden)
