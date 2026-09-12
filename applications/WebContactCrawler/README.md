@@ -15,6 +15,35 @@ Cross-language, responsible public-web crawler and contact extraction applicatio
 - Pause/resume/cancel integration boundary via session/event contracts.
 - Language adapters for the programming languages already represented in this repository.
 
+## Source-code citation index
+
+| Implementation | Source |
+|---|---|
+| Reference crawler | [python/webcontactcrawler.py](python/webcontactcrawler.py) |
+| Import/export | [python/import_export.py](python/import_export.py) |
+| Python tests | [python/tests/test_webcontactcrawler.py](python/tests/test_webcontactcrawler.py) |
+| C | [c/main.c](c/main.c) |
+| C++ | [cpp/main.cpp](cpp/main.cpp) |
+| C# | [csharp/Program.cs](csharp/Program.cs) |
+| Go | [go/main.go](go/main.go) |
+| Rust | [rust/src/main.rs](rust/src/main.rs) |
+| Java | [java/WebContactCrawler.java](java/WebContactCrawler.java) |
+| Kotlin | [kotlin/Main.kt](kotlin/Main.kt) |
+| Scala | [scala/WebContactCrawler.scala](scala/WebContactCrawler.scala) |
+| Swift | [swift/WebContactCrawler.swift](swift/WebContactCrawler.swift) |
+| TypeScript | [typescript/index.ts](typescript/index.ts) |
+| JavaScript | [javascript/index.js](javascript/index.js) |
+| PHP | [php/webcontactcrawler.php](php/webcontactcrawler.php) |
+| Ruby | [ruby/webcontactcrawler.rb](ruby/webcontactcrawler.rb) |
+| Dart | [dart/bin/webcontactcrawler.dart](dart/bin/webcontactcrawler.dart) |
+| Perl | [perl/webcontactcrawler.pl](perl/webcontactcrawler.pl) |
+| Lua | [lua/webcontactcrawler.lua](lua/webcontactcrawler.lua) |
+| Bash | [bash/webcontactcrawler.sh](bash/webcontactcrawler.sh) |
+| PowerShell | [powershell/WebContactCrawler.ps1](powershell/WebContactCrawler.ps1) |
+| Portable contact schema | [schema/contact.schema.json](schema/contact.schema.json) |
+| Browser dashboard | [web/index.html](web/index.html) |
+| Architecture/research docs | [docs/](docs/) |
+
 ## Quick start
 
 ```text
