@@ -1,0 +1,17 @@
+name: ApplePortfolioApp
+options:
+  bundleIdPrefix: com.amerhwitat
+  deploymentTarget:
+    iOS: '15.0'
+    macOS: '12.0'
+targets:
+  ApplePortfolioApp:
+    type: application
+    platform: [iOS, macOS]
+    sources:
+      - path: Sources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.amerhwitat.appleportfolio
+        CLANG_ENABLE_MODULES: YES
+        CLANG_ENABLE_OBJC_ARC: YES
