@@ -89,7 +89,8 @@ def export(rows, path):
 
 class Crawler:
     def __init__(self, seeds, keywords=(), max_pages=100, max_depth=2, delay=.5,
-                 timeout=10, max_bytes=2_000_000, allowed_domains=None, event_file=None):
+                 timeout=10, max_bytes=2_000_000, allowed_domains=None, event_file=None,
+                 stop_event=None):
         self.queue = deque((u, 0) for u in seeds)
         self.seen, self.contacts, self.robots = set(), {}, {}
         self.keywords = tuple(k.lower().strip() for k in keywords if k.strip())
@@ -97,6 +98,7 @@ class Crawler:
         self.timeout, self.max_bytes = timeout, max(1, max_bytes)
         self.allowed_domains = set(allowed_domains or [urlparse(u).netloc for u in seeds])
         self.event_file = event_file
+        self.stop_event = stop_event
         self.pages = self.errors = self.skipped = self.discovered = 0
         self.started = time.time()
 
@@ -134,6 +136,9 @@ class Crawler:
     def run(self):
         self.event("start", seeds=[u for u, _ in self.queue], keywords=list(self.keywords), max_pages=self.max_pages, max_depth=self.max_depth)
         while self.queue and self.pages < self.max_pages:
+            if self.stop_event is not None and self.stop_event.is_set():
+                self.event("cancelled", reason="user-request")
+                break
             url, depth = self.queue.popleft()
             if url in self.seen or depth > self.max_depth:
                 continue
@@ -158,7 +163,7 @@ class Crawler:
                     if urlparse(nxt).netloc == urlparse(final).netloc and nxt not in self.seen:
                         self.queue.append((nxt, depth + 1)); self.discovered += 1
             rate = self.pages / max(time.time() - self.started, .001)
-            self.event("page", url=final, depth=depth, rate=round(rate, 3))
+            self.event("page", url=final, depth=depth, rate=round(rate, 3), max_pages=self.max_pages)
             time.sleep(self.delay)
         result = sorted(self.contacts.values(), key=lambda r: (-r.score, r.email))
         self.event("done", elapsed=round(time.time() - self.started, 3), unique_pages=self.pages, unique_emails=len(result), queued_remaining=len(self.queue))
