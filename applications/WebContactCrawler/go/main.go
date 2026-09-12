@@ -1,0 +1,3 @@
+package main
+import("encoding/csv";"fmt";"os";"regexp";"strings")
+func main(){if len(os.Args)<2{fmt.Println("usage: webcontactcrawler <html-file> [output.csv]");return};b,_:=os.ReadFile(os.Args[1]); re:=regexp.MustCompile(`(?i)[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}`); seen:=map[string]bool{}; rows:=[][]string{{"email"}}; for _,e:=range re.FindAllString(string(b),-1){e=strings.ToLower(e);if !seen[e]{seen[e]=true;rows=append(rows,[]string{e})}}; out:="emails.csv";if len(os.Args)>2{out=os.Args[2]};f,_:=os.Create(out);defer f.Close();csv.NewWriter(f).WriteAll(rows);fmt.Printf("DONE unique_emails=%d output=%s\n",len(rows)-1,out)}
