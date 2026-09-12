@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "endpoint": "/api/ocr/scan",
+  "multipart_field": "file",
+  "engines": ["auto", "kraken", "tesseract", "quality-only"],
+  "output": {
+    "engine": "string",
+    "text": "UTF-8 NFC string",
+    "confidence": "0..1",
+    "script_candidates": [{"script": "string", "score": "0..1"}],
+    "boxes": [{"x": "integer", "y": "integer", "width": "integer", "height": "integer", "text": "string", "confidence": "0..1"}],
+    "image_quality": {"width": "number", "height": "number", "mean": "number", "contrast": "number", "blur": "number"},
+    "warnings": ["string"],
+    "source_sha256": "64-hex-string",
+    "preprocessing": ["string"],
+    "provenance": {"recognition_only": true, "translation_required_review": true}
+  }
+}
