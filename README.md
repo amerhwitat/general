@@ -40,6 +40,55 @@ The portfolio uses a common local-first RNN/LLM architecture pattern: bounded re
 
 Applications and experiments can model state using the portfolio-wide 128D semantic framework: geometry, time, observer/perspective, light/shadow/material response, events, objects, properties and interaction rules, with extensible perception/cognition/vector dimensions.
 
+## Source-code citation index
+
+The repository README set now treats source code as the implementation record: every major implementation area has a direct source-tree or source-file reference, while local component READMEs document their own detailed file inventories.
+
+### Core application source
+
+- [AgentResearchForge source](AgentResearchForge/) — `agents/`, `api/`, `api_registry/`, `artifacts/`, `build/`, `code_search/`, `core/`, `crawler/`, `documents/`, `exporters/`, `hosting/`, `languages/`, `project_builder/`, `scripts/`, `tests/`, `ui/`.
+- [SEO-Tool source](SEO-Tool/) — `SEO_Tool/`, `languages/`, `scripts/`, `tests/`, `web/`, `pyproject.toml`.
+- [WebContactCrawler source](applications/WebContactCrawler/) — `python/`, language adapters, `schema/`, `web/`, `docs/`.
+- [WorkflowStudio source](WorkflowStudio/) — `ai/`, `clients/`, `collaboration/`, `contracts/`, `core/`, `database/`, `deploy/`, `domain/`, `integrations/`, `services/`, `tests/`, `voice/`.
+
+### Platform source
+
+- [Chimera mobile source](mobile/) — C++ mobile runtime, package fabric/manager/adapters, ARM64/Android/iOS targets, Aurora web shell, tests and packaging.
+- [Apple implementations](Apple-Implementations/) — Flutter and Objective-C application implementations plus the full `Chimera3D4D` native/web source tree.
+- [Swift integration](apple/) — Swift package/application boundary and Apple build scripts.
+- [Web implementations](web/) — JavaScript and PHP browser/server entry points.
+- [Kotlin mobile integration](kotlin/) — Kotlin mobile communication implementation.
+
+### Documentation and provenance
+
+- [Portfolio integration docs](docs/) — ecosystem, mobile, web, library, publication and architecture records.
+- [Third-party/upstream records](third_party/) — upstream attribution and source-boundary records.
+- [Performance/concurrency notes](PERFORMANCE_CONCURRENCY.md).
+- [Linux command source integration](docs/LINUX_COMMANDS_SOURCE_INTEGRATION.md).
+
+### Exact source links for the active flagship applications
+
+- [SEO crawler engine](SEO-Tool/SEO_Tool/core.py)
+- [SEO CLI](SEO-Tool/SEO_Tool/cli.py)
+- [SEO GUI](SEO-Tool/SEO_Tool/gui.py)
+- [SEO research engine](SEO-Tool/SEO_Tool/research.py)
+- [SEO document extraction](SEO-Tool/SEO_Tool/documents.py)
+- [SEO language manifest](SEO-Tool/languages/manifest.json)
+- [WebContactCrawler Python engine](applications/WebContactCrawler/python/webcontactcrawler.py)
+- [WebContactCrawler import/export](applications/WebContactCrawler/python/import_export.py)
+- [WebContactCrawler contact schema](applications/WebContactCrawler/schema/contact.schema.json)
+- [WorkflowStudio Python service](WorkflowStudio/services/python/main.py)
+- [WorkflowStudio RNN/LLM engine](WorkflowStudio/services/python/rnn_llm_engine.py)
+- [WorkflowStudio C++ workflow core](WorkflowStudio/core/cpp/main.cpp)
+- [WorkflowStudio web client](WorkflowStudio/clients/web/src/App.tsx)
+- [WorkflowStudio Android client](WorkflowStudio/clients/android/Main.kt)
+- [WorkflowStudio iOS client](WorkflowStudio/clients/ios/WorkflowClient.swift)
+- [Mobile C++ runtime](mobile/src/runtime.cpp)
+- [Mobile package fabric](mobile/src/package_fabric.cpp)
+- [Chimera 3D/4D geometry](Apple-Implementations/Chimera3D4D/core/src/geometry.cpp)
+- [Chimera 3D/4D scene engine](Apple-Implementations/Chimera3D4D/core/src/scene.cpp)
+- [Chimera 3D/4D recurrent AI](Apple-Implementations/Chimera3D4D/ai/rnn_llm_engine.py)
+
 ## Portfolio relationships
 
 - `ChimeraIIOS` — canonical OS and interoperability contracts.
