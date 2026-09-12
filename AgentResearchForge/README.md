@@ -13,6 +13,32 @@ AgentResearchForge is a local-first AI research and project-building workspace. 
 - **Dark web:** explicitly authorized/public `.onion` URLs can be fetched through a local Tor SOCKS proxy when `AGENT_ALLOW_ONION=1`. The application does not enumerate onion space or bypass access controls.
 - **Evidence:** results retain URL/source type/provenance/license metadata where available.
 
+## Source-code citation index
+
+| Area | Source |
+|---|---|
+| Agent orchestration | [agents/orchestrator.py](agents/orchestrator.py) |
+| API service | [api/app.py](api/app.py) |
+| API registry | [api_registry/registry.py](api_registry/registry.py) |
+| Artifact store | [artifacts/store.py](artifacts/store.py) |
+| Build runner | [build/runner.py](build/runner.py) |
+| GitHub code discovery | [code_search/github.py](code_search/github.py) |
+| Core contracts | [core/contracts.py](core/contracts.py) |
+| Research engine | [core/research.py](core/research.py), [core/deep_research.py](core/deep_research.py) |
+| Web crawler | [crawler/web.py](crawler/web.py), [crawler/deep_crawl.py](crawler/deep_crawl.py) |
+| Crawler policy | [crawler/policy.py](crawler/policy.py) |
+| Authorized onion adapter | [crawler/onion.py](crawler/onion.py) |
+| Document index | [documents/index.py](documents/index.py) |
+| Exporters | [exporters/documents.py](exporters/documents.py) |
+| Hosting registry | [hosting/registry.py](hosting/registry.py) |
+| Project generator | [project_builder/generator.py](project_builder/generator.py) |
+| Language matrix | [languages/manifest.json](languages/manifest.json), [languages/README.md](languages/README.md) |
+| Local web UI | [ui/index.html](ui/index.html) |
+| Automation | [scripts/](scripts/) |
+| Tests | [tests/](tests/) |
+| Architecture/security | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/SECURITY.md](docs/SECURITY.md) |
+| Package configuration | [pyproject.toml](pyproject.toml) |
+
 ## Build, store and export
 
 Generated projects have real starter templates for every language in `languages/manifest.json`. Artifacts are stored under `data/artifacts/`, include an `artifact.json` manifest, and can be archived as ZIP files. Generated code remains inert until a user explicitly chooses a build/test workflow.
