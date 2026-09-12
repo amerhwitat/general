@@ -1,0 +1,2 @@
+import java.nio.file.*;import java.util.*;import java.util.regex.*;
+public class WebContactCrawler{public static void main(String[]a)throws Exception{if(a.length<1){System.err.println("usage: WebContactCrawler <html-file>");return;}String s=Files.readString(Path.of(a[0]));Matcher m=Pattern.compile("(?i)[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}").matcher(s);Set<String> out=new TreeSet<>();while(m.find())out.add(m.group().toLowerCase());System.out.println("DONE unique_emails="+out.size());out.forEach(System.out::println);}}
