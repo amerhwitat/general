@@ -1,0 +1,2 @@
+using System.Text.RegularExpressions;
+if(args.Length==0){Console.Error.WriteLine("usage: WebContactCrawler <html-file>");return;} var text=File.ReadAllText(args[0]);var set=new HashSet<string>(StringComparer.OrdinalIgnoreCase);foreach(Match m in Regex.Matches(text, @"[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}", RegexOptions.IgnoreCase))set.Add(m.Value.ToLowerInvariant());Console.WriteLine($"DONE unique_emails={set.Count}");foreach(var e in set.Order())Console.WriteLine(e);
