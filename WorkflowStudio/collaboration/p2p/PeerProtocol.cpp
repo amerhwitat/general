@@ -1,0 +1,2 @@
+#include "PeerProtocol.hpp"
+VerificationResult PeerProtocol::verify(const PeerEnvelope& e,const std::string& expected_peer,uint64_t expected_sequence) const { if(e.peer_id!=expected_peer) return {false,"unknown or unpaired peer"}; if(e.sequence!=expected_sequence) return {false,"sequence/replay check failed"}; if(e.event_id.empty()||e.payload_hash.empty()||e.signature.empty()) return {false,"incomplete signed envelope"}; return {true,"accepted metadata; cryptographic signature verification belongs to the configured crypto adapter"}; }
