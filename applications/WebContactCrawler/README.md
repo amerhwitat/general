@@ -54,6 +54,7 @@ Cross-language, responsible public-web crawler and contact extraction applicatio
 | Implementation plan | [`docs/superpowers/plans/2026-09-12-cute-web-extractor-ui.md`](docs/superpowers/plans/2026-09-12-cute-web-extractor-ui.md) |
 | Windows GUI launcher | [`scripts/run-gui.bat`](scripts/run-gui.bat) |
 | Unix GUI launcher | [`scripts/run-gui.sh`](scripts/run-gui.sh) |
+| GitHub Actions verification | [`../../.github/workflows/webcontactcrawler.yml`](../../.github/workflows/webcontactcrawler.yml) |
 
 ## Quick start — GUI
 
@@ -81,11 +82,15 @@ python -m unittest discover -s tests -v
 
 ## Progress and saved work
 
-Each GUI crawl writes an events file beside the requested output, for example `emails.events.jsonl`. Events contain timestamp, event type, page count, queue size, email count, error count, discovered URL count, current URL and crawl rate. The GUI uses this stream to update its progress bars and status area. The crawler output is written to the user-selected `.csv` or `.txt` destination.
+Each GUI crawl writes an events file beside the requested output, for example `emails.events.jsonl`. Events contain timestamp, event type, page count, queue size, email count, error count, discovered URL count, current URL and crawl rate. Contact events also carry email, source URL, title, score and extraction method, allowing the browser grid to update while the crawl is running. The crawler output is written to the user-selected `.csv` or `.txt` destination.
 
 ## UI design mapping
 
 The supplied reference's major regions are retained as an original implementation: top menu, three workflow tabs, engine/keyword controls, crawl settings row, action toolbar, large results grid, right-side statistics, progress area and status bar. See [`docs/UI.md`](docs/UI.md) for the source map and API behavior.
+
+## Verification
+
+GitHub Actions verifies the Python test suite and compiles `webcontactcrawler.py` and `gui_server.py` on changes under this application. The workflow is [`../../.github/workflows/webcontactcrawler.yml`](../../.github/workflows/webcontactcrawler.yml). A repository status with no completed run for the latest commit is not treated as proof of passing tests.
 
 ## Responsible use
 
