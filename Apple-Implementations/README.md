@@ -11,9 +11,50 @@ Each application has an independent directory containing:
 - `docs/` — Apple-specific architecture, performance and integration notes.
 - `scripts/` — macOS build/bootstrap helpers.
 
-Flutter is the shared UI/application layer; Objective-C is the native Apple integration layer for APIs requiring direct UIKit/AppKit/Foundation/AVFoundation/Metal access. Flutter officially supports Objective-C host code on iOS and macOS through platform channels, and supports native platform integration through Pigeon/platform channels. citeturn0search0
+## Source-code citation index
 
-Flutter Impeller is retained as the Apple rendering path. It is the supported renderer on iOS and is enabled by default on supported macOS releases. citeturn0search1
+The application source is intentionally kept beside its implementation-specific README. Use these direct trees as the authoritative navigation points:
+
+- [BizX](BizX/) — Flutter and Objective-C bridge sources.
+- [BizXtreme](BizXtreme/) — Flutter and Objective-C bridge sources.
+- [Chimera3D4D](Chimera3D4D/) — C++ geometry/scene engine, AI, Apple Metal/UIKit/AppKit shell, Flutter and web implementation.
+- [ChimeraIIOS](ChimeraIIOS/) — Apple compatibility/application boundary.
+- [CPU4096](CPU4096/) — Apple compatibility/application boundary.
+- [CPU4096Simulator](CPU4096Simulator/) — Apple compatibility/application boundary.
+- [PDFreaderPY](PDFreaderPY/) — Apple compatibility/application boundary.
+- [nlp](nlp/) — Apple compatibility/application boundary.
+- [eth-key-check](eth-key-check/) — Apple compatibility/application boundary.
+- [bruteforce](bruteforce/) — Apple compatibility/application boundary.
+- [keygen](keygen/) — Apple compatibility/application boundary.
+- [test](test/) — Apple compatibility/application boundary.
+- [general](general/) — Apple compatibility/application boundary.
+- [VanG](VanG/) — Apple compatibility/application boundary.
+- [amerhwitat.github.io](amerhwitat.github.io/) — Apple compatibility/application boundary.
+- [Shared scripts](scripts/) — native Apple bootstrap/build automation.
+
+### Detailed Chimera3D4D source references
+
+- [Geometry](Chimera3D4D/core/src/geometry.cpp) and [scene](Chimera3D4D/core/src/scene.cpp)
+- [RNN/LLM scene engine](Chimera3D4D/ai/rnn_llm_engine.py)
+- [Animation](Chimera3D4D/animation/src/animation.cpp)
+- [Modeling](Chimera3D4D/modeling/src/modeling.cpp)
+- [Sculpt](Chimera3D4D/sculpt/src/sculpt.cpp)
+- [Rigging](Chimera3D4D/rigging/src/rigging.cpp)
+- [Motion](Chimera3D4D/motion/src/motion.cpp)
+- [Dynamics](Chimera3D4D/dynamics/src/dynamics.cpp)
+- [Rendering](Chimera3D4D/rendering/src/rendering.cpp)
+- [Materials](Chimera3D4D/materials/src/materials.cpp)
+- [Color](Chimera3D4D/color/src/color.cpp)
+- [VFX](Chimera3D4D/vfx/src/vfx.cpp)
+- [Nodes](Chimera3D4D/nodes/src/nodes.cpp)
+- [Compositor](Chimera3D4D/compositor/src/compositor.cpp)
+- [USD adapter](Chimera3D4D/usd/src/usd_adapter.cpp)
+- [iOS shell](Chimera3D4D/apple/ios/CH3D4DiOSViewController.m)
+- [Metal renderer](Chimera3D4D/apple/metal/CH3D4DRenderer.m)
+- [macOS app delegate](Chimera3D4D/apple/objc/CH3D4DAppDelegate.m)
+- [Web entry point](Chimera3D4D/web/src/main.ts)
+- [Web viewport](Chimera3D4D/web/src/viewport.ts)
+- [Flutter entry point](Chimera3D4D/flutter/lib/main.dart)
 
 ## Applications
 
@@ -39,8 +80,6 @@ Flutter Impeller is retained as the Apple rendering path. It is the supported re
 - macOS arm64
 - macOS x86_64 where supported by the selected Flutter/Xcode toolchain
 
-Current Flutter documentation supports iOS arm64 and macOS arm64/x86_64 deployment, with Apple Silicon being the preferred target for new macOS development. citeturn0search2
-
 ## Native performance policy
 
 - Keep Flutter UI work off blocking native calls.
@@ -52,15 +91,13 @@ Current Flutter documentation supports iOS arm64 and macOS arm64/x86_64 deployme
 - Keep camera/microphone access explicit and permission-gated.
 - Keep cryptographic secrets outside source control.
 
-Flutter's performance guidance separates UI, raster, platform and I/O work; blocking those threads can degrade frame performance. citeturn0search6
-
 ## Xcode project generation
 
-XcodeGen specifications are used where practical so generated `.xcodeproj` files do not become the source of truth. XcodeGen consumes YAML/JSON project specifications and generates Xcode projects from the repository tree. citeturn0search5
+XcodeGen specifications are used where practical so generated `.xcodeproj` files do not become the source of truth. XcodeGen consumes YAML/JSON project specifications and generates Xcode projects from the repository tree.
 
 ## Dependencies
 
-CocoaPods remains supported for Objective-C dependencies that genuinely need it; Swift Package Manager is preferred where an upstream package provides it. CocoaPods is an Objective-C/Swift dependency manager with a large public library ecosystem. citeturn0search9
+CocoaPods remains supported for Objective-C dependencies that genuinely need it; Swift Package Manager is preferred where an upstream package provides it.
 
 ## Building on macOS
 
