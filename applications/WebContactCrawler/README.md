@@ -18,21 +18,40 @@ Cross-language, responsible public-web crawler and contact extraction applicatio
 - Language-neutral JSON contracts and language adapter boundaries.
 - Portable CLI plus browser dashboard.
 
-## GUI source-code citation index
+## Complete source-code citation index
 
-| Component | Source |
+| Implementation / component | Source |
 |---|---|
-| Reference crawler | [`python/webcontactcrawler.py`](python/webcontactcrawler.py) |
-| GUI/job API | [`python/gui_server.py`](python/gui_server.py) |
-| GUI API tests | [`python/tests/test_gui_server.py`](python/tests/test_gui_server.py) |
-| Crawler tests | [`python/tests/test_webcontactcrawler.py`](python/tests/test_webcontactcrawler.py) |
-| Cute-style interface markup | [`web/index.html`](web/index.html) |
-| Cute-style visual theme/layout | [`web/style.css`](web/style.css) |
-| Live progress/import/export browser logic | [`web/app.js`](web/app.js) |
-| UI architecture | [`docs/UI.md`](docs/UI.md) |
+| Python reference crawler | [`python/webcontactcrawler.py`](python/webcontactcrawler.py) |
+| Python GUI/job API | [`python/gui_server.py`](python/gui_server.py) |
+| Python crawler tests | [`python/tests/test_webcontactcrawler.py`](python/tests/test_webcontactcrawler.py) |
+| Python GUI tests | [`python/tests/test_gui_server.py`](python/tests/test_gui_server.py) |
+| C implementation | [`c/main.c`](c/main.c) |
+| C++ implementation | [`cpp/main.cpp`](cpp/main.cpp) |
+| C# implementation | [`csharp/Program.cs`](csharp/Program.cs) |
+| Go implementation | [`go/main.go`](go/main.go) |
+| Rust implementation | [`rust/src/main.rs`](rust/src/main.rs) |
+| Java implementation | [`java/WebContactCrawler.java`](java/WebContactCrawler.java) |
+| Kotlin implementation | [`kotlin/Main.kt`](kotlin/Main.kt) |
+| Scala implementation | [`scala/WebContactCrawler.scala`](scala/WebContactCrawler.scala) |
+| Swift implementation | [`swift/WebContactCrawler.swift`](swift/WebContactCrawler.swift) |
+| TypeScript implementation | [`typescript/index.ts`](typescript/index.ts) |
+| JavaScript implementation | [`javascript/index.js`](javascript/index.js) |
+| PHP implementation | [`php/webcontactcrawler.php`](php/webcontactcrawler.php) |
+| Ruby implementation | [`ruby/webcontactcrawler.rb`](ruby/webcontactcrawler.rb) |
+| Dart implementation | [`dart/bin/webcontactcrawler.dart`](dart/bin/webcontactcrawler.dart) |
+| Perl implementation | [`perl/webcontactcrawler.pl`](perl/webcontactcrawler.pl) |
+| Lua implementation | [`lua/webcontactcrawler.lua`](lua/webcontactcrawler.lua) |
+| Bash implementation | [`bash/webcontactcrawler.sh`](bash/webcontactcrawler.sh) |
+| PowerShell implementation | [`powershell/WebContactCrawler.ps1`](powershell/WebContactCrawler.ps1) |
+| Portable contact schema | [`schema/contact.schema.json`](schema/contact.schema.json) |
+| Browser UI markup | [`web/index.html`](web/index.html) |
+| Browser UI theme/layout | [`web/style.css`](web/style.css) |
+| Browser progress/import/export logic | [`web/app.js`](web/app.js) |
+| GUI architecture | [`docs/UI.md`](docs/UI.md) |
 | Open-source research | [`docs/OPEN_SOURCE_RESEARCH.md`](docs/OPEN_SOURCE_RESEARCH.md) |
 | Portfolio references | [`docs/PORTFOLIO_REFERENCES.md`](docs/PORTFOLIO_REFERENCES.md) |
-| Portable contact schema | [`schema/contact.schema.json`](schema/contact.schema.json) |
+| Implementation plan | [`docs/superpowers/plans/2026-09-12-cute-web-extractor-ui.md`](docs/superpowers/plans/2026-09-12-cute-web-extractor-ui.md) |
 
 ## Quick start — GUI
 
@@ -42,7 +61,7 @@ From `applications/WebContactCrawler/python/`:
 python gui_server.py
 ```
 
-Open the local address printed by the server. Enter a public/authorized URL, optional keywords, crawl depth and page budget, then use **Search Now**. Progress is streamed through JSONL-backed polling and shown in the statistics/progress area.
+Open the local address printed by the server. Enter a public/authorized URL, optional keywords, crawl depth and page budget, then use **Search Now**. Progress is JSONL-backed and displayed in the statistics/progress area.
 
 ## Quick start — CLI
 
@@ -61,6 +80,10 @@ python -m unittest discover -s tests -v
 ## Progress and saved work
 
 Each GUI crawl writes an events file beside the requested output, for example `emails.events.jsonl`. Events contain timestamp, event type, page count, queue size, email count, error count, discovered URL count, current URL and crawl rate. The GUI uses this stream to update its progress bars and status area. The crawler output is written to the user-selected `.csv` or `.txt` destination.
+
+## UI design mapping
+
+The supplied reference's major regions are retained as an original implementation: top menu, three workflow tabs, engine/keyword controls, crawl settings row, action toolbar, large results grid, right-side statistics, progress area and status bar. See [`docs/UI.md`](docs/UI.md) for the source map and API behavior.
 
 ## Responsible use
 
