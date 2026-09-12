@@ -1,0 +1,12 @@
+CREATE TABLE IF NOT EXISTS users (id TEXT PRIMARY KEY, tenant_id TEXT NOT NULL, username TEXT NOT NULL, role TEXT NOT NULL, password_hash TEXT, oidc_subject TEXT, created_at TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS teams (id TEXT PRIMARY KEY, tenant_id TEXT NOT NULL, name TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS projects (id TEXT PRIMARY KEY, tenant_id TEXT NOT NULL, key TEXT NOT NULL, name TEXT NOT NULL, methodology TEXT NOT NULL, version INTEGER NOT NULL DEFAULT 1);
+CREATE TABLE IF NOT EXISTS work_items (id TEXT PRIMARY KEY, project_id TEXT NOT NULL, type TEXT NOT NULL, title TEXT NOT NULL, state TEXT NOT NULL, priority INTEGER NOT NULL DEFAULT 3, assignee_id TEXT, version INTEGER NOT NULL DEFAULT 1);
+CREATE TABLE IF NOT EXISTS services (id TEXT PRIMARY KEY, tenant_id TEXT NOT NULL, name TEXT NOT NULL, owner_team_id TEXT);
+CREATE TABLE IF NOT EXISTS service_records (id TEXT PRIMARY KEY, service_id TEXT NOT NULL, type TEXT NOT NULL, state TEXT NOT NULL, title TEXT NOT NULL, priority INTEGER NOT NULL DEFAULT 3, correlation_id TEXT);
+CREATE TABLE IF NOT EXISTS pipelines (id TEXT PRIMARY KEY, project_id TEXT NOT NULL, provider TEXT NOT NULL, status TEXT NOT NULL, external_id TEXT);
+CREATE TABLE IF NOT EXISTS deployments (id TEXT PRIMARY KEY, pipeline_id TEXT NOT NULL, environment TEXT NOT NULL, status TEXT NOT NULL, version TEXT);
+CREATE TABLE IF NOT EXISTS events (event_id TEXT PRIMARY KEY, tenant_id TEXT NOT NULL, event_type TEXT NOT NULL, occurred_at TEXT NOT NULL, actor_id TEXT NOT NULL, correlation_id TEXT NOT NULL, payload_json TEXT NOT NULL, schema_version INTEGER NOT NULL);
+CREATE INDEX IF NOT EXISTS idx_work_project_state ON work_items(project_id,state);
+CREATE INDEX IF NOT EXISTS idx_events_correlation ON events(correlation_id);
+CREATE INDEX IF NOT EXISTS idx_records_service_state ON service_records(service_id,state);
