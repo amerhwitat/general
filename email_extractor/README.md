@@ -39,8 +39,14 @@ The following repository paths are the canonical source-of-record implementation
 | Visual Studio solution | [`EmailExtractor.sln`](EmailExtractor.sln) |
 | Architecture | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) |
 | Cross-platform automation | [`scripts/README.md`](scripts/README.md) |
+| Contact-list handoff | [`../EmailListManager/`](../EmailListManager/) |
+| Shared RNN/LLM contract | [`../shared/ai/README.md`](../shared/ai/README.md) |
 
-These links are maintained as code citations: documentation claims should map back to an implementation, project file, or architecture document in this repository.
+These links are maintained as code citations: documentation claims should map back to an implementation, project file, or architecture document in this repository or its shared integration layer.
+
+## RNN/LLM integration
+
+Extraction remains deterministic and provenance-first. Optional AI can rank/classify extracted contacts through the repository-wide `shared/ai` contract. The local RNN-style scorer works without a model server; the LLM adapter is optional and intended for a local Ollama-compatible endpoint. AI output is advisory and must never override consent, suppression, robots or access-control policy.
 
 ## Safety boundary
 
@@ -60,97 +66,11 @@ The crawler is intended for authorized/public-web collection. It must not bypass
 - CSV export with consistent `Email,Title,Website` schema
 - JSON/TSV interoperability and WebContactCrawler import/export compatibility
 - Filter/search result grids and native desktop/web interfaces
-
-## Automation
-
-The `scripts/` directory provides one-command dependency installation, build, and run sweeps for Windows and POSIX systems:
-
-- `scripts/install-all.bat`, `build-all.bat`, `run-all.bat` — Windows Command Prompt
-- `scripts/install-all.ps1`, `build-all.ps1`, `run-all.ps1` — PowerShell 5+/7+
-- `scripts/install-all.sh`, `build-all.sh`, `run-all.sh` — Linux/macOS/WSL shells
-
-Automation detects available toolchains and skips unavailable ones while reporting warnings. It does not silently install OS packages or require administrator privileges. Python uses a local `.venv`; .NET uses NuGet restore; Node uses npm; Java uses Maven; PHP uses Composer when present; Rust uses Cargo; native code uses CMake.
+- EmailListManager interoperability for list/tag/consent/status workflows
 
 ## Pipeline
 
-`keywords / URLs → search discovery → domain policy → bounded parallel HTTP/HTTPS fetch → extraction → normalization/deduplication → optional DNS/MX validation → SQLite → CSV/JSON export`
-
-## Persistence contract
-
-Every implementation targets the same logical SQLite table:
-
-```sql
-CREATE TABLE IF NOT EXISTS emails (
-  email TEXT PRIMARY KEY,
-  title TEXT,
-  website TEXT
-);
-```
-
-`Save` calls the language-specific storage helper; `Export CSV` writes a properly escaped CSV file.
-
-## Automation commands
-
-### Windows CMD
-
-```bat
-cd email_extractor
-scripts\install-all.bat
-scripts\build-all.bat
-scripts\run-all.bat
-```
-
-### PowerShell
-
-```powershell
-Set-Location email_extractor
-.\scripts\install-all.ps1
-.\scripts\build-all.ps1
-.\scripts\run-all.ps1
-```
-
-### Linux/macOS/WSL
-
-```bash
-cd email_extractor
-bash scripts/install-all.sh
-bash scripts/build-all.sh
-bash scripts/run-all.sh
-```
-
-## Project and IDE files
-
-- `EmailExtractor.sln` — Visual Studio solution
-- `core_csharp/EmailExtractor.CSharp.csproj` — .NET/Visual Studio
-- `native/EmailExtractor.Native.vcxproj` — native Visual Studio C/C++ project
-- `native/CMakeLists.txt` — C/C++/ASM-capable CMake project
-- `native/CodeBlocks.EmailExtractor.cbp` — Code::Blocks
-- `pyproject.toml` — Python/PyCharm/packaging metadata
-- `.idea/` — PyCharm/IntelliJ project metadata
-- `.vscode/` — Visual Studio Code tasks
-- `.project` — Eclipse-compatible project marker
-- `core_java/pom.xml` — Maven/IntelliJ/Eclipse Java build
-- `core_rust/Cargo.toml` — Cargo/RustRover/VS Code/CLion build
-- `core_js/package.json` — Node.js/Electron project metadata
-
-## Layout
-
-- `core_py/` Python extraction, async crawler, search discovery, and SQLite persistence
-- `core_csharp/` C# extraction, async crawler, and SQLite persistence
-- `core_js/` Node/Electron extraction, bounded crawler, and SQLite persistence
-- `core_java/` Java extraction, executor crawler, and SQLite persistence
-- `core_php/` PHP extraction, curl-multi crawler, and SQLite persistence
-- `core_rust/` Rust extraction, async crawler, and SQLite persistence
-- `native/` C/C++/ASM build and IDE scaffolding
-- `electron/` Electron main/preload integration
-- `ui_pyqt/`, `ui_csharp/`, `ui_js/`, `ui_java/`, `ui_php/`, `ui_rust/` interfaces
-- `scripts/` cross-platform automation
-- `tests/` cross-language test vectors
-- `docs/` architecture and implementation documentation
-
-## Result schema
-
-The crawler uses: `email`, `page_title`, `website`, `source_url`, `valid_mx`, and `status`. Persistence additionally maintains the compact SQLite export fields `email`, `title`, and `website`.
+`keywords / URLs → search discovery → domain policy → bounded parallel HTTP/HTTPS fetch → extraction → normalization/deduplication → optional DNS/MX validation → optional AI ranking → SQLite → EmailListManager/human review → CSV/JSON export`
 
 ## Citation maintenance rule
 
