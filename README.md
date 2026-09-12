@@ -4,7 +4,7 @@ This repository is a general integration and research workspace within the Amer 
 
 ## WebContactCrawler
 
-`applications/WebContactCrawler/` is the portfolio's cross-language public-web contact crawler. It provides bounded keyword-focused crawling, robots-aware scheduling, public email extraction, provenance, deduplication, detailed progress telemetry, a visual dashboard, and TXT/CSV import/export. The directory contains the language-neutral JSON contract, reference Python implementation, portable language adapters, web UI, architecture and open-source research records.
+`applications/WebContactCrawler/` is the portfolio's cross-language public-web contact crawler. It provides bounded keyword-focused crawling, robots-aware scheduling, public email extraction, provenance, deduplication, detailed JSONL progress telemetry, a visual dashboard, and TXT/CSV import/export. The directory contains the language-neutral contact schema, executable Python reference implementation, portable language adapters, web UI, architecture and open-source research records.
 
 The crawler is intentionally responsible-use oriented: public/authorized resources only; no authentication or CAPTCHA bypass, anti-bot evasion, credential collection, private-area crawling or SMTP mailbox probing. Third-party projects are used as architectural references or through documented adapters; proprietary source is not copied.
 
@@ -13,14 +13,16 @@ The crawler is intentionally responsible-use oriented: public/authorized resourc
 - `applications/WebContactCrawler/schema/` — portable contact schema.
 - `applications/WebContactCrawler/python/` — reference crawler and TXT/CSV helpers.
 - `applications/WebContactCrawler/{c,cpp,go,rust,java,csharp,typescript,javascript,php,ruby,dart,swift,kotlin,scala,perl,lua,bash,powershell}/` — language adapters.
-- `applications/WebContactCrawler/web/` — visual progress dashboard foundation.
-- `applications/WebContactCrawler/docs/` — architecture, open-source research and responsible-use documentation.
+- `applications/WebContactCrawler/web/` — visual progress dashboard.
+- `applications/WebContactCrawler/docs/` — architecture, open-source research, licensing and portfolio references.
+
+### External/open-source references
+
+Scrapy: https://github.com/scrapy/scrapy; xcrawler: https://github.com/cardsurf/xcrawler; Frostwork: https://github.com/scrapy/frostwork; Heritrix: https://github.com/internetarchive/heritrix3; Scrapely: https://github.com/scrapy/scrapely; email-enrich: https://github.com/waterdoog/email-enrich; Prowl: https://github.com/nettitude/prowl. These are reference projects, not copied source. See the application documentation for license review and adaptation boundaries.
 
 ## Chimera WorkFlow Studio
 
 `WorkflowStudio/` is the portfolio's cross-platform project, Agile, ITIL 4, DevOps and service-management application foundation. It provides Jira/Azure DevOps-style work tracking, Agile workflow templates, ITIL 4 service records, CI/CD provider boundaries, Kubernetes/OpenShift integration, OpenTelemetry observability, team collaboration, trusted P2P synchronization, voice controls and local-first RNN/ML assistance.
-
-The implementation is deliberately provider-neutral: Kubernetes/OpenShift are deployment and reconciliation targets, while CI execution is delegated to adapters such as Argo Workflows, Tekton, Jenkins or source-control CI. External open-source projects are integrated through documented APIs and adapter boundaries; proprietary source is not copied.
 
 ## Central Apple implementations
 
