@@ -21,7 +21,14 @@ It is implemented as an independent application. Commercial DCC products such as
 - macOS Objective-C/Metal shell plus iOS/iPadOS UIKit Metal shell
 - Flutter cross-platform workspace shell
 - PlayCanvas WebGL/WebGPU browser viewport
+- local-first RNN/LLM scene intelligence in `ai/`
 - CMake, PowerShell, shell scripts and GitHub Actions CI definitions
+
+## RNN/LLM scene intelligence
+
+`ai/rnn_llm_engine.py` provides bounded recurrent scene memory, time-series observation, explainable recommendations and an optional PyTorch GRU next-token backend. It can consume authorized scene descriptions, animation/motion events and optional 128D semantic metadata. It does not automatically mutate production scenes.
+
+The design draws architectural ideas from LangChain, LangGraph, LlamaIndex, Chroma, Open WebUI and Mamba while preserving this project's own interfaces. citeturn0search2turn0search0turn0search1turn0search3turn0search9turn1search0
 
 ## Repository layout
 
@@ -31,7 +38,7 @@ Chimera3D4D/
 ├── animation/ rigging/ motion/ dynamics/
 ├── rendering/ materials/ color/ vfx/ nodes/ compositor/
 ├── usd/ pipeline/ docs/
-├── apple/ flutter/ web/
+├── ai/ apple/ flutter/ web/
 ├── scripts/ tests/
 └── CMakeLists.txt
 ```
@@ -39,6 +46,8 @@ Chimera3D4D/
 ## Open-source integration strategy
 
 The architecture uses adapter boundaries around OpenUSD, MaterialX, OpenColorIO, OpenImageIO, OpenVDB, OpenSubdiv, CGAL and libigl. The core does not require these libraries to compile. See `THIRD_PARTY.md` and `LICENSES.md` before enabling optional adapters.
+
+The AI layer similarly uses optional adapters rather than vendoring external frameworks. Research references include OpenDCC and PlayCanvas for DCC/web architecture and current AI projects for stateful agents, retrieval, vector search and sequence modeling.
 
 ## 3D versus 4D
 
@@ -99,5 +108,10 @@ See `docs/FEATURE_MATRIX.md` for the distinction between the implemented foundat
 - libigl: https://igl.ethz.ch/code/
 - OpenDCC: https://github.com/shapefx/OpenDCC
 - PlayCanvas Engine: https://github.com/playcanvas/engine
+- LangChain: https://github.com/langchain-ai/langchain citeturn0search2
+- LangGraph: https://github.com/langchain-ai/langgraph citeturn0search0
+- LlamaIndex: https://github.com/run-llama/llama_index citeturn0search1
+- Chroma: https://github.com/chroma-core/chroma citeturn0search3
+- Mamba: https://github.com/state-spaces/mamba citeturn1search0turn1search3
 
-See `TRAINING_GUIDES.md` and `THIRD_PARTY.md` for attribution and integration notes.
+See `TRAINING_GUIDES.md`, `THIRD_PARTY.md` and `ai/README.md` for attribution and integration notes.
