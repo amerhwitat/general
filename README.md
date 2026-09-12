@@ -2,39 +2,21 @@
 
 This repository is a general integration and research workspace within the Amer Hwitat GitHub portfolio. It complements the canonical `ChimeraIIOS` repository and provides shared experiments, host-side integration material and compatibility boundaries.
 
+## AI architecture layer
+
+The portfolio now uses a common local-first RNN/LLM architecture pattern across applications: bounded recurrent state, explicit memory, optional trainable GRU inference, retrieval/vector-store boundaries, explainable recommendations, provenance/confidence and human/policy approval before consequential mutations.
+
+The architecture research is informed by LangChain (composable LLM applications), LangGraph (stateful workflows), LlamaIndex (document/RAG integration), Open WebUI (local-model UI), FastAPI (service boundary), Chroma (vector/hybrid search) and Mamba (state-space sequence modeling). These are references and optional integration boundaries, not copied proprietary source. citeturn0search2turn0search0turn0search1turn0search9turn0search3turn1search0
+
 ## WebContactCrawler
 
 `applications/WebContactCrawler/` is the portfolio's cross-language public-web contact crawler. It provides bounded keyword-focused crawling, robots-aware scheduling, public email extraction, provenance, deduplication, detailed JSONL progress telemetry, a visual dashboard, and TXT/CSV import/export. The directory contains the language-neutral contact/event schema, executable Python reference implementation, portable language adapters, web UI, architecture and open-source research records.
 
 The crawler is intentionally responsible-use oriented: public/authorized resources only; no authentication or CAPTCHA bypass, anti-bot evasion, credential collection, private-area crawling or SMTP mailbox probing. Third-party projects are used as architectural references or through documented adapters; proprietary source is not copied.
 
-### WebContactCrawler structure
-
-- `applications/WebContactCrawler/schema/` — portable contact and telemetry contract.
-- `applications/WebContactCrawler/python/` — executable reference crawler, import/export helpers and tests.
-- `applications/WebContactCrawler/{c,cpp,go,rust,java,csharp,typescript,javascript,php,ruby,dart,swift,kotlin,scala,perl,lua,bash,powershell}/` — language adapters already represented in the repository.
-- `applications/WebContactCrawler/web/` — visual JSONL progress dashboard.
-- `applications/WebContactCrawler/docs/` — architecture, open-source research, licensing and portfolio references.
-
-### Verification
-
-From `applications/WebContactCrawler/python/`, run `python -m unittest discover -s tests -v`. The tests cover normal and obfuscated public email extraction, keyword scoring, TXT/CSV import, deterministic deduplication and TXT/CSV export.
-
-### External/open-source references
-
-- Scrapy: https://github.com/scrapy/scrapy
-- xcrawler: https://github.com/cardsurf/xcrawler
-- Frostwork: https://github.com/scrapy/frostwork
-- Heritrix: https://github.com/internetarchive/heritrix3
-- Scrapely: https://github.com/scrapy/scrapely
-- email-enrich: https://github.com/waterdoog/email-enrich
-- Prowl: https://github.com/nettitude/prowl
-
-These projects are reference implementations for crawler scheduling, extraction, feed/export, selector and contact-discovery patterns. They are not presented as copied source. See `applications/WebContactCrawler/docs/OPEN_SOURCE_RESEARCH.md` and `applications/WebContactCrawler/docs/PORTFOLIO_REFERENCES.md` for licensing/adaptation boundaries and references to related code in this portfolio.
-
 ## Chimera WorkFlow Studio
 
-`WorkflowStudio/` is the portfolio's cross-platform project, Agile, ITIL 4, DevOps and service-management application foundation. It provides Jira/Azure DevOps-style work tracking, Agile workflow templates, ITIL 4 service records, CI/CD provider boundaries, Kubernetes/OpenShift integration, OpenTelemetry observability, team collaboration, trusted P2P synchronization, voice controls and local-first RNN/ML assistance.
+`WorkflowStudio/` is the portfolio's cross-platform project, Agile, ITIL 4, DevOps and service-management application foundation. It provides Jira/Azure DevOps-style work tracking, Agile workflow templates, ITIL 4 service records, CI/CD provider boundaries, Kubernetes/OpenShift integration, OpenTelemetry observability, team collaboration, trusted P2P synchronization, voice controls and a local-first RNN/LLM assistant. The expanded recurrent engine is in `WorkflowStudio/services/python/rnn_llm_engine.py` with tests and architecture documentation in `WorkflowStudio/docs/AI_RNN_LLM.md`.
 
 ## Central Apple implementations
 
@@ -42,7 +24,7 @@ These projects are reference implementations for crawler scheduling, extraction,
 
 ## Chimera 3D/4D Studio
 
-`Apple-Implementations/Chimera3D4D/` is the unified 3D/4D digital-content-creation application foundation.
+`Apple-Implementations/Chimera3D4D/` is the unified 3D/4D digital-content-creation application foundation. Its `ai/` layer now provides local-first recurrent scene intelligence, optional GRU language modeling, scene/time-series memory and explainable recommendations.
 
 ## Chimera 128D
 
