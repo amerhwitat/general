@@ -10,6 +10,7 @@ Maintained application trees include:
 - [WebContactCrawler](applications/WebContactCrawler/)
 - [Email Extractor](email_extractor/)
 - [EmailKeywordCrawler](EmailKeywordCrawler/)
+- [EmailListManager](EmailListManager/)
 - [WorkflowStudio](WorkflowStudio/)
 - [Apple-Implementations](Apple-Implementations/)
 - [mobile](mobile/)
@@ -17,17 +18,24 @@ Maintained application trees include:
 - [apple](apple/)
 - [web](web/)
 - [docs](docs/)
+- [shared](shared/)
 - [third_party](third_party/)
+
+## EmailListManager
+
+`EmailListManager/` is the new cross-language local-first contact-list manager. It provides normalized/deduplicated contacts, lists and memberships, tags, notes, source provenance, explicit consent/status fields, CSV interoperability, a deterministic lightweight RNN-style scorer and an optional local Ollama-compatible LLM adapter. It deliberately does not implement unsolicited bulk delivery. The design was informed by open-source mailing-list manager patterns, especially list/subscriber relationships and CSV/API synchronization. citeturn0search4turn0search13
+
+## Shared AI layer
+
+`shared/ai/` defines the repository-wide local intelligence contract: deterministic recurrent scoring plus an optional local LLM HTTP adapter. Crawlers, SEO tools, contact extractors, research tools and list management applications can use the same environment-based model configuration while preserving provenance and human approval boundaries.
 
 ## EmailKeywordCrawler
 
-`EmailKeywordCrawler/` is the new cross-language public/authorized-web keyword-driven email discovery application. It adds bounded search/crawling, robots-aware scheduling, concurrency and delay controls, detailed progress events, keyword matching, email normalization, provenance, TXT/CSV import/export and a static visual dashboard. The reference implementation is Python, with companion Node.js/TypeScript, Go, Java, C++20, Rust, C#, PHP and web implementations. See `EmailKeywordCrawler/docs/RESEARCH.md` for the open-source comparison and attribution notes.
-
-Existing `email_extractor/` and `applications/WebContactCrawler/` remain separate, reusable implementations; this new application provides a focused keyword-search/crawl workflow and shared interoperable formats.
+`EmailKeywordCrawler/` is the cross-language public/authorized-web keyword-driven email discovery application. It adds bounded search/crawling, robots-aware scheduling, concurrency and delay controls, detailed progress events, keyword matching, email normalization, provenance, TXT/CSV import/export and a static visual dashboard. The reference implementation is Python, with companion Node.js/TypeScript, Go, Java, C++20, Rust, C# and PHP implementations. It can feed normalized contacts into `EmailListManager`.
 
 ## Email Extractor
 
-`email_extractor/` is the cross-language public/authorized-web contact discovery application with extraction, title/provenance handling, DNS/MX validation cores, SQLite/CSV/JSON persistence and cross-platform automation.
+`email_extractor/` is the cross-language public/authorized-web contact discovery application with extraction, title/provenance handling, DNS/MX validation cores, SQLite/CSV/JSON persistence and cross-platform automation. Its outputs can be imported into `EmailListManager` for explicit list/consent management.
 
 ## AgentResearchForge
 
@@ -43,7 +51,7 @@ Existing `email_extractor/` and `applications/WebContactCrawler/` remain separat
 
 ## AI architecture layer
 
-The portfolio uses local-first RNN/LLM patterns with bounded state, explicit memory, retrieval/vector boundaries, provenance/confidence and human/policy approval before consequential mutations.
+The portfolio uses local-first RNN/LLM patterns with bounded state, explicit memory, retrieval/vector boundaries, provenance/confidence and human/policy approval before consequential mutations. AI suggestions never silently change consent or suppression state.
 
 ## Chimera 3D/4D and 128D
 
