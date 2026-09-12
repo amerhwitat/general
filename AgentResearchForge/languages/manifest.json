@@ -1,0 +1,5 @@
+{
+  "protocol": "stdin-jsonl/stdout-jsonl",
+  "languages": ["python","typescript","javascript","c","cpp","csharp","java","kotlin","go","rust","swift","objective-c","php","ruby","dart","julia","r","lua","bash","powershell","sql","html","css","webassembly"],
+  "rules": ["never execute generated code automatically", "preserve provenance", "require explicit tool permission"]
+}
