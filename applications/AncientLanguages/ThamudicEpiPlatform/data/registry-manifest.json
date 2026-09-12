@@ -1,15 +1,17 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "canonical_repository": "https://github.com/amerhwitat/nlp",
   "canonical_path": "ThamudicEpiPlatform",
   "integration_role": "deployment-and-aggregation-layer",
   "shared_contracts": [
     "data/schemas/kpi.schema.json",
-    "data/schemas/pdf_export.schema.json"
+    "data/schemas/pdf_export.schema.json",
+    "ocr/api-contract.json"
   ],
   "languages": ["mesopotamia", "egypt", "arabia", "greek", "latin"],
   "encoding": "UTF-8",
   "language_identifiers": "BCP47/CLDR",
+  "ocr_engines": ["auto", "kraken", "tesseract", "quality-only"],
   "verification": "SHA-256",
-  "notes": "Do not treat this manifest as a second source of truth; synchronize from the nlp implementation."
+  "notes": "Do not treat this manifest as a second source of truth; synchronize from the nlp implementation. Recognition output remains distinct from transliteration and translation."
 }
