@@ -1,0 +1,7 @@
+{
+  "protocol": "stdin-jsonl/stdout-jsonl",
+  "engine": "SEO_Tool",
+  "targets": ["python","javascript","typescript","c","cpp","csharp","java","kotlin","go","rust","swift","objective-c","php","ruby","dart","julia","r","lua","bash","powershell","sql","html","css","webassembly"],
+  "mode": "language-adapter",
+  "policy": "Adapters invoke the local SEO-Tool engine; generated code is not automatically executed against remote targets."
+}
