@@ -10,6 +10,8 @@ Cross-language public-web email discovery application for **authorized/publicly 
 - Detailed live progress events: queued, fetched, matched, emails, errors, rate limiting and completion.
 - TXT and CSV import/export; normalized, deduplicated records with source URL and keyword evidence.
 - Optional DNS/MX validation hook (disabled by default).
+- `EmailListManager` interoperability for explicit contact lists, tags, consent/status and suppression workflows.
+- Local-first RNN/LLM integration contract for contact ranking and keyword/context classification; disabled by default.
 - No authentication bypass, private-area access, CAPTCHA bypass, or stealth/anti-bot evasion.
 - Respects configured rate limits and robots.txt where available.
 
@@ -25,6 +27,13 @@ Cross-language public-web email discovery application for **authorized/publicly 
 - `web/` — browser dashboard/API contract and static UI.
 - `scripts/` — dependency installation, build and run sweeps for Windows/POSIX.
 - `docs/` — architecture, safety, format and open-source research notes.
+
+## AI integration
+The shared `shared/ai/` contract provides a deterministic lightweight recurrent scorer plus an optional local Ollama-compatible LLM endpoint. AI results are advisory and retain source provenance. The crawler never changes consent state or sends mail based solely on an AI result.
+
+## Contact-list handoff
+The canonical normalized record can be exported/imported as CSV and passed to `EmailListManager/`. The recommended pipeline is:
+`public/authorized discovery -> extraction -> provenance -> dedupe -> human review -> EmailListManager -> consent/status policy -> export`.
 
 ## Quick start
 ```bash
