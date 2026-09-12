@@ -1,17 +1,48 @@
 {
-  "$schema":"https://json-schema.org/draft/2020-12/schema",
-  "title":"WebContactCrawler contact",
-  "type":"object",
-  "required":["email","source_url","domain","discovered_at"],
-  "properties":{
-    "email":{"type":"string","format":"email"},
-    "source_url":{"type":"string","format":"uri"},
-    "domain":{"type":"string"},
-    "title":{"type":"string"},
-    "keywords":{"type":"array","items":{"type":"string"}},
-    "score":{"type":"integer","minimum":0},
-    "method":{"type":"string"},
-    "discovered_at":{"type":"number"}
-  },
-  "additionalProperties":false
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/amerhwitat/general/blob/master/applications/WebContactCrawler/schema/contact.schema.json",
+  "title": "WebContactCrawler contact/event contract",
+  "oneOf": [
+    {
+      "title": "Contact",
+      "type": "object",
+      "required": ["email", "source_url", "domain", "discovered_at"],
+      "properties": {
+        "email": {"type": "string", "format": "email"},
+        "source_url": {"type": "string", "format": "uri"},
+        "domain": {"type": "string"},
+        "title": {"type": "string"},
+        "keywords": {"type": "array", "items": {"type": "string"}},
+        "score": {"type": "integer", "minimum": 0},
+        "method": {"type": "string"},
+        "discovered_at": {"type": "number"}
+      },
+      "additionalProperties": false
+    },
+    {
+      "title": "Progress event",
+      "type": "object",
+      "required": ["ts", "event", "pages", "queued", "emails", "errors", "skipped", "discovered_urls"],
+      "properties": {
+        "ts": {"type": "number"},
+        "event": {"type": "string", "enum": ["start", "fetch", "page", "skip", "error", "done"]},
+        "pages": {"type": "integer", "minimum": 0},
+        "queued": {"type": "integer", "minimum": 0},
+        "emails": {"type": "integer", "minimum": 0},
+        "errors": {"type": "integer", "minimum": 0},
+        "skipped": {"type": "integer", "minimum": 0},
+        "discovered_urls": {"type": "integer", "minimum": 0},
+        "url": {"type": "string"},
+        "depth": {"type": "integer", "minimum": 0},
+        "reason": {"type": "string"},
+        "error": {"type": "string"},
+        "rate": {"type": "number", "minimum": 0},
+        "unique_pages": {"type": "integer", "minimum": 0},
+        "unique_emails": {"type": "integer", "minimum": 0},
+        "elapsed": {"type": "number", "minimum": 0},
+        "queued_remaining": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": true
+    }
+  ]
 }
