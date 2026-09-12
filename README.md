@@ -9,6 +9,7 @@ Every maintained application is cited from this README by its canonical source t
 - [AgentResearchForge](AgentResearchForge/)
 - [SEO-Tool](SEO-Tool/)
 - [WebContactCrawler](applications/WebContactCrawler/)
+- [Email Extractor](email_extractor/)
 - [WorkflowStudio](WorkflowStudio/)
 - [Apple-Implementations](Apple-Implementations/)
 - [mobile](mobile/)
@@ -20,6 +21,16 @@ Every maintained application is cited from this README by its canonical source t
 
 ### Exact flagship source files
 
+- [Email Extractor Python core](email_extractor/core_py/extractor.py)
+- [Email Extractor SQLite/CSV/JSON persistence](email_extractor/core_py/persistence.py)
+- [Email Extractor PyQt UI](email_extractor/ui_pyqt/main.py)
+- [Email Extractor C# core](email_extractor/core_csharp/Extractor.cs)
+- [Email Extractor C# UI](email_extractor/ui_csharp/MainForm.cs)
+- [Email Extractor Node.js core](email_extractor/core_js/extractor.js)
+- [Email Extractor Java core](email_extractor/core_java/Extractor.java)
+- [Email Extractor PHP core](email_extractor/core_php/extractor.php)
+- [Email Extractor Rust core](email_extractor/core_rust/extractor.rs)
+- [Email Extractor Rust TUI](email_extractor/ui_rust/src/main.rs)
 - [SEO crawler](SEO-Tool/SEO_Tool/core.py)
 - [SEO CLI](SEO-Tool/SEO_Tool/cli.py)
 - [SEO GUI](SEO-Tool/SEO_Tool/gui.py)
@@ -40,6 +51,10 @@ Every maintained application is cited from this README by its canonical source t
 - [Chimera 3D/4D geometry](Apple-Implementations/Chimera3D4D/core/src/geometry.cpp)
 - [Chimera 3D/4D scene](Apple-Implementations/Chimera3D4D/core/src/scene.cpp)
 - [Chimera 3D/4D RNN/LLM](Apple-Implementations/Chimera3D4D/ai/rnn_llm_engine.py)
+
+## Email Extractor
+
+`email_extractor/` is the cross-language public/authorized-web contact discovery application. It now includes extraction, page-title/provenance handling and DNS/MX validation cores for Python, C#, Node.js, Java, PHP and Rust, plus native/UI implementations for the supported desktop/web environments. The Python reference implementation also provides SQLite persistence and CSV/JSON export. The design shares result fields and interoperability goals with `WebContactCrawler`.
 
 ## AgentResearchForge
 
