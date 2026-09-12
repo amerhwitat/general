@@ -21,13 +21,21 @@ Maintained application trees include:
 - [shared](shared/)
 - [third_party](third_party/)
 
+## Shared Network Module
+
+`shared/network/` is the repository-wide application networking contract. It adds client, server, host (server + local client), P2P and hybrid modes so applications can launch networking from their existing UI. It defines a common session envelope, profile model, nickname/avatar handling, transport-selection policy, host-mode routing invariant and security rules. Native applications can use QUIC/TLS with TCP/TLS fallback; browser applications can use WebRTC plus WebSocket/WebTransport; libp2p is an optional discovery/NAT/relay layer.
+
+Every participating application should expose a Network Center/Multiplayer/Connect action, allow a user-selected nickname and built-in avatar, and provide local avatar upload when built-in choices are unavailable. Avatar files are restricted to validated image formats and bounded dimensions/size.
+
+See [`shared/network/README.md`](shared/network/README.md) and [`shared/network/PROTOCOL.md`](shared/network/PROTOCOL.md).
+
 ## EmailListManager
 
-`EmailListManager/` is the new cross-language local-first contact-list manager. It provides normalized/deduplicated contacts, lists and memberships, tags, notes, source provenance, explicit consent/status fields, CSV interoperability, a deterministic lightweight RNN-style scorer and an optional local Ollama-compatible LLM adapter. It deliberately does not implement unsolicited bulk delivery. The design was informed by [listmonk](https://listmonk.app/) patterns for subscriber/list relationships and [external API/CSV synchronization](https://listmonk.app/docs/external-integration/).
+`EmailListManager/` is the new cross-language local-first contact-list manager. It provides normalized/deduplicated contacts, lists and memberships, tags, notes, source provenance, explicit consent/status fields, CSV interoperability, a deterministic lightweight RNN-style scorer and an optional local Ollama-compatible LLM adapter. It deliberately does not implement unsolicited bulk delivery.
 
 ## Shared AI layer
 
-`shared/ai/` defines the repository-wide local intelligence contract: deterministic recurrent scoring plus an optional local LLM HTTP adapter. Crawlers, SEO tools, contact extractors, research tools and list management applications can use the same environment-based model configuration while preserving provenance and human approval boundaries. The LLM boundary follows the local REST model exposed by [Ollama](https://github.com/ollama/ollama) and its [API documentation](https://github.com/ollama/ollama/blob/main/docs/api.md).
+`shared/ai/` defines the repository-wide local intelligence contract: deterministic recurrent scoring plus an optional local LLM HTTP adapter. Crawlers, SEO tools, contact extractors, research tools and list management applications can use the same environment-based model configuration while preserving provenance and human approval boundaries.
 
 ## EmailKeywordCrawler
 
@@ -35,7 +43,7 @@ Maintained application trees include:
 
 ## Email Extractor
 
-`email_extractor/` is the cross-language public/authorized-web contact discovery application with extraction, title/provenance handling, DNS/MX validation cores, SQLite/CSV/JSON persistence and cross-platform automation. Its outputs can be imported into `EmailListManager` for explicit list/consent management.
+`email_extractor/` is the cross-language public/authorized-web contact discovery application with extraction, title/provenance handling, DNS/MX validation cores, SQLite/CSV/JSON persistence and cross-platform automation.
 
 ## AgentResearchForge
 
@@ -51,11 +59,11 @@ Maintained application trees include:
 
 ## AI architecture layer
 
-The portfolio uses local-first RNN/LLM patterns with bounded state, explicit memory, retrieval/vector boundaries, provenance/confidence and human/policy approval before consequential mutations. AI suggestions never silently change consent or suppression state.
+The portfolio uses local-first RNN/LLM patterns with bounded state, explicit memory, retrieval/vector boundaries, provenance/confidence and human/policy approval before consequential mutations.
 
 ## Chimera 3D/4D and 128D
 
-`Apple-Implementations/Chimera3D4D/` provides the 3D/4D application foundation. Portfolio applications can use the 128D semantic model spanning geometry, time, observer/perspective, light/material response, events, objects, properties and interaction rules, with extensible perception/cognition dimensions.
+`Apple-Implementations/Chimera3D4D/` provides the 3D/4D application foundation. Portfolio applications can use the 128D semantic model spanning geometry, time, observer/perspective, light/material response, events, objects, properties and interaction rules.
 
 ## Portfolio relationships
 
