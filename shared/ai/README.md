@@ -14,4 +14,8 @@ Environment:
 `CHIMERA_LLM_MODEL=llama3.2`
 `CHIMERA_AI_ENABLED=0`
 
-Open-source research basis: Ollama/local-RAG patterns were reviewed for the adapter boundary; no third-party source code is copied. See repository documentation for attribution.
+## Implementations
+The shared contract is currently represented directly in the EmailListManager language cores: Python, TypeScript, Go, C++20, C#, Java, Rust and PHP all contain the deterministic recurrent scorer. Python and TypeScript also contain optional local LLM HTTP adapters; the other implementations can adopt the same protocol without changing the data contract.
+
+## Open-source research basis
+The LLM boundary follows the documented [Ollama REST API](https://github.com/ollama/ollama/blob/main/docs/api.md). Local-RAG architecture patterns were also reviewed from [local-rag-stack](https://github.com/emilvrana/local-rag-stack). Mailing-list data-model ideas were reviewed from [listmonk](https://listmonk.app/). No third-party source code is copied.
