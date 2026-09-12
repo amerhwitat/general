@@ -2,6 +2,10 @@
 
 This repository is a general integration and research workspace within the Amer Hwitat GitHub portfolio. It complements the canonical `ChimeraIIOS` repository and provides shared experiments, host-side integration material and compatibility boundaries.
 
+## Apple applications
+
+`apple/project.yml` defines native SwiftUI iOS/iPadOS and macOS application targets generated with XcodeGen. The Apple shell provides a portable integration surface while source-of-truth application logic remains in its owning repositories. IPA archive/export requires macOS/Xcode and operator-controlled signing.
+
 ## Chimera 128D
 
 Applications and experiments can model state using the portfolio-wide 128D semantic framework: geometry, time, observer/perspective, light/shadow/material response, events, objects, properties and interaction rules, with extensible perception/cognition/vector dimensions.
