@@ -21,6 +21,17 @@ Every maintained application is cited from this README by its canonical source t
 
 ### Exact flagship source files
 
+- [Email Extractor README](email_extractor/README.md)
+- [Email Extractor automation](email_extractor/scripts/README.md)
+- [Email Extractor Windows batch installer](email_extractor/scripts/install-all.bat)
+- [Email Extractor PowerShell installer](email_extractor/scripts/install-all.ps1)
+- [Email Extractor POSIX installer](email_extractor/scripts/install-all.sh)
+- [Email Extractor Windows build](email_extractor/scripts/build-all.bat)
+- [Email Extractor PowerShell build](email_extractor/scripts/build-all.ps1)
+- [Email Extractor POSIX build](email_extractor/scripts/build-all.sh)
+- [Email Extractor Windows runner](email_extractor/scripts/run-all.bat)
+- [Email Extractor PowerShell runner](email_extractor/scripts/run-all.ps1)
+- [Email Extractor POSIX runner](email_extractor/scripts/run-all.sh)
 - [Email Extractor Python core](email_extractor/core_py/extractor.py)
 - [Email Extractor Python SQLite/CSV storage](email_extractor/utils/storage.py)
 - [Email Extractor SQLite/CSV/JSON persistence](email_extractor/core_py/persistence.py)
@@ -66,7 +77,7 @@ Every maintained application is cited from this README by its canonical source t
 
 ## Email Extractor
 
-`email_extractor/` is the cross-language public/authorized-web contact discovery application. It includes extraction, title/provenance handling and DNS/MX validation cores for Python, C#, Node.js, Java, PHP and Rust, native C/C++/ASM build scaffolding, and desktop/web interfaces. SQLite persistence and CSV export are standardized across the language cores. IDE/build metadata is included for Visual Studio, Code::Blocks, CMake, PyCharm/IntelliJ, VS Code, Eclipse, Maven, Cargo, Node/Electron and PHP workflows.
+`email_extractor/` is the cross-language public/authorized-web contact discovery application. It includes extraction, title/provenance handling and DNS/MX validation cores for Python, C#, Node.js, Java, PHP and Rust, native C/C++/ASM build scaffolding, and desktop/web interfaces. SQLite persistence and CSV export are standardized across the language cores. IDE/build metadata is included for Visual Studio, Code::Blocks, CMake, PyCharm/IntelliJ, VS Code, Eclipse, Maven, Cargo, Node/Electron and PHP workflows. Cross-platform automation now provides dependency installation, build sweeps and run launchers in Batch, PowerShell and POSIX shell form.
 
 ## AgentResearchForge
 
