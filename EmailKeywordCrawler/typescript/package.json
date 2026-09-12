@@ -1,0 +1,1 @@
+{"name":"email-keyword-crawler","private":true,"type":"module","scripts":{"start":"tsx main.ts"},"devDependencies":{"tsx":"^4.19.0","typescript":"^5.7.0"}}

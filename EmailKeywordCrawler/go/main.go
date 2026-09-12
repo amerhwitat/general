@@ -1,0 +1,5 @@
+package main
+import("encoding/csv";"fmt";"net/http";"os";"regexp";"strings";"io")
+var re=regexp.MustCompile(`(?i)[a-z0-9._%+-]+\s*(?:@|\[at\]|\(at\))\s*[a-z0-9.-]+\s*(?:\.|\[dot\]|\(dot\))\s*[a-z]{2,}`)
+func main(){var urls []string; keys:=[]string{}; for i:=1;i<len(os.Args);i++{if strings.HasPrefix(os.Args[i],"http") {urls=append(urls,os.Args[i])}; if os.Args[i]=="--keyword"&&i+1<len(os.Args){keys=append(keys,strings.ToLower(os.Args[i+1]));i++}}
+ out:=map[string]string{}; for _,u:=range urls{r,e:=http.Get(u);if e!=nil{fmt.Println("error",e);continue};b,_:=io.ReadAll(r.Body);r.Body.Close();t:=string(b); low:=strings.ToLower(t); hit:=len(keys)==0;for _,k:=range keys{if strings.Contains(low,k){hit=true}};if hit{for _,m:=range re.FindAllString(t,-1){e:=strings.ToLower(strings.ReplaceAll(strings.ReplaceAll(m,"[at]","@"),"(at)","@"));e=strings.ReplaceAll(strings.ReplaceAll(e,"[dot]","."),"(dot)",".");out[e]=u}};fmt.Printf("{\"event\":\"page\",\"url\":%q,\"emails\":%d}\n",u,len(out))}; f,_:=os.Create("emails.csv");w:=csv.NewWriter(f);w.Write([]string{"email","source_url"});for e,u:=range out{w.Write([]string{e,u})};w.Flush();f.Close();}

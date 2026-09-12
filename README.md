@@ -4,12 +4,12 @@ This repository is a general integration and research workspace within the Amer 
 
 ## Repository-wide source citation index
 
-Every maintained application is cited from this README by its canonical source tree, and flagship components have exact source-file links. These links are the source-of-record navigation points for the code tracked here.
-
+Maintained application trees include:
 - [AgentResearchForge](AgentResearchForge/)
 - [SEO-Tool](SEO-Tool/)
 - [WebContactCrawler](applications/WebContactCrawler/)
 - [Email Extractor](email_extractor/)
+- [EmailKeywordCrawler](EmailKeywordCrawler/)
 - [WorkflowStudio](WorkflowStudio/)
 - [Apple-Implementations](Apple-Implementations/)
 - [mobile](mobile/)
@@ -19,65 +19,15 @@ Every maintained application is cited from this README by its canonical source t
 - [docs](docs/)
 - [third_party](third_party/)
 
-### Exact flagship source files
+## EmailKeywordCrawler
 
-- [Email Extractor README](email_extractor/README.md)
-- [Email Extractor automation](email_extractor/scripts/README.md)
-- [Email Extractor Windows batch installer](email_extractor/scripts/install-all.bat)
-- [Email Extractor PowerShell installer](email_extractor/scripts/install-all.ps1)
-- [Email Extractor POSIX installer](email_extractor/scripts/install-all.sh)
-- [Email Extractor Windows build](email_extractor/scripts/build-all.bat)
-- [Email Extractor PowerShell build](email_extractor/scripts/build-all.ps1)
-- [Email Extractor POSIX build](email_extractor/scripts/build-all.sh)
-- [Email Extractor Windows runner](email_extractor/scripts/run-all.bat)
-- [Email Extractor PowerShell runner](email_extractor/scripts/run-all.ps1)
-- [Email Extractor POSIX runner](email_extractor/scripts/run-all.sh)
-- [Email Extractor Python core](email_extractor/core_py/extractor.py)
-- [Email Extractor Python SQLite/CSV storage](email_extractor/utils/storage.py)
-- [Email Extractor SQLite/CSV/JSON persistence](email_extractor/core_py/persistence.py)
-- [Email Extractor Visual Studio solution](email_extractor/EmailExtractor.sln)
-- [Email Extractor PyQt UI](email_extractor/ui_pyqt/main.py)
-- [Email Extractor C# core](email_extractor/core_csharp/Extractor.cs)
-- [Email Extractor C# storage](email_extractor/core_csharp/Storage.cs)
-- [Email Extractor C# project](email_extractor/core_csharp/EmailExtractor.CSharp.csproj)
-- [Email Extractor native C/C++/ASM CMake](email_extractor/native/CMakeLists.txt)
-- [Email Extractor Code::Blocks project](email_extractor/native/CodeBlocks.EmailExtractor.cbp)
-- [Email Extractor Node.js core](email_extractor/core_js/extractor.js)
-- [Email Extractor Node.js storage](email_extractor/core_js/storage.js)
-- [Email Extractor Electron integration](email_extractor/electron/main.js)
-- [Email Extractor Java core](email_extractor/core_java/Extractor.java)
-- [Email Extractor Java storage](email_extractor/core_java/Storage.java)
-- [Email Extractor Maven project](email_extractor/core_java/pom.xml)
-- [Email Extractor PHP core](email_extractor/core_php/extractor.php)
-- [Email Extractor PHP storage](email_extractor/core_php/storage.php)
-- [Email Extractor Rust core](email_extractor/core_rust/extractor.rs)
-- [Email Extractor Rust storage](email_extractor/core_rust/storage.rs)
-- [Email Extractor Cargo project](email_extractor/core_rust/Cargo.toml)
-- [Email Extractor Rust TUI](email_extractor/ui_rust/src/main.rs)
-- [SEO crawler](SEO-Tool/SEO_Tool/core.py)
-- [SEO CLI](SEO-Tool/SEO_Tool/cli.py)
-- [SEO GUI](SEO-Tool/SEO_Tool/gui.py)
-- [SEO research](SEO-Tool/SEO_Tool/research.py)
-- [SEO document extraction](SEO-Tool/SEO_Tool/documents.py)
-- [SEO language manifest](SEO-Tool/languages/manifest.json)
-- [WebContactCrawler engine](applications/WebContactCrawler/python/webcontactcrawler.py)
-- [WebContactCrawler import/export](applications/WebContactCrawler/python/import_export.py)
-- [WebContactCrawler schema](applications/WebContactCrawler/schema/contact.schema.json)
-- [WorkflowStudio Python entry](WorkflowStudio/services/python/main.py)
-- [WorkflowStudio RNN/LLM](WorkflowStudio/services/python/rnn_llm_engine.py)
-- [WorkflowStudio C++ core](WorkflowStudio/core/cpp/main.cpp)
-- [WorkflowStudio web client](WorkflowStudio/clients/web/src/App.tsx)
-- [WorkflowStudio Android client](WorkflowStudio/clients/android/Main.kt)
-- [WorkflowStudio iOS client](WorkflowStudio/clients/ios/WorkflowClient.swift)
-- [Mobile C++ runtime](mobile/src/runtime.cpp)
-- [Mobile package fabric](mobile/src/package_fabric.cpp)
-- [Chimera 3D/4D geometry](Apple-Implementations/Chimera3D4D/core/src/geometry.cpp)
-- [Chimera 3D/4D scene](Apple-Implementations/Chimera3D4D/core/src/scene.cpp)
-- [Chimera 3D/4D RNN/LLM](Apple-Implementations/Chimera3D4D/ai/rnn_llm_engine.py)
+`EmailKeywordCrawler/` is the new cross-language public/authorized-web keyword-driven email discovery application. It adds bounded search/crawling, robots-aware scheduling, concurrency and delay controls, detailed progress events, keyword matching, email normalization, provenance, TXT/CSV import/export and a static visual dashboard. The reference implementation is Python, with companion Node.js/TypeScript, Go, Java, C++20, Rust, C#, PHP and web implementations. See `EmailKeywordCrawler/docs/RESEARCH.md` for the open-source comparison and attribution notes.
+
+Existing `email_extractor/` and `applications/WebContactCrawler/` remain separate, reusable implementations; this new application provides a focused keyword-search/crawl workflow and shared interoperable formats.
 
 ## Email Extractor
 
-`email_extractor/` is the cross-language public/authorized-web contact discovery application. It includes extraction, title/provenance handling and DNS/MX validation cores for Python, C#, Node.js, Java, PHP and Rust, native C/C++/ASM build scaffolding, and desktop/web interfaces. SQLite persistence and CSV export are standardized across the language cores. IDE/build metadata is included for Visual Studio, Code::Blocks, CMake, PyCharm/IntelliJ, VS Code, Eclipse, Maven, Cargo, Node/Electron and PHP workflows. Cross-platform automation now provides dependency installation, build sweeps and run launchers in Batch, PowerShell and POSIX shell form.
+`email_extractor/` is the cross-language public/authorized-web contact discovery application with extraction, title/provenance handling, DNS/MX validation cores, SQLite/CSV/JSON persistence and cross-platform automation.
 
 ## AgentResearchForge
 
@@ -87,21 +37,13 @@ Every maintained application is cited from this README by its canonical source t
 
 `SEO-Tool/` provides bounded HTTP/HTTPS technical SEO auditing, metadata/structured-data analysis, reports, GUI/CLI operation, document capture and an explicitly configured authorized `.onion` research boundary.
 
-## AI architecture layer
-
-The portfolio uses local-first RNN/LLM patterns with bounded state, explicit memory, retrieval/vector boundaries, provenance/confidence and human/policy approval before consequential mutations.
-
 ## WebContactCrawler
 
 `applications/WebContactCrawler/` provides bounded public-web contact discovery, keyword-focused crawling, robots-aware scheduling, public email extraction, provenance, deduplication, progress telemetry and import/export.
 
-## WorkflowStudio
+## AI architecture layer
 
-`WorkflowStudio/` is the cross-platform project/service-management foundation with a local-first RNN/LLM assistant.
-
-## Central Apple implementations
-
-`Apple-Implementations/` contains the portfolio's Objective-C/Xcode and Flutter iOS/macOS implementation boundaries.
+The portfolio uses local-first RNN/LLM patterns with bounded state, explicit memory, retrieval/vector boundaries, provenance/confidence and human/policy approval before consequential mutations.
 
 ## Chimera 3D/4D and 128D
 
