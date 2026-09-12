@@ -7,29 +7,29 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
-      - run: python -m py_compile general/WorkflowStudio/services/python/main.py general/WorkflowStudio/ai/rnn/SequenceModel.py general/WorkflowStudio/ai/rnn/Inference.py general/WorkflowStudio/integrations/observability/TelemetryCorrelator.py general/WorkflowStudio/voice/python/voice_router.py
-      - run: python -m unittest discover -s general/WorkflowStudio/tests -p 'test_*.py'
+      - run: python -m py_compile WorkflowStudio/services/python/main.py WorkflowStudio/ai/rnn/SequenceModel.py WorkflowStudio/ai/rnn/Inference.py WorkflowStudio/integrations/observability/TelemetryCorrelator.py WorkflowStudio/voice/python/voice_router.py
+      - run: python -m unittest discover -s WorkflowStudio/tests -p 'test_*.py'
   node:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: {node-version: '22'}
-      - run: node --check general/WorkflowStudio/services/node/server.mjs
+      - run: node --check WorkflowStudio/services/node/server.mjs
   cpp:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: g++ -std=c++20 -Wall -Wextra general/WorkflowStudio/core/cpp/main.cpp general/WorkflowStudio/core/workflow/StateMachine.cpp -I general/WorkflowStudio/core/workflow -o /tmp/chimera-workflow
+      - run: g++ -std=c++20 -Wall -Wextra WorkflowStudio/core/cpp/main.cpp WorkflowStudio/core/workflow/StateMachine.cpp -I WorkflowStudio/core/workflow -o /tmp/chimera-workflow
   java-go-rust:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with: {distribution: temurin, java-version: '21'}
-      - run: javac general/WorkflowStudio/clients/java/Main.java
+      - run: javac WorkflowStudio/clients/java/Main.java
       - uses: actions/setup-go@v5
         with: {go-version: '1.23'}
-      - run: go build ./general/WorkflowStudio/clients/go
+      - run: cd WorkflowStudio/clients/go && go build main.go
       - uses: dtolnay/rust-toolchain@stable
-      - run: cargo check --manifest-path general/WorkflowStudio/clients/rust/Cargo.toml
+      - run: cargo check --manifest-path WorkflowStudio/clients/rust/Cargo.toml
