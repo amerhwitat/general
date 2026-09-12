@@ -1,0 +1,2 @@
+import 'dart:io';
+void main(List<String> a){if(a.isEmpty){stderr.writeln('usage: dart run webcontactcrawler.dart <html-file>');return;}final s=File(a[0]).readAsStringSync();final r=RegExp(r'[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}',caseSensitive:false);final e=r.allMatches(s).map((m)=>m.group(0)!.toLowerCase()).toSet().toList()..sort();stdout.writeln('DONE unique_emails=${e.length}');stdout.writeAll(e,'\n');}
