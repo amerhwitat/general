@@ -4,39 +4,52 @@ This directory is the integration/deployment layer for the canonical implementat
 
 ## Capabilities
 
-- Historical-object PDF import with bounded extraction and page provenance.
-- Research PDF export containing objects, scripts, scholarly transliteration, literal/meaning translations, confidence, provenance and citations.
-- **Intelligent OCR scanner integration** for historical inscriptions and manuscript images, with image-quality analysis, pluggable Kraken/Tesseract adapters, confidence, script routing, bounding boxes and SHA-256 provenance.
-- KPI dashboard contract shared by the API and language clients.
-- Integration manifests and SHA-256 verification for synchronized registries.
-- Bash, PowerShell and Windows CMD automation with dependency checks/install steps.
+- Historical-object PDF import/export with provenance.
+- Intelligent OCR for RTL/LTR, top-to-bottom/bottom-to-top, spiral/reverse hypotheses, skew/perspective correction and weathered/low-contrast material.
+- Kraken/Tesseract adapters plus optional PaddleOCR/EasyOCR integrations.
+- Chinese and Japanese as both source and target languages, including classical/vertical-writing metadata.
+- BCP-47/CLDR target-language resolution.
+- Literal, meaning, interlinear and scholarly translation contracts.
+- Proof layer for neural/RNN/Transformer/LLM candidates and speech/phoneme records.
+- Provider-neutral research chatbot API.
+- KPI dashboard contract shared by API and language clients.
+- SQLite, PostgreSQL and MySQL schemas; JSON/CSV flat-file interchange; optional Access/ODBC exchange.
+- Bash, PowerShell and Windows CMD dependency/build automation.
 
 ## Source of truth
 
-Application code and canonical language data remain in the `nlp` repository. This `general` directory deliberately avoids silently becoming a divergent fork. `scripts/sync-nlp-assets.*` verifies or updates the integration manifest against the canonical repository.
+Application code and canonical language data remain in the `nlp` repository. This `general` directory deliberately avoids silently becoming a divergent fork.
 
-## OCR contract
+Canonical application: [amerhwitat/nlp](https://github.com/amerhwitat/nlp/tree/main/ThamudicEpiPlatform)
 
-The general-repository contract is `ocr/api-contract.json` and the research/integration notes are in `ocr/README.md`. The canonical endpoint is `POST /api/ocr/scan`.
+## OCR and translation contract
 
-Recognition is not translation. The returned OCR hypothesis must remain associated with its source hash, engine, model (when configured), confidence and warnings before transliteration or translation is accepted as scholarly data.
+Recognition is not translation. OCR hypotheses retain source hash, engine, model, confidence, geometry and warnings. Translation is separately labelled literal or meaning-preserving and retains alternatives/proof status.
 
-## Research standards
+The canonical API exposes:
 
-Transliteration is kept separate from translation. Unicode/CLDR language identifiers and transformed-content metadata are used for language and script routing. See the canonical implementation's `docs/SOURCES.md` and `docs/PDF_CITATIONS.md`.
+- `POST /api/ocr/scan`
+- `POST /api/ocr/geometry`
+- `POST /api/translation/proof`
+- `POST /api/speech/proof`
+- `POST /api/chat`
+- `GET /api/kpis/summary`
+- `GET /api/kpis/languages`
 
-References:
+## Research references
 
 - [Unicode supported scripts](https://www.unicode.org/standard/supported.html)
 - [Unicode 18.0](https://www.unicode.org/versions/Unicode18.0.0/)
-- [Unicode CLDR Project](https://cldr.unicode.org/) — language and locale data.
-- [Unicode BCP 47 Extensions](https://cldr.unicode.org/index/bcp47-extension) — machine-readable language/locale extensions.
-- [Unicode Transliteration Guidelines](https://cldr.unicode.org/index/cldr-spec/transliteration-guidelines) — transliteration guidance and its distinction from translation.
-- [Kraken OCR](https://github.com/mittagessen/kraken) — historical/non-Latin OCR reference.
-- [Tesseract OCR](https://github.com/tesseract-ocr/tesseract) — general OCR reference.
-- [Cuneiform sign detection](https://github.com/CompVis/cuneiform-sign-detection-code) — sign-detection research reference.
-- [Electronic Babylonian Literature cuneiform OCR](https://github.com/ElectronicBabylonianLiterature/cuneiform-ocr) — cuneiform OCR/data reference.
+- [CLDR](https://cldr.unicode.org/)
+- [BCP 47 extensions](https://cldr.unicode.org/index/bcp47-extension)
+- [Unicode Transliteration Guidelines](https://cldr.unicode.org/index/cldr-spec/transliteration-guidelines)
+- [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR)
+- [EasyOCR](https://github.com/JaidedAI/EasyOCR)
+- [Kraken](https://github.com/mittagessen/kraken)
+- [Tesseract](https://github.com/tesseract-ocr/tesseract)
+- [Rasa](https://github.com/RasaHQ/rasa)
+- [LangChain](https://github.com/langchain-ai/langchain)
+- [Cuneiform sign detection](https://github.com/CompVis/cuneiform-sign-detection-code)
+- [CuReD](https://github.com/DigitalPasts/CuReD)
 
-## KPI scope
-
-The dashboard tracks objects, readings, review status, translations, confidence, PDF imports/exports, OCR jobs/errors, and processing performance. Metrics are API-derived rather than hardcoded in the UI.
+These are public research/architecture references; no third-party proprietary source, model or database is silently republished.
