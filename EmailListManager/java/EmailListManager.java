@@ -1,0 +1,3 @@
+package email.list;
+import java.util.*;
+public final class EmailListManager{public record Contact(String email,String name,String status,String consent,String source,String tags){}private final Map<String,Contact> contacts=new TreeMap<>(String.CASE_INSENSITIVE_ORDER);private double state;public boolean add(Contact c){String e=c.email().trim().toLowerCase(Locale.ROOT);if(!e.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"))return false;contacts.put(e,new Contact(e,c.name(),c.status(),c.consent(),c.source(),c.tags()));return true;}public Collection<Contact> all(){return contacts.values();}public double rnnScore(Contact c){for(char ch:(c.email()+" "+c.tags()).toCharArray())state=Math.tanh(.86*state+.14*(ch%97)/96.0);return(state+1)/2;}}

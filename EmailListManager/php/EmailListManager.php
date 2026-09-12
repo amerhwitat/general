@@ -1,0 +1,3 @@
+<?php
+final class RnnLlm{private float $state=0;function score(string $s):float{foreach(str_split(substr($s,0,4096)) as $c)$this->state=tanh(.86*$this->state+.14*(ord($c)%97)/96);return($this->state+1)/2;}}
+final class EmailListManager{private array $contacts=[];private RnnLlm $ai;function __construct(){$this->ai=new RnnLlm;}function add(array $c):bool{$e=strtolower(trim($c['email']??''));if(!filter_var($e,FILTER_VALIDATE_EMAIL))return false;$c['email']=$e;$this->contacts[$e]=$c;return true;}function all():array{return array_values($this->contacts);}function rank(array $c):float{return $this->ai->score(($c['email']??'').' '.($c['tags']??''));}}

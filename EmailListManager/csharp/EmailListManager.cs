@@ -1,0 +1,4 @@
+using System;using System.Collections.Generic;using System.Text.RegularExpressions;
+public record Contact(string Email,string Name="",string Status="active",string Consent="unknown",string Source="",string Tags="");
+public sealed class RnnLlm{double state;public double Score(string s){foreach(var c in s){state=Math.Tanh(.86*state+.14*(c%97)/96.0);}return(state+1)/2;}}
+public sealed class EmailListManager{readonly Dictionary<string,Contact> contacts=new(StringComparer.OrdinalIgnoreCase);readonly RnnLlm ai=new();public bool Add(Contact c){if(!Regex.IsMatch(c.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))return false;contacts[c.Email]=c with{Email=c.Email.Trim().ToLowerInvariant()};return true;}public IEnumerable<Contact> All()=>contacts.Values;public double Rank(Contact c)=>ai.Score(c.Email+" "+c.Tags);}
