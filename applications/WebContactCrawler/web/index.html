@@ -1,47 +1,25 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>WebContactCrawler Progress</title>
-<style>
-body{font:14px system-ui;margin:24px;background:#0b1020;color:#eaf0ff}main{max-width:1100px;margin:auto}.bar{height:18px;background:#273250;border-radius:9px;overflow:hidden}.fill{height:100%;width:0;background:#58a6ff;transition:width .15s}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.card{background:#151d35;padding:14px;border-radius:10px}.metric{font-size:1.6rem;font-weight:700}button,input{padding:9px;margin:4px}pre{background:#111827;padding:12px;min-height:180px;max-height:460px;overflow:auto;white-space:pre-wrap}.muted{opacity:.75}@media(max-width:700px){.grid{grid-template-columns:repeat(2,1fr)}}
-</style>
-</head>
-<body><main>
-<h1>WebContactCrawler — Detailed Progress</h1>
-<p class="muted">Load JSONL emitted with <code>--events events.jsonl</code>. The dashboard replays the event stream locally in the browser.</p>
-<input id="file" type="file" accept=".jsonl,.log,.txt">
-<div class="bar"><div id="fill" class="fill"></div></div>
-<div class="grid">
-<div class="card">Pages<div id="pages" class="metric">0</div></div>
-<div class="card">Queued<div id="queued" class="metric">0</div></div>
-<div class="card">Emails<div id="emails" class="metric">0</div></div>
-<div class="card">Errors<div id="errors" class="metric">0</div></div>
-<div class="card">Skipped<div id="skipped" class="metric">0</div></div>
-<div class="card">Discovered URLs<div id="discovered" class="metric">0</div></div>
-<div class="card">Rate<div id="rate" class="metric">0</div></div>
-<div class="card">Progress<div id="percent" class="metric">0%</div></div>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WebContactCrawler — Cute Web Extractor Style</title><link rel="stylesheet" href="style.css"></head>
+<body><div class="app">
+<header class="menu"><span>File</span><span>Tools</span><span>Help</span></header>
+<nav class="tabs"><button class="tab active" data-mode="search">Email Addresses from Search Engine Via Keywords</button><button class="tab" data-mode="website">Extract Emails Addresses from Websites</button><button class="tab" data-mode="files">Extract Email Addresses from Files</button></nav>
+<section class="workspace">
+<div class="box"><h3>Select Search Engine(s)</h3><div class="search-list"><label class="engine"><input type="checkbox" checked> <span>Google</span><span>International</span></label><label class="engine"><input type="checkbox" checked> <span>Bing</span><span>International</span></label><label class="engine"><input type="checkbox"> <span>DuckDuckGo</span><span>International</span></label><label class="engine"><input type="checkbox"> <span>Custom/public provider</span><span>Configured</span></label></div></div>
+<div class="box"><h3>Enter Keywords <button id="helpKeywords" class="tab">Keyword Help</button></h3><textarea id="keywords" class="keywords" placeholder="one keyword per line, e.g. research\nuniversity\ncontact"></textarea></div>
+<div class="box"><h3>Keywords List <span class="hint">[ double click row to edit ] [ Ctrl+C to copy ]</span></h3><div id="keywordList" class="keyword-table"></div></div>
+<div class="box"><h3>Actions</h3><div class="side-actions"><button id="addKeyword">➜ Add</button><button id="clearKeywords">Clear List</button><button id="importFile">Import</button><input id="fileInput" type="file" accept=".txt,.csv" hidden></div></div>
+</section>
+<section class="settings">
+<label>URL <input id="url" size="42" value="https://example.org" placeholder="https://public-authorized-site.example"></label>
+<label>URL crawl depth <select id="depth"><option>1</option><option selected>3</option><option>5</option><option>10</option></select></label>
+<label>Number of Processes <select id="pages"><option>25</option><option selected>100</option><option>250</option><option>1000</option></select></label>
+<label><input id="robots" type="checkbox" checked> Don't crawl pages disallowed by robots.txt</label>
+<label><input id="dedupe" type="checkbox" checked> Don't re-crawl already processed pages</label>
+</section>
+<div class="toolbar"><button class="tool primary" id="start">🌐 Search Now</button><button class="tool" id="settings">🛠 Settings</button><button class="tool" id="save">💾 Save</button><button class="tool" id="filter">🔎 Filter</button><button class="tool" id="validate">✓ Validate</button><button class="tool" id="clearGrid">🗑 Clear Grid</button><button class="tool" id="clearHistory">🧹 Clear History</button><button class="tool" id="help">❓ Help</button><button class="tool" id="about">❔ About</button><button class="tool" id="quit">✖ Quit</button></div>
+<div class="main"><section class="results-wrap"><table class="results"><thead><tr><th>Email Address</th><th>Page Title</th><th>Web Site (Double Click to Open Page)</th><th>Keyword Score</th><th>Method</th></tr></thead><tbody id="results"></tbody></table><div class="progress-panel"><div class="progress-title"><span>Overall Progress</span><span id="pct">0%</span></div><div class="progress"><span id="overall"></span></div><div class="progress-title"><span>Queue Activity</span><span id="queueText">0 URLs</span></div><div class="progress"><span id="queueBar"></span></div></div><div id="status" class="status">Ready — public/authorized crawling only.</div></section>
+<aside class="stats"><h3>Statistics</h3><div class="metric">Domain Count: <b id="domains">0</b></div><div class="metric">Fetched Contacts: <b id="emails">0</b></div><div class="metric">Pages Parsed: <b id="parsed">0</b></div><div class="metric">Fetched pages in Q.: <b id="queued">0</b></div><div class="metric">URL in Queue: <b id="urls">0</b></div><div class="metric">Errors: <b id="errors">0</b></div><div class="metric">Elapsed: <b id="elapsed">00:00:00</b></div></aside></div>
+<footer class="footer"><span>WebContactCrawler • Cute Web Extractor-style interface</span><span id="clock">00:00:00</span></footer>
 </div>
-<p id="status">Waiting for telemetry…</p><pre id="out"></pre>
-<script>
-const $=id=>document.getElementById(id);
-$('file').onchange=async()=>{
- const input=$('file'); if(!input.files[0]) return;
- $('out').textContent='';
- const lines=(await input.files[0].text()).split(/\r?\n/).filter(Boolean);
- let maxPages=0,lastPages=0;
- for(const line of lines){
-  try{
-   const e=JSON.parse(line); maxPages=Math.max(maxPages,Number(e.max_pages||0)); lastPages=Number(e.pages||0);
-   $('pages').textContent=e.pages??0; $('queued').textContent=e.queued??0; $('emails').textContent=e.emails??0;
-   $('errors').textContent=e.errors??0; $('skipped').textContent=e.skipped??0; $('discovered').textContent=e.discovered_urls??0;
-   $('rate').textContent=e.rate?`${e.rate}/s`:'0';
-   const pct=maxPages?Math.min(100,(lastPages/maxPages)*100):((e.event==='done')?100:0);
-   $('fill').style.width=pct+'%'; $('percent').textContent=pct.toFixed(1)+'%';
-   $('status').textContent=(e.event||'event')+(e.url?' — '+e.url:'')+(e.error?' — '+e.error:'');
-   $('out').textContent+=JSON.stringify(e)+'\n'; $('out').scrollTop=$('out').scrollHeight;
-  }catch(_){ $('out').textContent+='[ignored malformed event]\n'; }
- }
-};
-</script>
-</main></body></html>
+<div id="modal" class="modal"><div class="dialog"><header id="modalTitle">WebContactCrawler</header><section id="modalBody"></section></div></div>
+<script src="app.js"></script></body></html>
