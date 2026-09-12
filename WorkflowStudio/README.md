@@ -6,7 +6,7 @@ A self-hosted, cross-platform project/workflow/DevOps and service-management pla
 
 `services/python/rnn_llm_engine.py` provides the reference local recurrent engine. It includes bounded recurrent state, short-term memory, explainable workflow recommendations and an optional trainable PyTorch GRU language-model backend. The AI layer is deliberately separated from production mutation: model output is advisory and policy approval remains required.
 
-The AI architecture is informed by LangChain, LangGraph, LlamaIndex, Open WebUI, FastAPI, Chroma and state-space/RNN research such as Mamba. See `docs/AI_RNN_LLM.md`; these projects are references/integration boundaries, not copied source. citeturn0search2turn0search0turn0search1turn0search3turn1search0
+The AI architecture is informed by LangChain, LangGraph, LlamaIndex, Open WebUI, FastAPI, Chroma and state-space/RNN research such as Mamba. See `docs/AI_RNN_LLM.md`; these projects are references/integration boundaries, not copied source.
 
 ## Current implementation
 - Shared JSON domain/event contracts in `contracts/`.
@@ -18,6 +18,37 @@ The AI architecture is informed by LangChain, LangGraph, LlamaIndex, Open WebUI,
 - Trusted-P2P envelope/replay policy boundary and multilingual voice-command schema/router.
 - Docker images for Python and Node services.
 - Contract and observability smoke tests.
+
+## Source-code citation index
+
+| Area | Source |
+|---|---|
+| C++ workflow entry point | [core/cpp/main.cpp](core/cpp/main.cpp) |
+| Workflow state machine | [core/workflow/StateMachine.cpp](core/workflow/StateMachine.cpp), [StateMachine.hpp](core/workflow/StateMachine.hpp) |
+| DevOps provider interface | [integrations/devops/Provider.hpp](integrations/devops/Provider.hpp), [ProviderRegistry.hpp](integrations/devops/ProviderRegistry.hpp) |
+| Kubernetes adapter | [integrations/devops/KubernetesAdapter.md](integrations/devops/KubernetesAdapter.md) |
+| OpenShift adapter | [integrations/devops/OpenShiftAdapter.md](integrations/devops/OpenShiftAdapter.md) |
+| Python service | [services/python/main.py](services/python/main.py) |
+| RNN/LLM engine | [services/python/rnn_llm_engine.py](services/python/rnn_llm_engine.py) |
+| RNN sequence model | [ai/rnn/SequenceModel.py](ai/rnn/SequenceModel.py) |
+| RNN inference | [ai/rnn/Inference.py](ai/rnn/Inference.py) |
+| Telemetry correlator | [integrations/observability/TelemetryCorrelator.py](integrations/observability/TelemetryCorrelator.py) |
+| Node service | [services/node/server.mjs](services/node/server.mjs) |
+| Web client | [clients/web/src/App.tsx](clients/web/src/App.tsx) |
+| Android client | [clients/android/Main.kt](clients/android/Main.kt) |
+| iOS client | [clients/ios/WorkflowClient.swift](clients/ios/WorkflowClient.swift) |
+| Flutter client | [clients/flutter/lib/main.dart](clients/flutter/lib/main.dart) |
+| Java client | [clients/java/Main.java](clients/java/Main.java) |
+| Go client | [clients/go/main.go](clients/go/main.go) |
+| Rust client | [clients/rust/src/main.rs](clients/rust/src/main.rs) |
+| P2P protocol | [collaboration/p2p/PeerProtocol.cpp](collaboration/p2p/PeerProtocol.cpp), [PeerProtocol.hpp](collaboration/p2p/PeerProtocol.hpp) |
+| Domain contracts | [contracts/schema.json](contracts/schema.json), [contracts/events.json](contracts/events.json) |
+| Database schema | [database/schema.sql](database/schema.sql) |
+| Voice schema/router | [voice/VoiceCommandSchema.json](voice/VoiceCommandSchema.json), [voice/python/voice_router.py](voice/python/voice_router.py) |
+| Deployment | [deploy/](deploy/) |
+| CI | [ci/github-actions.yml](ci/github-actions.yml) |
+| Tests | [tests/](tests/), [services/python/tests/](services/python/tests/) |
+| Architecture and research | [ARCHITECTURE.md](ARCHITECTURE.md), [docs/](docs/) |
 
 ## Design principles
 - API-first and event-driven; the same domain model is exposed to web, desktop, mobile and CLI clients.
