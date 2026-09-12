@@ -1,13 +1,14 @@
 [project]
 name = "agent-research-forge"
-version = "0.1.0"
-description = "Local-first AI research, document retrieval, code discovery and project generation"
+version = "0.2.0"
+description = "Deep web research, authorized onion retrieval, document RAG, code discovery, project generation and artifact export"
 requires-python = ">=3.11"
 dependencies = ["requests>=2.31"]
 
 [project.optional-dependencies]
 api = ["fastapi>=0.110", "uvicorn>=0.29", "python-multipart>=0.0.9"]
 documents = ["pypdf>=4", "python-docx>=1.1", "python-pptx>=0.6", "ebooklib>=0.18"]
+exports = ["reportlab>=4.0", "python-docx>=1.1"]
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
