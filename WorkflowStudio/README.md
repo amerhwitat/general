@@ -1,6 +1,12 @@
 # Chimera WorkFlow Studio
 
-A self-hosted, cross-platform project/workflow/DevOps and service-management platform for computers and mobile devices. It combines Jira/Azure DevOps-style work tracking, Agile methods, ITIL 4-aligned service management, CI/CD orchestration, Kubernetes/OpenShift integration, observability, team collaboration, voice controls, trusted P2P synchronization, and a local-first RNN/ML assistant.
+A self-hosted, cross-platform project/workflow/DevOps and service-management platform for computers and mobile devices. It combines Jira/Azure DevOps-style work tracking, Agile methods, ITIL 4-aligned service management, CI/CD orchestration, Kubernetes/OpenShift integration, observability, team collaboration, voice controls, trusted P2P synchronization, and a local-first RNN/LLM assistant.
+
+## AI engine
+
+`services/python/rnn_llm_engine.py` provides the reference local recurrent engine. It includes bounded recurrent state, short-term memory, explainable workflow recommendations and an optional trainable PyTorch GRU language-model backend. The AI layer is deliberately separated from production mutation: model output is advisory and policy approval remains required.
+
+The AI architecture is informed by LangChain, LangGraph, LlamaIndex, Open WebUI, FastAPI, Chroma and state-space/RNN research such as Mamba. See `docs/AI_RNN_LLM.md`; these projects are references/integration boundaries, not copied source. citeturn0search2turn0search0turn0search1turn0search3turn1search0
 
 ## Current implementation
 - Shared JSON domain/event contracts in `contracts/`.
@@ -8,6 +14,7 @@ A self-hosted, cross-platform project/workflow/DevOps and service-management pla
 - Persistent-schema foundation in `database/`.
 - Provider-neutral C++ workflow state machine and DevOps provider interfaces.
 - Python sequence-model/inference and telemetry-correlation foundations.
+- Local-first RNN/LLM engine and regression tests in `services/python/`.
 - Trusted-P2P envelope/replay policy boundary and multilingual voice-command schema/router.
 - Docker images for Python and Node services.
 - Contract and observability smoke tests.
@@ -33,12 +40,12 @@ A self-hosted, cross-platform project/workflow/DevOps and service-management pla
 9. OpenTelemetry metrics/logs/traces with Prometheus/Grafana adapters
 10. Team collaboration, mentions, notifications and optional P2P synchronization
 11. Admin/user/role/team/workspace tenancy and audit trail
-12. RNN/ML assistant, project summarization, anomaly detection, prioritization and workflow recommendations
+12. RNN/LLM assistant, project summarization, anomaly detection, prioritization and workflow recommendations
 13. Speech-to-text/text-to-speech hooks with locale/voice controls
 
 ## Implementations
 - `core/cpp` — portable C++20 domain/engine foundation
-- `services/python` — FastAPI reference service and ML orchestration
+- `services/python` — FastAPI reference service, ML orchestration and recurrent language engine
 - `services/node` — Node API and webhook worker
 - `clients/web` — TypeScript web application shell
 - `clients/android` — Kotlin Android client
@@ -50,22 +57,20 @@ A self-hosted, cross-platform project/workflow/DevOps and service-management pla
 - `deploy` — Docker, Kubernetes and OpenShift deployment boundaries
 - `ci` — GitHub Actions and reusable CI/CD examples
 
-## Security
-See `docs/SECURITY.md`. Credentials are runtime configuration only. Use TLS/mTLS, RBAC/ABAC, short-lived tokens, audit logs and external secret stores in production.
-
 ## Documentation
 - `ARCHITECTURE.md` — system architecture
 - `docs/API.md` — API/event contract
 - `docs/AGILE_ITIL4.md` — Agile and ITIL 4 workflows
 - `docs/OPEN_SOURCE_RESEARCH.md` — open-source references and integration boundaries
-- `docs/AI_RNN.md` — neural assistant design
+- `docs/AI_RNN.md` — original RNN/ML assistant design
+- `docs/AI_RNN_LLM.md` — expanded recurrent/LLM architecture and current research references
 - `docs/IDENTITY_P2P_VOICE.md` — identity, P2P and voice
 - `docs/SECURITY.md` — security model
 - `docs/superpowers/specs/2026-09-12-workflow-studio-platform-design.md` — approved design
 - `docs/superpowers/plans/2026-09-12-workflow-studio-platform.md` — implementation plan
 
 ## Verification status
-The repository contains implementation foundations and tests, but this chat session has not executed every native/mobile/container build. Do not interpret source presence as proof of a successful platform build; CI/native runners must verify each target.
+Run `python -m unittest discover -s services/python/tests -v` from the repository root for the Python unit tests. Full native/mobile/container verification remains the responsibility of the appropriate CI/platform runners.
 
 ## License
 Original project code: GPL-3.0-or-later. Third-party dependencies retain their own licenses. This project documents and integrates open APIs; it does not copy proprietary source code.
