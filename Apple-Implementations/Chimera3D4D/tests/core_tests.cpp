@@ -25,6 +25,11 @@ int main() {
   const auto box = scene.find(id)->mesh.bounds();
   assert(box.valid() && box.min.x == 0.0 && box.max.x == 1.0);
 
+  Transform mid;
+  assert(scene.evaluate(id, 0.5, mid));
+  assert(std::abs(mid.translation.x - 0.5) < 1e-12);
+  assert(std::abs(mid.scale.x - 1.0) < 1e-12);
+
   SceneObject invalid;
   invalid.mesh.vertices = {{{0,0,0}}, {{1,0,0}}};
   invalid.mesh.triangles = {{{0,1,2}}};
