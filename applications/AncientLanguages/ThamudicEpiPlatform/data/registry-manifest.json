@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "canonical_repository": "https://github.com/amerhwitat/nlp",
+  "canonical_path": "ThamudicEpiPlatform",
+  "integration_role": "deployment-and-aggregation-layer",
+  "shared_contracts": [
+    "data/schemas/kpi.schema.json",
+    "data/schemas/pdf_export.schema.json"
+  ],
+  "languages": ["mesopotamia", "egypt", "arabia", "greek", "latin"],
+  "encoding": "UTF-8",
+  "language_identifiers": "BCP47/CLDR",
+  "verification": "SHA-256",
+  "notes": "Do not treat this manifest as a second source of truth; synchronize from the nlp implementation."
+}
