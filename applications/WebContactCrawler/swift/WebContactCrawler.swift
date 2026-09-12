@@ -1,0 +1,2 @@
+import Foundation
+let p=CommandLine.arguments.dropFirst().first ?? ""; let s=(try? String(contentsOfFile:p)) ?? ""; let re=try! NSRegularExpression(pattern:"[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}",options:.caseInsensitive); let ms=re.matches(in:s,range:NSRange(s.startIndex...,in:s)); var set=Set(ms.compactMap{Range($0.range,in:s).map{String(s[$0]).lowercased()}}); print("DONE unique_emails=\(set.count)"); for e in set.sorted(){print(e)}
