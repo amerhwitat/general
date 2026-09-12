@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../../.." && pwd)"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
 NLP="${ROOT}/../nlp/ThamudicEpiPlatform"
 if [[ ! -d "${NLP}" ]]; then echo "Canonical nlp checkout not found: ${NLP}" >&2; exit 2; fi
 python3 -m venv "${NLP}/.venv"
