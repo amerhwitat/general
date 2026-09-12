@@ -1,0 +1,9 @@
+{
+  "name": "email-extractor-node",
+  "version": "0.1.0",
+  "private": true,
+  "main": "../electron/main.js",
+  "scripts": {"start": "electron .", "lint": "node --check extractor.js"},
+  "dependencies": {"axios": "^1.7.7", "dns": "^0.2.0", "sqlite3": "^5.1.7"},
+  "devDependencies": {"electron": "^32.1.2"}
+}
