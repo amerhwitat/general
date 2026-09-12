@@ -1,0 +1,18 @@
+{
+  "canonical_source": "https://github.com/amerhwitat/nlp/tree/main/ThamudicEpiPlatform",
+  "normalization": "UTF-8 NFC",
+  "source_and_target": [
+    {"id":"zh","name":"Modern Chinese","source":true,"target":true,"directions":["ltr","ttb","rtl"]},
+    {"id":"ja","name":"Modern Japanese","source":true,"target":true,"directions":["ltr","ttb","rtl"]},
+    {"id":"classical-chinese","name":"Classical Chinese","source":true,"target":true,"directions":["ttb","rtl","ltr"]},
+    {"id":"classical-japanese","name":"Classical Japanese","source":true,"target":true,"directions":["ttb","rtl","ltr"]},
+    {"id":"ancient-north-arabian","name":"Ancient North Arabian","source":true,"target":true,"directions":["rtl"]},
+    {"id":"ancient-egyptian","name":"Ancient Egyptian","source":true,"target":true,"directions":["ltr","rtl","ttb","btt"]},
+    {"id":"akkadian","name":"Akkadian","source":true,"target":true,"directions":["ltr","rtl"]},
+    {"id":"sumerian","name":"Sumerian","source":true,"target":true,"directions":["ltr","rtl"]},
+    {"id":"ancient-greek","name":"Ancient Greek","source":true,"target":true,"directions":["ltr"]},
+    {"id":"latin","name":"Latin","source":true,"target":true,"directions":["ltr"]}
+  ],
+  "modern_target_resolution": "BCP-47/CLDR",
+  "translation_modes": ["literal","meaning","interlinear","scholarly"]
+}
