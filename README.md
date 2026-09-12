@@ -23,11 +23,11 @@ Maintained application trees include:
 
 ## EmailListManager
 
-`EmailListManager/` is the new cross-language local-first contact-list manager. It provides normalized/deduplicated contacts, lists and memberships, tags, notes, source provenance, explicit consent/status fields, CSV interoperability, a deterministic lightweight RNN-style scorer and an optional local Ollama-compatible LLM adapter. It deliberately does not implement unsolicited bulk delivery. The design was informed by open-source mailing-list manager patterns, especially list/subscriber relationships and CSV/API synchronization. citeturn0search4turn0search13
+`EmailListManager/` is the new cross-language local-first contact-list manager. It provides normalized/deduplicated contacts, lists and memberships, tags, notes, source provenance, explicit consent/status fields, CSV interoperability, a deterministic lightweight RNN-style scorer and an optional local Ollama-compatible LLM adapter. It deliberately does not implement unsolicited bulk delivery. The design was informed by [listmonk](https://listmonk.app/) patterns for subscriber/list relationships and [external API/CSV synchronization](https://listmonk.app/docs/external-integration/).
 
 ## Shared AI layer
 
-`shared/ai/` defines the repository-wide local intelligence contract: deterministic recurrent scoring plus an optional local LLM HTTP adapter. Crawlers, SEO tools, contact extractors, research tools and list management applications can use the same environment-based model configuration while preserving provenance and human approval boundaries.
+`shared/ai/` defines the repository-wide local intelligence contract: deterministic recurrent scoring plus an optional local LLM HTTP adapter. Crawlers, SEO tools, contact extractors, research tools and list management applications can use the same environment-based model configuration while preserving provenance and human approval boundaries. The LLM boundary follows the local REST model exposed by [Ollama](https://github.com/ollama/ollama) and its [API documentation](https://github.com/ollama/ollama/blob/main/docs/api.md).
 
 ## EmailKeywordCrawler
 
