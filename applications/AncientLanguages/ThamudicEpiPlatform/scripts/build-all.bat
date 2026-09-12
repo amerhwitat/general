@@ -6,8 +6,7 @@ if not exist "%NLP%" (
   echo Canonical nlp checkout not found: %NLP%
   exit /b 2
 )
-python -m venv "%NLP%\.venv"
-"%NLP%\.venv\Scripts\python.exe" -m pip install -r "%NLP%\server\requirements.txt"
+call "%NLP%\scripts\check-dependencies.bat"
 "%NLP%\.venv\Scripts\python.exe" -m pytest "%NLP%\server\tests" -q
 where npm >nul 2>nul
 if %errorlevel%==0 (
@@ -16,5 +15,5 @@ if %errorlevel%==0 (
   call npm run build
   popd
 )
-echo AncientLanguages build/test completed.
+echo AncientLanguages build/test completed with OCR dependency checks.
 endlocal
