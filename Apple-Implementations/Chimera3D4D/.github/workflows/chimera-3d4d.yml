@@ -20,11 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
-          cache-dependency-path: Apple-Implementations/Chimera3D4D/web/package-lock.json
       - name: Install
         working-directory: Apple-Implementations/Chimera3D4D/web
         run: npm install
@@ -59,11 +58,11 @@ jobs:
         working-directory: Apple-Implementations/Chimera3D4D/apple
         run: |
           if command -v xcodegen >/dev/null 2>&1; then xcodegen generate; else echo 'XcodeGen not installed; project generation skipped'; fi
-      - name: Build macOS without signing
+      - name: Build macOS without signing when generated project exists
         working-directory: Apple-Implementations/Chimera3D4D/apple
         run: |
           if [ -f Chimera3D4D.xcodeproj/project.pbxproj ]; then
             xcodebuild -project Chimera3D4D.xcodeproj -scheme Chimera3D4D-macOS -configuration Release CODE_SIGNING_ALLOWED=NO build
           else
-            echo 'Generated Xcode project not present; configure XcodeGen or commit an .xcodeproj before native build.'
+            echo 'Generated Xcode project not present; native build is intentionally not asserted.'
           fi
