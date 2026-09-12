@@ -1,0 +1,66 @@
+name: EmailListManager
+on:
+  push:
+    paths: ['EmailListManager/**','shared/ai/**']
+  pull_request:
+    paths: ['EmailListManager/**','shared/ai/**']
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m py_compile EmailListManager/python/manager.py EmailListManager/python/shared_ai.py
+  go:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with: {go-version: '1.22'}
+      - run: go test ./...
+        working-directory: EmailListManager/go
+  cpp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: cmake -S EmailListManager/cpp -B EmailListManager/cpp/build
+      - run: cmake --build EmailListManager/cpp/build
+  csharp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with: {dotnet-version: '8.0.x'}
+      - run: dotnet build EmailListManager/csharp/EmailListManager.csproj --no-restore
+  java:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: {distribution: temurin, java-version: '17'}
+      - run: mvn -q -f EmailListManager/java/pom.xml package
+  rust:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-rust@v1
+      - run: cargo check
+        working-directory: EmailListManager/rust
+  php:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with: {php-version: '8.3'}
+      - run: php -l EmailListManager/php/EmailListManager.php
+  typescript:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: npm install
+        working-directory: EmailListManager/typescript
+      - run: npx tsc --noEmit manager.ts --target ES2022 --module NodeNext --moduleResolution NodeNext
+        working-directory: EmailListManager/typescript
