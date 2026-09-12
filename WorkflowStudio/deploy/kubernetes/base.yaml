@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chimera-workflow-api
+spec:
+  replicas: 2
+  selector: {matchLabels: {app: chimera-workflow-api}}
+  template:
+    metadata: {labels: {app: chimera-workflow-api}}
+    spec:
+      containers:
+        - name: api
+          image: ghcr.io/amerhwitat/chimera-workflow-api:dev
+          ports: [{containerPort: 8080}]
+          readinessProbe: {httpGet: {path: /health, port: 8080}}
+          livenessProbe: {httpGet: {path: /health, port: 8080}}
+---
+apiVersion: v1
+kind: Service
+metadata: {name: chimera-workflow-api}
+spec:
+  selector: {app: chimera-workflow-api}
+  ports: [{port: 8080, targetPort: 8080}]

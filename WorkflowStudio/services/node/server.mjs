@@ -1,0 +1,10 @@
+import express from 'express';
+import crypto from 'node:crypto';
+const app=express(); app.use(express.json());
+const projects=new Map(); const events=[];
+app.get('/health',(_,res)=>res.json({status:'ok'}));
+app.post('/api/projects',(req,res)=>{const p=req.body;if(!p?.id||!p?.name)return res.status(400).json({error:'id and name required'});projects.set(p.id,p);events.push({type:'project.created',id:p.id,at:Date.now()});res.status(201).json(p)});
+app.get('/api/projects',(_,res)=>res.json([...projects.values()]));
+app.post('/api/events',(req,res)=>{events.push({...req.body,id:crypto.randomUUID(),at:Date.now()});res.status(202).json({accepted:true})});
+app.get('/api/events',(_,res)=>res.json(events.slice(-500)));
+app.listen(process.env.PORT||8080,()=>console.log('Chimera WorkFlow Studio Node service listening'));

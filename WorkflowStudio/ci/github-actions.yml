@@ -1,0 +1,22 @@
+name: chimera-workflow
+on: [push, pull_request]
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m py_compile general/WorkflowStudio/services/python/main.py
+  node:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: node --check general/WorkflowStudio/services/node/server.mjs
+  cpp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: g++ -std=c++20 -Wall -Wextra general/WorkflowStudio/core/cpp/main.cpp -o /tmp/chimera-workflow
