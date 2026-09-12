@@ -4,21 +4,33 @@ This repository is a general integration and research workspace within the Amer 
 
 ## WebContactCrawler
 
-`applications/WebContactCrawler/` is the portfolio's cross-language public-web contact crawler. It provides bounded keyword-focused crawling, robots-aware scheduling, public email extraction, provenance, deduplication, detailed JSONL progress telemetry, a visual dashboard, and TXT/CSV import/export. The directory contains the language-neutral contact schema, executable Python reference implementation, portable language adapters, web UI, architecture and open-source research records.
+`applications/WebContactCrawler/` is the portfolio's cross-language public-web contact crawler. It provides bounded keyword-focused crawling, robots-aware scheduling, public email extraction, provenance, deduplication, detailed JSONL progress telemetry, a visual dashboard, and TXT/CSV import/export. The directory contains the language-neutral contact/event schema, executable Python reference implementation, portable language adapters, web UI, architecture and open-source research records.
 
 The crawler is intentionally responsible-use oriented: public/authorized resources only; no authentication or CAPTCHA bypass, anti-bot evasion, credential collection, private-area crawling or SMTP mailbox probing. Third-party projects are used as architectural references or through documented adapters; proprietary source is not copied.
 
 ### WebContactCrawler structure
 
-- `applications/WebContactCrawler/schema/` — portable contact schema.
-- `applications/WebContactCrawler/python/` — reference crawler and TXT/CSV helpers.
-- `applications/WebContactCrawler/{c,cpp,go,rust,java,csharp,typescript,javascript,php,ruby,dart,swift,kotlin,scala,perl,lua,bash,powershell}/` — language adapters.
-- `applications/WebContactCrawler/web/` — visual progress dashboard.
+- `applications/WebContactCrawler/schema/` — portable contact and telemetry contract.
+- `applications/WebContactCrawler/python/` — executable reference crawler, import/export helpers and tests.
+- `applications/WebContactCrawler/{c,cpp,go,rust,java,csharp,typescript,javascript,php,ruby,dart,swift,kotlin,scala,perl,lua,bash,powershell}/` — language adapters already represented in the repository.
+- `applications/WebContactCrawler/web/` — visual JSONL progress dashboard.
 - `applications/WebContactCrawler/docs/` — architecture, open-source research, licensing and portfolio references.
+
+### Verification
+
+From `applications/WebContactCrawler/python/`, run `python -m unittest discover -s tests -v`. The tests cover normal and obfuscated public email extraction, keyword scoring, TXT/CSV import, deterministic deduplication and TXT/CSV export.
 
 ### External/open-source references
 
-Scrapy: https://github.com/scrapy/scrapy; xcrawler: https://github.com/cardsurf/xcrawler; Frostwork: https://github.com/scrapy/frostwork; Heritrix: https://github.com/internetarchive/heritrix3; Scrapely: https://github.com/scrapy/scrapely; email-enrich: https://github.com/waterdoog/email-enrich; Prowl: https://github.com/nettitude/prowl. These are reference projects, not copied source. See the application documentation for license review and adaptation boundaries.
+- Scrapy: https://github.com/scrapy/scrapy
+- xcrawler: https://github.com/cardsurf/xcrawler
+- Frostwork: https://github.com/scrapy/frostwork
+- Heritrix: https://github.com/internetarchive/heritrix3
+- Scrapely: https://github.com/scrapy/scrapely
+- email-enrich: https://github.com/waterdoog/email-enrich
+- Prowl: https://github.com/nettitude/prowl
+
+These projects are reference implementations for crawler scheduling, extraction, feed/export, selector and contact-discovery patterns. They are not presented as copied source. See `applications/WebContactCrawler/docs/OPEN_SOURCE_RESEARCH.md` and `applications/WebContactCrawler/docs/PORTFOLIO_REFERENCES.md` for licensing/adaptation boundaries and references to related code in this portfolio.
 
 ## Chimera WorkFlow Studio
 
