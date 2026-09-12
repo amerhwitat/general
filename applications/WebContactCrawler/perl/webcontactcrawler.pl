@@ -1,0 +1,1 @@
+use strict; use warnings; open my $fh,'<',$ARGV[0] or die $!; local $/; my $s=<$fh>; my %e; while($s =~ /([A-Z0-9._%+-]+\@[A-Z0-9.-]+\.[A-Z]{2,})/ig){$e{lc $1}=1} print "DONE unique_emails=",scalar(keys %e),"\n",join("\n",sort keys %e),"\n";
