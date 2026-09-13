@@ -1,0 +1,11 @@
+services:
+  app:
+    build: .
+    image: amerhwitat/general:local
+    container_name: general-app
+    ports: ["8000:8000", "8080:8080"]
+    volumes: ["general-data:/app/data", "general-logs:/app/logs"]
+    init: true
+volumes:
+  general-data:
+  general-logs:
