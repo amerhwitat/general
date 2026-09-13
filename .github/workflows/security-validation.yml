@@ -1,0 +1,40 @@
+name: Security and repository validation
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Reject private-key material
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git grep -n -E -- '-----BEGIN (RSA|OPENSSH|EC|DSA|PRIVATE) KEY-----' -- ':!SECURITY.md'; then
+            echo 'Private-key material detected in tracked source.' >&2
+            exit 1
+          fi
+
+      - name: Validate shared network capability JSON
+        run: python -m json.tool shared/network/application_integrations.json >/dev/null
+
+      - name: Validate routing capability JSON
+        run: python -m json.tool shared/network/routing_capabilities.json >/dev/null
+
+      - name: Validate observability and deployment documents
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s shared/observability/README.md
+          test -s shared/deployment/DISTRIBUTED_SYSTEMS.md
+          test -s docs/REMEDIATION_STATUS.md
