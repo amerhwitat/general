@@ -2,7 +2,7 @@
 
 ## Audit scope
 
-Audited the currently connected repositories: General, ChimeraIIOS, BizX and BizXtreme. The GitHub issue search currently exposes open issues in General, BizX and BizXtreme. citehttps://github.com/amerhwitat/general/issues/1
+Audited the currently connected repositories: General, ChimeraIIOS, BizX and BizXtreme. GitHub issue review identified historical issues requiring either archival or security sanitization.
 
 ## Architecture remediation
 
@@ -16,19 +16,20 @@ Completed in this pass:
 - Service complexity controls: modular-first architecture, gRPC/HTTP2 reuse, streaming, local caching, service-local data, outbox/inbox, idempotency, Saga compensation, circuit breakers, resource limits and canary/blue-green deployment.
 - OpenTelemetry trace/metric/log integration boundary.
 - Security policies covering credentials, avatars, network identity and privileged routing.
+- Repository validation workflows for secret-marker detection, JSON validation and required documentation.
 
-## Critical security action still required
+## Historical credential incident
 
-A historical General repository issue contains credential/private-key material in its body. This must be treated as compromised: revoke/rotate the credential immediately and remove/redact the issue content through GitHub's issue-management interface. Do not reuse the exposed key. The available repository connector in this session does not expose an issue-edit/redaction operation, so claiming that this historical issue has been fully remediated would be false.
+General issue #1 was sanitized and closed. Its former credential/private-key material was removed from the issue body. Any credential that was ever exposed there must still be considered compromised and revoked/rotated outside GitHub.
 
 ## Historical OpenStack issue
 
-General issue #1 is a historical OpenStack/Neutron/Swift troubleshooting log and contains obsolete platform-specific commands. It should be archived/closed after its useful lessons are migrated into maintained documentation. Current code should not depend on those 2019-era deployment commands.
+General issue #1 was a 2019 OpenStack/Neutron/Swift troubleshooting log with obsolete platform-specific commands. The issue is now closed with a sanitized historical summary. Current code must not depend on those 2019-era deployment commands.
 
 ## Legacy wsgi issue
 
-General issue #2 asks about Python ConfigParser/wsgi compatibility. A repository-wide code search did not find a current `wsgi.py` matching that issue, so it is treated as historical unless the referenced source is restored. The safe modern Python approach is `configparser` on Python 3, with compatibility adapters only when an actual legacy deployment still requires them.
+General issue #2 was closed as historical. A repository-wide code search did not identify a current `wsgi.py` matching that report. Modern Python uses `configparser`; compatibility adapters should only be introduced when an actual legacy deployment requires them.
 
 ## Verification boundary
 
-GitHub content retrieval confirms the new routing/network/SDN documents and C++ routing interface exist on their respective default branches. Full compilation of every repository/language cannot be honestly claimed from the connector alone; CI/build execution should remain the final verification gate for each language implementation.
+GitHub retrieval confirms the new routing/network/SDN documents, security policies and validation workflows exist on the default branches. A local clone/build attempt was blocked because the execution environment could not resolve `github.com`, and no GitHub Actions run was available for the newly created commits at verification time. Therefore no claim is made that the full multi-language build matrix has passed. The repository workflows are the intended final build/test gate.
