@@ -1,0 +1,14 @@
+{
+  "schema": "CHIMERA-AI-DISCIPLINES-1",
+  "disciplines": {
+    "ml": {"data": ["tabular", "structured", "mixed"], "families": ["linear", "tree", "ensemble", "clustering", "probabilistic"], "python": ["scikit-learn"]},
+    "dl": {"data": ["text", "audio", "image", "tensor"], "families": ["cnn", "rnn", "transformer", "autoencoder", "multimodal"], "python": ["pytorch", "tensorflow", "jax"]},
+    "rl": {"data": ["interaction", "simulation", "trajectory"], "families": ["q-learning", "policy-gradient", "actor-critic", "model-based"], "python": ["gymnasium", "stable-baselines3"]},
+    "symbolic_ai": {"data": ["rules", "facts", "ontology", "knowledge_graph"], "families": ["forward_chaining", "backward_chaining", "constraint_solving", "theorem_proving"], "python": ["sympy"], "formats": ["json", "rdf", "owl"]},
+    "computer_vision": {"data": ["image", "video", "point_cloud"], "families": ["classification", "detection", "segmentation", "tracking", "geometry"], "python": ["opencv", "scikit-image", "pytorch"]},
+    "nlp": {"data": ["text", "speech", "corpus"], "families": ["tokenization", "tagging", "parsing", "embedding", "transformer", "translation", "generation"], "python": ["spacy", "transformers", "pytorch"]}
+  },
+  "cross_discipline": ["multimodal", "knowledge_augmented", "neuro_symbolic", "model_serving", "experiment_tracking", "edge_inference"],
+  "deployment": ["onnx", "tvm", "native", "container", "kubernetes", "chimera_vm"],
+  "governance": {"auto_download": false, "auto_execute_generated_code": false, "auto_cloud_mutation": false}
+}
