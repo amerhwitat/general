@@ -1,0 +1,1 @@
+{"$schema":"CHM-APP-INTEGRATION-1","application":"general","target":"Chimera II OS","integration_points":["Aurora","Chimera SDK","Package Manager","Universal Execution API"],"purpose":"Common application and tooling integration registry for Chimera II OS.","policy":"Applications are exposed through adapters without relicensing or copying third-party code."}
