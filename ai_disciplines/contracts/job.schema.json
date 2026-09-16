@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Chimera AI Job",
+  "type": "object",
+  "required": ["schema", "discipline", "task", "data_kind"],
+  "properties": {
+    "schema": {"const": "CHIMERA-AI-JOB-1"},
+    "discipline": {"enum": ["ml", "dl", "rl", "symbolic_ai", "computer_vision", "nlp"]},
+    "task": {"type": "string", "minLength": 1},
+    "data_kind": {"type": "string", "minLength": 1},
+    "framework": {"type": ["string", "null"]},
+    "parameters": {"type": "object"},
+    "provenance": {"type": "object"}
+  },
+  "additionalProperties": true
+}
