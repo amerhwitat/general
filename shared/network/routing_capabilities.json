@@ -1,0 +1,22 @@
+{
+  "protocol_version": 1,
+  "route_modes": ["client", "server", "host", "p2p", "hybrid"],
+  "defaults": {
+    "mode": "client",
+    "remote_execution": false,
+    "persist_raw_ip_in_profile": false,
+    "share_exact_location": false
+  },
+  "capabilities": {
+    "local_client": true,
+    "same_authorization_path": true,
+    "explicit_peer_opt_in": true,
+    "authenticated_peer_envelopes": true,
+    "automatic_remote_command_execution": false
+  },
+  "applications_manifest": "shared/network/application_integrations.json",
+  "notes": [
+    "This file describes advertised routing capabilities and safe defaults; it does not grant network or host privileges.",
+    "Each application must enforce authorization and validate peer messages independently."
+  ]
+}

@@ -20,5 +20,7 @@ jobs:
         with:
           python-version: '3.11'
       - run: python -m pip install --upgrade pip
-      - run: python -m pip install -e '.[api,documents,exports]'
+      - run: python -m pip install -e '.[api,documents,exports,test]'
       - run: python -m pytest -q
+        env:
+          PYTHONPATH: ..

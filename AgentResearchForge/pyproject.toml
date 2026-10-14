@@ -9,6 +9,12 @@ dependencies = ["requests>=2.31"]
 api = ["fastapi>=0.110", "uvicorn>=0.29", "python-multipart>=0.0.9"]
 documents = ["pypdf>=4", "python-docx>=1.1", "python-pptx>=0.6", "ebooklib>=0.18"]
 exports = ["reportlab>=4.0", "python-docx>=1.1"]
+test = ["pytest>=8"]
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["agents*", "api*", "api_registry*", "artifacts*", "code_search*", "core*", "crawler*", "documents*", "exporters*", "hosting*", "languages*", "project_builder*"]
+exclude = ["tests*", "ui*"]
