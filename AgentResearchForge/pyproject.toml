@@ -12,3 +12,8 @@ exports = ["reportlab>=4.0", "python-docx>=1.1"]
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["agents*", "api*", "api_registry*", "artifacts*", "code_search*", "core*", "crawler*", "documents*", "exporters*", "hosting*", "languages*", "project_builder*"]
+exclude = ["tests*", "ui*"]
