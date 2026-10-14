@@ -1,0 +1,22 @@
+name: SEO Tool Java Adapter
+on:
+  push:
+    paths: ["SEO-Tool/languages/java/**", ".github/workflows/seo-tool-java.yml"]
+  pull_request:
+    paths: ["SEO-Tool/languages/java/**", ".github/workflows/seo-tool-java.yml"]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+          cache-dependency-path: SEO-Tool/languages/java/pom.xml
+      - run: mvn -f SEO-Tool/languages/java/pom.xml --batch-mode test
+      - run: mvn -f SEO-Tool/languages/java/pom.xml --batch-mode package
