@@ -105,3 +105,8 @@ Run `python -m unittest discover -s services/python/tests -v` from the repositor
 
 ## License
 Original project code: GPL-3.0-or-later. Third-party dependencies retain their own licenses. This project documents and integrates open APIs; it does not copy proprietary source code.
+
+
+## Browser GUI and API origin policy
+
+The portfolio's WorkflowStudio browser GUI talks to the Python FastAPI service only when that service is running locally and the browser origin is explicitly allowed. The Python API reads `WORKFLOW_STUDIO_CORS_ORIGINS` as a comma-separated exact-origin allowlist. By default, only local development origins on ports 3000 and 5173 are allowed. To opt in to the published portfolio GUI, set `WORKFLOW_STUDIO_CORS_ORIGINS=https://amerhwitat.github.io` (include any additional trusted origin explicitly). Do not use a wildcard origin for a local API that accepts project/work-item writes. The current reference store is in-memory and is not production persistence.

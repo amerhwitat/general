@@ -1,11 +1,29 @@
 from __future__ import annotations
 from datetime import datetime, timezone
+import os
 from enum import Enum
 from typing import Any
 from pydantic import BaseModel, Field
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="Chimera WorkFlow Studio API", version="0.1.0")
+
+# CORS is opt-in by origin. Add the published browser GUI origin explicitly when
+# you intend to use it; never use wildcard origins for a local service with writes.
+_DEFAULT_CORS_ORIGINS = "http://localhost:3000,http://127.0.0.1:3000,http://localhost:5173,http://127.0.0.1:5173"
+CORS_ORIGINS = [
+    origin.strip()
+    for origin in os.getenv("WORKFLOW_STUDIO_CORS_ORIGINS", _DEFAULT_CORS_ORIGINS).split(",")
+    if origin.strip()
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=CORS_ORIGINS,
+    allow_credentials=False,
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["Content-Type"],
+)
 
 class WorkType(str, Enum):
     epic='epic'; story='story'; task='task'; bug='bug'; incident='incident'; change='change'; problem='problem'
