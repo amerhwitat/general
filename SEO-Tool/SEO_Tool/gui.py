@@ -10,6 +10,9 @@ HTML='''<!doctype html><html><head><meta charset="utf-8"><title>SEO-Tool</title>
 @app.get('/')
 def index(): return render_template_string(HTML)
 
+@app.get('/health')
+def health(): return jsonify(status='ok', service='SEO-Tool', mode='local-python-crawler')
+
 @app.post('/api/scan')
 def scan():
     data=request.get_json(force=True); url=data.get('url','').strip(); out=data.get('output','./seo-results')
