@@ -108,3 +108,14 @@ The `web/` interface now includes a static browser-native HTML audit mode. Paste
 For full multi-page crawling, use the local Python crawler and explicitly configure the local bridge endpoint in the browser GUI. The bridge is optional and remains a local service; GitHub Pages does not execute this Python code. The current browser audit is a useful subset, not feature parity with the Python crawler's robots parsing, crawl graph, sitemap analysis, persistence, document capture, or report generation.
 
 Use only authorized targets, keep robots-aware crawling enabled, and choose conservative crawl limits and delays.
+
+
+### Connect the hosted browser audit to the local crawler
+
+The hosted SEO Audit Studio can call the local Flask crawler only when the service is running and the portfolio origin is explicitly allowed. The local UI served by Flask remains same-origin and does not require this opt-in. To enable the hosted UI, set:
+
+```bash
+SEO_TOOL_CORS_ORIGINS=https://amerhwitat.github.io python3 -m SEO_Tool.gui
+```
+
+The CLI entrypoint is also available; use the project's documented startup command if your environment launches the GUI module differently. The service defaults to port 5088. CORS uses exact origins, not a wildcard; only targets you are authorized to audit should be submitted.
