@@ -99,3 +99,12 @@ Raw downloads are bounded by size and are saved only when enabled.
 ## Safety
 
 Crawling an arbitrary website can create load and can collect personal or copyrighted material. Use targets you own or are authorized to assess, respect terms and robots policies, use conservative concurrency/delays, and review data-retention requirements. HTTP without TLS is supported for auditing because the protocol itself is part of the audit surface; it is not treated as secure transport.
+
+
+## Browser-native GUI mode
+
+The `web/` interface now includes a static browser-native HTML audit mode. Paste HTML from a site you own or are authorized to assess to inspect title/description metadata, heading counts, viewport and language declarations, canonical/robots tags, Open Graph and JSON-LD presence, image alt attributes, links, and text length. Export findings as JSON or issue CSV. This mode runs entirely in the browser and does not fetch target pages.
+
+For full multi-page crawling, use the local Python crawler and explicitly configure the local bridge endpoint in the browser GUI. The bridge is optional and remains a local service; GitHub Pages does not execute this Python code. The current browser audit is a useful subset, not feature parity with the Python crawler's robots parsing, crawl graph, sitemap analysis, persistence, document capture, or report generation.
+
+Use only authorized targets, keep robots-aware crawling enabled, and choose conservative crawl limits and delays.
