@@ -1,10 +1,29 @@
 from __future__ import annotations
+import os
 import threading
 from pathlib import Path
 from flask import Flask, jsonify, render_template_string, request
 from .core import CrawlConfig, SeoCrawler
 
 app=Flask(__name__)
+DEFAULT_CORS_ORIGINS = "http://localhost:3000,http://127.0.0.1:3000,http://localhost:5173,http://127.0.0.1:5173"
+ALLOWED_ORIGINS = {
+    origin.strip()
+    for origin in os.getenv("SEO_TOOL_CORS_ORIGINS", DEFAULT_CORS_ORIGINS).split(",")
+    if origin.strip()
+}
+
+@app.after_request
+def add_cors_headers(response):
+    origin = request.headers.get("Origin")
+    if origin and origin in ALLOWED_ORIGINS:
+        response.headers["Access-Control-Allow-Origin"] = origin
+        response.headers["Vary"] = "Origin"
+        response.headers["Access-Control-Allow-Methods"] = "GET,POST,OPTIONS"
+        response.headers["Access-Control-Allow-Headers"] = "Content-Type"
+        if request.headers.get("Access-Control-Request-Private-Network", "").lower() == "true":
+            response.headers["Access-Control-Allow-Private-Network"] = "true"
+    return response
 HTML='''<!doctype html><html><head><meta charset="utf-8"><title>SEO-Tool</title><style>body{font-family:system-ui;margin:0;background:#111827;color:#e5e7eb}main{max-width:1200px;margin:auto;padding:28px}input,button{padding:12px;border-radius:8px;border:1px solid #374151;background:#1f2937;color:#fff}input{width:42%}button{cursor:pointer}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.card{background:#1f2937;padding:18px;border-radius:12px}.log{white-space:pre-wrap;background:#030712;padding:16px;min-height:160px}table{width:100%;border-collapse:collapse}td,th{padding:8px;border-bottom:1px solid #374151;text-align:left}</style></head><body><main><h1>SEO-Tool</h1><p>Authorized technical SEO, web research and document extraction workspace.</p><p><input id="url" placeholder="https://example.org"><input id="out" placeholder="Output directory" value="./seo-results"><button onclick="start()">Start scan</button></p><div class="grid"><div class="card"><b>Pages</b><div id="pages">0</div></div><div class="card"><b>Issues</b><div id="issues">0</div></div><div class="card"><b>Links</b><div id="links">0</div></div><div class="card"><b>Status</b><div id="status">idle</div></div></div><h2>Progress</h2><div class="log" id="log">Ready.</div></main><script>async function start(){const url=document.getElementById('url').value,out=document.getElementById('out').value;document.getElementById('status').textContent='running';const r=await fetch('/api/scan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url,output:out})});const j=await r.json();document.getElementById('pages').textContent=j.pages;document.getElementById('issues').textContent=j.issues;document.getElementById('links').textContent=j.links;document.getElementById('status').textContent=j.status;document.getElementById('log').textContent=JSON.stringify(j,null,2)}</script></body></html>'''
 
 @app.get('/')
@@ -13,8 +32,13 @@ def index(): return render_template_string(HTML)
 @app.get('/health')
 def health(): return jsonify(status='ok', service='SEO-Tool', mode='local-python-crawler')
 
-@app.post('/api/scan')
+@app.route('/api/scan', methods=['POST', 'OPTIONS'])
 def scan():
+    if request.method == 'OPTIONS':
+        origin = request.headers.get('Origin')
+        if origin and origin not in ALLOWED_ORIGINS:
+            return ('', 403)
+        return ('', 204)
     data=request.get_json(force=True); url=data.get('url','').strip(); out=data.get('output','./seo-results')
     if not url: return jsonify(error='url required'),400
     c=CrawlConfig(seed=url,output=Path(out),allow_onion=False)
