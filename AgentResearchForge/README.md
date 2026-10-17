@@ -82,3 +82,8 @@ Then use `/chat`, `/documents`, and `/export`, or open `ui/index.html` through t
 ## Safety
 
 This project is designed for public/authorized research. It intentionally excludes credential collection, private-area crawling, authentication/CAPTCHA bypass, deanonymization, unsolicited network scanning, and automatic execution of generated code. Review `docs/SECURITY.md` before enabling external tools.
+
+
+## Browser GUI origin policy
+
+The portfolio's AgentResearchForge browser GUI calls this API only when the service is running and the browser origin is explicitly allowed. Configure `AGENT_CORS_ORIGINS` as a comma-separated exact-origin allowlist. Defaults permit local development origins on ports 3000 and 5173 only. To opt in to the published portfolio GUI, set `AGENT_CORS_ORIGINS=https://amerhwitat.github.io`. Do not use wildcard origins: the API accepts prompts and document uploads. GitHub Pages itself does not run this Python backend.
