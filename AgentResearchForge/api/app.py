@@ -2,9 +2,11 @@ import os
 from pathlib import Path
 try:
     from fastapi import FastAPI, UploadFile, File
+    from fastapi.middleware.cors import CORSMiddleware
     from pydantic import BaseModel
 except ImportError:
     FastAPI = None
+    CORSMiddleware = None
 
 from ..documents.index import DocumentIndexer
 from ..core.research import ResearchEngine
@@ -33,6 +35,21 @@ orchestrator = AgentOrchestrator(engine, ProjectGenerator(), artifacts, DeepRese
 
 if FastAPI:
     app = FastAPI(title='AgentResearchForge')
+    # Exact-origin opt-in: this API accepts document uploads and research requests.
+    # Keep the published portfolio origin disabled unless the operator opts in.
+    default_cors = "http://localhost:3000,http://127.0.0.1:3000,http://localhost:5173,http://127.0.0.1:5173"
+    cors_origins = [
+        origin.strip()
+        for origin in os.getenv("AGENT_CORS_ORIGINS", default_cors).split(",")
+        if origin.strip()
+    ]
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=cors_origins,
+        allow_credentials=False,
+        allow_methods=["GET", "POST", "OPTIONS"],
+        allow_headers=["Content-Type"],
+    )
     class ChatRequest(BaseModel):
         message: str
         language: str = 'python'
