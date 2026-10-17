@@ -110,3 +110,18 @@ Original project code: GPL-3.0-or-later. Third-party dependencies retain their o
 ## Browser GUI and API origin policy
 
 The portfolio's WorkflowStudio browser GUI talks to the Python FastAPI service only when that service is running locally and the browser origin is explicitly allowed. The Python API reads `WORKFLOW_STUDIO_CORS_ORIGINS` as a comma-separated exact-origin allowlist. By default, only local development origins on ports 3000 and 5173 are allowed. To opt in to the published portfolio GUI, set `WORKFLOW_STUDIO_CORS_ORIGINS=https://amerhwitat.github.io` (include any additional trusted origin explicitly). Do not use a wildcard origin for a local API that accepts project/work-item writes. The current reference store is in-memory and is not production persistence.
+
+
+### Start the Python API for the browser GUI
+
+From the repository root, create an isolated environment and start the reference API on port 8001 (AgentResearchForge uses port 8000 by default, so keeping these ports separate allows both services to run together):
+
+```bash
+cd WorkflowStudio/services/python
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install fastapi uvicorn pydantic
+WORKFLOW_STUDIO_CORS_ORIGINS=https://amerhwitat.github.io uvicorn main:app --host 127.0.0.1 --port 8001
+```
+
+On Windows, activate the environment with `.venv\\Scripts\\Activate.ps1`. Only add the portfolio origin to the CORS allowlist if you intend to use the hosted page to contact this local service.
