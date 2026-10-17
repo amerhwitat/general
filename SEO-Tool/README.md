@@ -115,7 +115,7 @@ Use only authorized targets, keep robots-aware crawling enabled, and choose cons
 The hosted SEO Audit Studio can call the local Flask crawler only when the service is running and the portfolio origin is explicitly allowed. The local UI served by Flask remains same-origin and does not require this opt-in. To enable the hosted UI, set:
 
 ```bash
-SEO_TOOL_CORS_ORIGINS=https://amerhwitat.github.io python3 -m SEO_Tool.gui
+cd SEO-Tool\nSEO_TOOL_CORS_ORIGINS=https://amerhwitat.github.io python3 -m SEO_Tool.gui
 ```
 
 The CLI entrypoint is also available; use the project's documented startup command if your environment launches the GUI module differently. The service defaults to port 5088. CORS uses exact origins, not a wildcard; only targets you are authorized to audit should be submitted.
